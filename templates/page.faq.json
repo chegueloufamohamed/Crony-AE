@@ -1,0 +1,78 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-faq-template",
+      "blocks": {
+        "block-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Orders"
+          }
+        },
+        "block-2": {
+          "type": "question",
+          "settings": {}
+        },
+        "block-3": {
+          "type": "question",
+          "settings": {}
+        },
+        "block-4": {
+          "type": "question",
+          "settings": {}
+        },
+        "block-5": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shipping & Returns"
+          }
+        },
+        "block-6": {
+          "type": "question",
+          "settings": {}
+        },
+        "block-7": {
+          "type": "question",
+          "settings": {}
+        },
+        "block-8": {
+          "type": "question",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3",
+        "block-4",
+        "block-5",
+        "block-6",
+        "block-7",
+        "block-8"
+      ],
+      "settings": {
+        "title": "Page FAQ Template",
+        "subtitle": "<p>Create an amazing FAQ page with a full-width banner</p>",
+        "text_position": "center",
+        "text_align": "center"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

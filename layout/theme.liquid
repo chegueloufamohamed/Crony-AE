@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html class="no-js no-touch" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="robots" content="index,follow">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.shop_bg_color }}">  
+
+<!-- GTM Deferred Load -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+// Store GTM load for after page interactive
+function loadGTM() {
+  if (window._gtmLoaded) return;
+  window._gtmLoaded = true;
+
+  // Load main GTM
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),
+        dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MN6KN2NC');
+}
+
+// Load GTM after user first interacts — not on initial page load
+var _gtmEvents = ['mousedown','mousemove','touchstart','scroll','keydown'];
+_gtmEvents.forEach(function(e) {
+  window.addEventListener(e, function() { loadGTM(); }, { once: true, passive: true });
+});
+
+// Safety fallback — load after 5 seconds no matter what
+setTimeout(loadGTM, 5000);
+</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+    {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
+    <title>
+      {% if template contains "index" %}
+        {{ page_title }}
+      {% else %}
+        {{ page_title }}
+        {% if current_tags %}
+          {{ 'general.meta.tagged_html' | t: tags: meta_tags }}
+        {% endif %}
+        {% if current_page != 1 %}
+          {{ 'general.meta.page' | t: page_number: current_page }}
+        {% endif %}
+        {% unless page_title contains shop.name %}
+          - {{ shop.name }}
+        {% endunless %}
+      {% endif %}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{% if template contains 'search' %} {{ page_title }} - {{ shop.name }} {% else %}{{ page_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}{% endif %}"/>
+    {% endif %}
+
+    <!-- Performance: preconnect to critical CDNs -->
+    <link rel="preconnect" href="https://fonts.shopifycdn.com">
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://cdn.shopifycloud.com">
+
+    <!-- Fonts (Google) – non-blocking + cached -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+          rel="stylesheet"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+    </noscript>
+
+    <link rel="dns-prefetch" href="https://v.shopify.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="https://vimeo.com">
+
+    {{ 'jquery.min.js' | asset_url | preload_tag: as: 'script' }}
+
+    <!-- Fancybox CSS: non-blocking -->
+    <link rel="preload" href="{{ 'fancybox.css' | asset_url }}" as="style">
+    <link rel="stylesheet"
+          href="{{ 'fancybox.css' | asset_url }}"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
+    </noscript>
+
+    <!-- Core styles: preload + non-blocking apply -->
+    <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
+    <link rel="stylesheet"
+          href="{{ 'styles.css' | asset_url }}"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+    </noscript>
+
+    <!-- Icons -->
+    {% if settings.favicon != nil %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon | img_url: '180x180' }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '180x180' }}">
+      <link rel="apple-touch-icon" sizes="57x57" href="{{ settings.favicon | img_url: '57x57' }}">
+      <link rel="apple-touch-icon" sizes="60x60" href="{{ settings.favicon | img_url: '60x60' }}">
+      <link rel="apple-touch-icon" sizes="72x72" href="{{ settings.favicon | img_url: '72x72' }}">
+      <link rel="apple-touch-icon" sizes="76x76" href="{{ settings.favicon | img_url: '76x76' }}">
+      <link rel="apple-touch-icon" sizes="114x114" href="{{ settings.favicon | img_url: '114x114' }}">
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
+      <link rel="apple-touch-icon" sizes="228x228" href="{{ settings.favicon | img_url: '228x228' }}">
+    {% else %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% if template contains 'customer' %}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    {% endif %}
+
+    {% if settings.show_multiple_currencies or settings.show_shipping_calculator %}
+      <script type="text/javascript"
+              src="/services/javascripts/currencies.js"
+              data-no-instant></script>
+    {% endif %}
+
+    {% if settings.show_multiple_currencies or shop.enabled_currencies.size > 1 %}
+      <script src="{{ 'currencies.js' | asset_url }}" defer></script>
+    {% endif %}
+
+    {% comment %} Theme object {% endcomment %}
+    <script>
+      window.PXUTheme = window.PXUTheme || {};
+      window.PXUTheme.version = '9.5.1';
+      window.PXUTheme.name = 'Turbo';
+    </script>
+
+    {% comment %} Price UI templates {% endcomment %}
+    {%- capture price -%}{%- render 'price-ui-templates', template: 'price' -%}{%- endcapture -%}
+    {%- capture price_percent -%}{%- render 'price-ui-templates', template: 'price-percent' -%}{%- endcapture -%}
+    {%- capture price_min -%}{%- render 'price-ui-templates', template: 'price-min' -%}{%- endcapture -%}
+    {%- capture price_max -%}{%- render 'price-ui-templates', template: 'price-max' -%}{%- endcapture -%}
+    {%- capture unit_quantity -%}{%- render 'price-ui-templates', template: 'unit-quantity' -%}{%- endcapture -%}
+    {%- capture unit_price -%}{%- render 'price-ui-templates', template: 'unit-price' -%}{%- endcapture -%}
+    {%- capture unit_measurement -%}{%- render 'price-ui-templates', template: 'unit-measurement' -%}{%- endcapture -%}
+
+    <template id="price-ui">{%- render 'price-ui-templates', template: 'price-ui' -%}</template>
+    <template id="price-ui-badge">{%- render 'price-ui-templates', template: 'price-ui-badge' -%}</template>
+
+    <template id="price-ui__price">{{ price }}</template>
+    <template id="price-ui__price-range">
+      {{- 'product.price.range_html' | t: price_min: price_min, price_max: price_max -}}
+    </template>
+    <template id="price-ui__unit-pricing">
+      {{- 'product.price.unit_pricing_html'
+          | t: unit_quantity: unit_quantity,
+               unit_price: unit_price,
+               unit_measurement: unit_measurement -}}
+    </template>
+    <template id="price-ui-badge__percent-savings-range">
+      {{- 'product.badge.sale_percentage_range_html' | t: price_percent: price_percent -}}
+    </template>
+    <template id="price-ui-badge__percent-savings">
+      {{- 'product.badge.sale_percentage_single_html' | t: price_percent -}}
+    </template>
+    <template id="price-ui-badge__price-savings-range">
+      {{- 'product.badge.sale_money_range_html' | t: price: price -}}
+    </template>
+    <template id="price-ui-badge__price-savings">
+      {{- 'product.badge.sale_money_single_html' | t: price: price -}}
+    </template>
+    <template id="price-ui-badge__on-sale">
+      {{- 'product.badge.sale' | t -}}
+    </template>
+    <template id="price-ui-badge__sold-out">
+      {{- 'product.badge.sold_out' | t -}}
+    </template>
+    <template id="price-ui-badge__in-stock">
+      {{- 'product.badge.in_stock' | t -}}
+    </template>
+
+    <script>
+      {% render 'js-variables' %}
+    </script>
+
+    {% if settings.disqus_enabled %}
+      {% if template contains "blog" or template contains "article" or template contains "index" %}
+        <script id="dsq-count-scr"
+                src="//{{ settings.disqus_shortname }}.disqus.com/count.js"
+                async></script>
+      {% endif %}
+    {% endif %}
+
+    {% unless settings.performance == "sport" or template contains "customer" %}
+      <script src="{{ 'instantclick.min.js' | asset_url }}" data-no-instant defer></script>
+
+      <script data-no-instant>
+        window.addEventListener('DOMContentLoaded', function() {
+
+          function inIframe() {
+            try {
+              return window.self !== window.top;
+            } catch (e) {
+              return true;
+            }
+          }
+
+          if (!inIframe()) {
+            InstantClick.on('change', function() {
+
+              $('head script[src*="shopify"]').each(function() {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = $(this).attr('src');
+
+                $('body').append(script);
+              });
+
+              $('body').removeClass('fancybox-active');
+              $.fancybox.destroy();
+
+              InstantClick.init();
+
+            });
+          }
+        });
+      </script>
+    {% endunless %}
+
+    <!-- Custom scripts from theme settings -->
+    <script>
+      {{ settings.custom_scripts }}
+    </script>
+
+    {{ content_for_header }}
+    <style>
+  /* Prevent banner CLS — reserve space before image loads */
+  .home-section--banner .image-element,
+  .home-section--banner .image-element__wrap,
+  .home-section--banner img,
+  .featured-image img,
+  .slideshow img,
+  [class*="banner"] img,
+  [class*="hero"] img {
+    aspect-ratio: auto;
+    min-height: 1px;
+  }
+
+  /* Desktop banner aspect ratio */
+  @media (min-width: 601px) {
+    .home-section--banner .image-element__wrap {
+      aspect-ratio: 1000 / 376;
+      overflow: hidden;
+    }
+  }
+
+  /* Mobile banner aspect ratio */
+  @media (max-width: 600px) {
+    .home-section--banner .image-element__wrap {
+      aspect-ratio: 600 / 1016;
+      overflow: hidden;
+    }
+  }
+</style>
+
+    {% render 'social-meta-info' %}
+
+    {% if collection.previous_product %}
+      <link rel="prev" href="{{ collection.previous_product }}">
+    {% endif %}
+    {% if collection.next_product %}
+      <link rel="next" href="{{ collection.next_product }}">
+    {% endif %}
+
+    {% include 'pagefly-app-header' %}
+
+    <!-- CRONY.AE SAFE IMAGE OPTIMIZER (inline, early, non-breaking) -->
+    <script>
+      (function() {
+        'use strict';
+
+        const CONFIG = {
+          enabled: true,
+          debug: false,          // set true if you want console logs
+          lazyLoadThreshold: 4,  // first images eager, rest lazy
+          addDimensions: true,
+          safeFormats: ['webp', 'avif', 'svg']
+        };
+
+        const state = {
+          initialized: false,
+          totalImages: 0,
+          processed: 0,
+          converted: 0,
+          alreadyOptimized: 0,
+          skipped: 0,
+          pngToWebP: 0,
+          jpgToProgressive: 0,
+          dimensionsAdded: 0
+        };
+
+        function log(message, type = 'info') {
+          if (!CONFIG.debug) return;
+          const styles = {
+            info: 'color:#2196F3;font-weight:bold;',
+            success: 'color:#4CAF50;font-weight:bold;',
+            warn: 'color:#FF9800;font-weight:bold;',
+            error: 'color:#F44336;font-weight:bold;',
+            header: 'background:#111;color:#fff;font-size:15px;padding:8px;font-weight:bold;'
+          };
+          console.log('%c' + message, styles[type] || styles.info);
+        }
+
+        function isShopifyImage(src) {
+          if (!src) return false;
+          return src.includes('cdn.shopify.com') ||
+                 src.includes('/cdn/shop/') ||
+                 src.includes('/cdn/shopifycloud/') ||
+                 src.includes('shopifycdn.com');
+        }
+
+        function isOptimizedFormat(src) {
+          if (!src) return false;
+          if (src.includes('format=')) return true;
+          const lower = src.toLowerCase();
+          if (lower.endsWith('.svg')) return true;
+          return CONFIG.safeFormats.some(ext => lower.includes(ext));
+        }
+
+        function isPNG(src) {
+          return src && src.toLowerCase().includes('.png');
+        }
+
+        function appendParam(url, param) {
+          return url.includes('?') ? url + '&' + param : url + '?' + param;
+        }
+
+        function createOptimizedURL(src) {
+          if (!src) return src;
+
+          if (isOptimizedFormat(src)) {
+            return src;
+          }
+
+          if (isPNG(src)) {
+            return appendParam(src, 'format=webp');
+          }
+
+          if (src.match(/\.(jpg|jpeg)/i)) {
+            return appendParam(src, 'format=pjpg&quality=80');
+          }
+
+          return src;
+        }
+
+        function addDimensions(img) {
+          if (img.hasAttribute('width') && img.hasAttribute('height')) {
+            return false;
+          }
+
+          if (img.naturalWidth && img.naturalHeight) {
+            if (!img.hasAttribute('width')) {
+              img.setAttribute('width', img.naturalWidth);
+            }
+            if (!img.hasAttribute('height')) {
+              img.setAttribute('height', img.naturalHeight);
+            }
+            state.dimensionsAdded++;
+            return true;
+          }
+
+          img.addEventListener('load', function() {
+            if (!this.hasAttribute('width') && this.naturalWidth) {
+              this.setAttribute('width', this.naturalWidth);
+            }
+            if (!this.hasAttribute('height') && this.naturalHeight) {
+              this.setAttribute('height', this.naturalHeight);
+            }
+            state.dimensionsAdded++;
+          }, { once: true });
+
+          return true;
+        }
+
+        function setLoadingBehavior(img, index) {
+          if (index === 0 || index === 1 || index === 2 || index === 3) {
+            img.loading = 'eager';
+            img.decoding = 'sync';
+            img.fetchPriority = 'high';
+          } else if (index <= CONFIG.lazyLoadThreshold) {
+            img.loading = 'eager';
+            img.decoding = 'sync';
+          } else {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+          }
+        }
+
+        function optimizeImage(img, index) {
+          const src = img.getAttribute('src');
+
+          if (!src || !isShopifyImage(src)) {
+            state.skipped++;
+            return;
+          }
+
+          if (img.complete && img.currentSrc && isOptimizedFormat(img.currentSrc)) {
+            setLoadingBehavior(img, index);
+            if (CONFIG.addDimensions) addDimensions(img);
+            state.skipped++;
+            return;
+          }
+
+          if (isOptimizedFormat(src)) {
+            state.alreadyOptimized++;
+            setLoadingBehavior(img, index);
+            if (CONFIG.addDimensions) addDimensions(img);
+            if (!img.alt) img.alt = img.title || 'Product image';
+            return;
+          }
+
+          const newSrc = createOptimizedURL(src);
+
+          if (newSrc !== src) {
+            img.setAttribute('src', newSrc);
+
+            if (isPNG(src)) {
+              state.pngToWebP++;
+            } else if (src.match(/\.(jpg|jpeg)/i)) {
+              state.jpgToProgressive++;
+            }
+
+            state.converted++;
+            log('Optimized: ' + (src.split('/').pop() || src), 'success');
+          }
+
+          setLoadingBehavior(img, index);
+
+          if (CONFIG.addDimensions) {
+            addDimensions(img);
+          }
+
+          if (!img.alt) {
+            img.alt = img.title || 'Product image';
+          }
+
+          state.processed++;
+        }
+
+        function runOptimizer() {
+          if (!CONFIG.enabled) {
+            log('Image optimizer disabled via CONFIG', 'warn');
+            return;
+          }
+
+          if (state.initialized) return;
+          state.initialized = true;
+
+          const images = document.querySelectorAll('img');
+          state.totalImages = images.length;
+
+          if (!images.length) {
+            log('No images found to optimize', 'warn');
+            return;
+          }
+
+          log('CRONY.AE SAFE IMAGE OPTIMIZER: ' + images.length + ' images found', 'header');
+
+          images.forEach((img, index) => {
+            try {
+              optimizeImage(img, index);
+            } catch (e) {
+              state.skipped++;
+              log('Error optimizing image: ' + e.message, 'error');
+            }
+          });
+        }
+
+        function init() {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', runOptimizer);
+          } else {
+            runOptimizer();
+          }
+        }
+
+        init();
+
+        window.CronyImageOptimizer = {
+          getState: function() { return state; },
+          rerun: function() {
+            state.initialized = false;
+            runOptimizer();
+          },
+          enable: function() { CONFIG.enabled = true; },
+          disable: function() { CONFIG.enabled = false; },
+          debug: function(enable) { CONFIG.debug = !!enable; }
+        };
+      })();
+    </script>
+
+  </head>
+
+  {% if template contains "index" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "collection" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "blog" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "article" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "contact" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "product" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "gallery" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "banner" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "faq" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "search" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "cart" %}
+    {% assign feature_image = true %}
+  {% else %}
+    {% assign feature_image = false %}
+  {% endif %}
+
+  <noscript>
+    <style>
+      .product_section .product_form,
+      .product_gallery {
+        opacity: 1;
+      }
+
+      .multi_select,
+      form .select {
+        display: block !important;
+      }
+
+      .image-element__wrap {
+        display: none;
+      }
+    </style>
+  </noscript>
+
+  <body class="{% if template == '404' %}error-404{% else %}{{ template | replace: '.', '-' | handle }}{% endif %}"
+        data-money-format="
+          {%- if settings.currency_format == 'money_with_currency_format' -%}
+            {{- shop.money_with_currency_format | strip_html -}}
+          {%- else -%}
+            {{- shop.money_format | strip_html -}}
+          {%- endif -%}"
+        data-shop-currency="{{ shop.currency }}"
+        data-shop-url="{{ shop.url }}">
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6KN2NC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');
+      if (window.Shopify && window.Shopify.designMode) document.documentElement.className += ' in-theme-editor';
+      if (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch)) {
+        document.documentElement.className = document.documentElement.className.replace(/\bno-touch\b/, 'has-touch');
+      }
+    </script>
+
+    {% comment %} Star icon symbol {% endcomment %}
+    <svg
+      class="icon-star-reference"
+      aria-hidden="true"
+      focusable="false"
+      role="presentation"
+      xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="3 3 17 17" fill="none"
+    >
+      <symbol id="icon-star">
+        <rect class="icon-star-background" width="20" height="20" fill="currentColor"/>
+        <path d="M10 3L12.163 7.60778L17 8.35121L13.5 11.9359L14.326 17L10 14.6078L5.674 17L6.5 11.9359L3 8.35121L7.837 7.60778L10 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </symbol>
+      <clipPath id="icon-star-clip">
+        <path d="M10 3L12.163 7.60778L17 8.35121L13.5 11.9359L14.326 17L10 14.6078L5.674 17L6.5 11.9359L3 8.35121L7.837 7.60778L10 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </clipPath>
+    </svg>
+
+    <div class="header-group">
+      {% sections 'header-group' %}
+    </div>
+
+    <div style="--background-color: {{ settings.shop_bg_color }}">
+      {%
+        render 'age-gate',
+        id: 'page',
+        sections: content_for_layout,
+      %}
+    </div>
+
+    <div class="section-wrapper">
+      {{ content_for_layout }}
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById("backtop");
+        if (!btn) return;
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            btn.style.display = "flex";
+          } else {
+            btn.style.display = "none";
+          }
+        });
+
+        btn.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    </script>
+
+    <div class="site-overlay" data-site-overlay></div>
+
+    {% sections 'footer-group' %}
+
+    {% if settings.quick_shop_enabled %}
+      {% render 'quick-shop' %}
+    {% endif %}
+
+    {% if settings.newsletter_popup %}
+      {% render 'popup-newsletter' %}
+    {% endif %}
+
+    {% render 'mobile-search' %}
+
+    {% if settings.show_shipping_calculator and template contains "cart" %}
+      {% render 'cart-shipping-scripts' %}
+    {% endif %}
+
+    {%- comment -%}
+      Core JS order:
+      1) jQuery
+      2) Flickity library (CDN)
+      3) Theme vendors + utilities
+      4) Sections + app logic
+    {%- endcomment -%}
+
+    <!-- jQuery (keep the preload in <head>, this is the actual script) -->
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+
+    <!-- Flickity core -->
+    {% if template contains 'index' or template contains 'collection' or template contains 'product' %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"
+  crossorigin="anonymous"
+  defer
+></script>
+{% endif %}
+
+    <!-- Theme vendor bundle + utilities -->
+    <script src="{{ 'vendors.js' | asset_url }}" defer></script>
+    <script src="{{ 'utilities.js' | asset_url }}" defer></script>
+
+    {%- if settings.minify -%}
+      <script src="{{ 'sections.min.js' | asset_url }}" defer></script>
+      <script src="{{ 'app.min.js' | asset_url }}" defer></script>
+    {%- else -%}
+      <script src="{{ 'sections.js' | asset_url }}" defer></script>
+      <script src="{{ 'app.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
+    <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer></script>
+
+    {%- if request.design_mode -%}
+      <script src="{{ 'themeEditorSections.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
+    <!-- Flickity jQuery bridge (compatibility) -->
+    <script>
+      (function() {
+        function attachFlickityPlugin() {
+          if (!window.jQuery || !window.Flickity) return;
+          var $ = window.jQuery;
+
+          if (typeof $.fn.flickity === 'function') return;
+
+          $.fn.flickity = function(optionsOrMethod) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            return this.each(function() {
+              var elem = this;
+              var flkty = Flickity.data(elem);
+
+              if (!flkty && (typeof optionsOrMethod === 'object' || optionsOrMethod === undefined)) {
+                flkty = new Flickity(elem, optionsOrMethod || {});
+                return;
+              }
+
+              if (flkty && typeof optionsOrMethod === 'string' && typeof flkty[optionsOrMethod] === 'function') {
+                flkty[optionsOrMethod].apply(flkty, args);
+              }
+            });
+          };
+        }
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          attachFlickityPlugin();
+        } else {
+          document.addEventListener('DOMContentLoaded', attachFlickityPlugin);
+        }
+      })();
+    </script>
+    <script>
+      (function(n, v) {
+        if (window.Shopify && window.Shopify.theme && navigator && navigator.sendBeacon && window.Shopify.designMode) {
+          if (sessionStorage.getItem('oots_beacon')) return;
+          navigator.sendBeacon(
+            'https://app.outofthesandbox.com/beacon',
+            new URLSearchParams({
+              shop_domain: window.Shopify.shop.toLowerCase(),
+              shop_id: window.BOOMR.shopId,
+              shop_email: '{{ shop.email }}',
+              theme_name: n.toLowerCase(),
+              theme_version: v.toLowerCase(),
+              theme_store_id: window.Shopify.theme.theme_store_id,
+              theme_id: window.Shopify.theme.id,
+              theme_role: window.Shopify.theme.role
+            })
+          );
+          sessionStorage.setItem('oots_beacon', '');
+        }
+      })('turbo','9.5.1');
+    </script>
+    <script>
+(function() {
+  // Delay non-critical scripts until page is idle
+  function loadDeferred() {
+    // Force browser to process remaining deferred tasks
+    if (window.requestIdleCallback) {
+      requestIdleCallback(function() {
+        // Trigger any lazy-loaded content
+        document.dispatchEvent(new Event('crony:idle'));
+      }, { timeout: 3000 });
+    }
+  }
+  
+  if (document.readyState === 'complete') {
+    loadDeferred();
+  } else {
+    window.addEventListener('load', loadDeferred, { once: true, passive: true });
+  }
+})();
+</script>
+    {% render 'whatsapp-floating' %}
+    {% render 'back-to-top-floating' %}
+    {% render 'scroll-progress-bar' %}
+  </body>
+</html>

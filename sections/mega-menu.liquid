@@ -1,0 +1,219 @@
+{% assign mm_uid = section.id | replace: '_','' %}
+
+<style>
+/* --- Minimal diagnostic styles --- */
+.mega-{{ mm_uid }} * { box-sizing:border-box; }
+.mega-{{ mm_uid }} { position:relative; z-index:40; background: {{ section.settings.bg | default: 'transparent' }}; }
+.mega-{{ mm_uid }} .wrap { max-width: {{ section.settings.max_width }}px; margin:0 auto; padding: 0 16px; display:flex; align-items:center; gap:24px; }
+.mega-{{ mm_uid }} .logo img { height: {{ section.settings.logo_height }}px; width:auto; display:block; }
+
+.mega-{{ mm_uid }} .nav { display:flex; align-items:center; gap:18px; }
+.mega-{{ mm_uid }} .nav > li { position:relative; list-style:none; }
+.mega-{{ mm_uid }} .nav > li > button{
+  display:flex; align-items:center; gap:8px; padding:14px 8px;
+  font:inherit; color:{{ section.settings.link_color }}; background:none; border:0; cursor:pointer;
+}
+.mega-{{ mm_uid }} .nav > li > button:hover{ color:{{ section.settings.link_hover_color }}; }
+
+/* Dropdown shell */
+.mega-{{ mm_uid }} .panel{
+  position:absolute; left:0; top:100%;
+  width:min(100vw, {{ section.settings.max_width }}px);
+  transform: translateX(calc(-1 * var(--panel-left,0px)));
+  background:{{ section.settings.panel_bg }}; color:{{ section.settings.panel_text }};
+  border-radius:10px; box-shadow:0 12px 28px rgba(0,0,0,.12);
+  opacity:0; visibility:hidden; pointer-events:none; transition:opacity .18s ease, visibility .18s ease;
+}
+.mega-{{ mm_uid }} .nav > li:hover .panel,
+.mega-{{ mm_uid }} .nav > li:focus-within .panel{ opacity:1; visibility:visible; pointer-events:auto; }
+
+.mega-{{ mm_uid }} .panel-inner{
+  display:grid; grid-template-columns:260px 1fr;
+}
+
+/* Left: collections list */
+.mega-{{ mm_uid }} .links{ padding:16px; border-right:1px solid rgba(0,0,0,.06); }
+.mega-{{ mm_uid }} .links h4{ margin:0 0 10px; font-weight:600; font-size:14px; color:{{ section.settings.link_heading_color }}; }
+.mega-{{ mm_uid }} .cat-list{ list-style:none; margin:0; padding:0; }
+.mega-{{ mm_uid }} .cat-list a{ display:block; padding:8px 10px; border-radius:8px; }
+.mega-{{ mm_uid }} .cat-list a:hover{ background:rgba(0,0,0,.06); }
+.mega-{{ mm_uid }} .cat-list a.is-active{ background:rgba(0,0,0,.10); }
+
+/* Right: product titles only (diagnostic) */
+.mega-{{ mm_uid }} .products-area{ padding:16px; }
+.mega-{{ mm_uid }} .view{ display:none; }
+.mega-{{ mm_uid }} .view.is-active{ display:block; }
+.mega-{{ mm_uid }} .prod-list{ margin:0; padding:0; list-style:none; display:grid; gap:8px; }
+.mega-{{ mm_uid }} .prod-list li a{ display:block; padding:8px 10px; border:1px solid rgba(0,0,0,.08); border-radius:8px; text-decoration:none; color:inherit; }
+.mega-{{ mm_uid }} .prod-list li a:hover{ border-color:rgba(0,0,0,.2); }
+
+/* Mobile (keep simple) */
+@media (max-width: 990px){
+  .mega-{{ mm_uid }} .wrap{ justify-content:space-between; }
+  .mega-{{ mm_uid }} .nav{ display:none; }
+  .mega-{{ mm_uid }} .hamburger{ display:block; background:none; border:0; font:inherit; }
+  .mega-{{ mm_uid }}[data-open="1"] .nav{ display:block; position:absolute; left:0; right:0; top:100%; background:{{ section.settings.panel_bg }}; padding:10px 16px; }
+  .mega-{{ mm_uid }} .nav > li{ border-bottom:1px solid rgba(0,0,0,.06); }
+  .mega-{{ mm_uid }} .panel{ position:static; transform:none; opacity:1; visibility:visible; pointer-events:auto; box-shadow:none; border-radius:0; }
+  .mega-{{ mm_uid }} .panel-inner{ grid-template-columns:1fr; }
+  .mega-{{ mm_uid }} .links{ border-right:0; }
+}
+</style>
+
+<nav class="mega-{{ mm_uid }}" data-open="0" role="navigation" aria-label="Mega menu (diagnostic)">
+  <div class="wrap">
+    <a class="logo" href="{{ section.settings.logo_link | default: routes.root_url }}">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}">
+      {% else %}
+        <strong style="color:{{ section.settings.link_color }}">{{ shop.name }}</strong>
+      {% endif %}
+    </a>
+
+    <button class="hamburger" aria-label="Toggle menu" onclick="this.closest('.mega-{{ mm_uid }}').dataset.open = this.closest('.mega-{{ mm_uid }}').dataset.open == '1' ? '0' : '1'">☰</button>
+
+    <ul class="nav">
+      {% for block in section.blocks %}
+        {% assign menu_handle = block.settings.menu %}
+        {% comment %} Prefer menus[...] (OS 2.0). Fallback to linklists[...] if needed. {% endcomment %}
+        {% assign menu_obj = menus[menu_handle] %}
+        {% if menu_obj == nil %}
+          {% assign menu_obj = linklists[menu_handle] %}
+        {% endif %}
+
+        <li {{ block.shopify_attributes }}>
+          <button type="button" aria-haspopup="true" aria-expanded="false">{{ block.settings.title }}</button>
+
+          <div class="panel" style="--panel-left: {{ section.settings.panel_align_offset }}px;">
+            <div class="panel-inner">
+              <div class="links">
+                {% if menu_handle != blank and menu_obj and menu_obj.links and menu_obj.links.size > 0 %}
+                  <h4>{{ block.settings.menu_heading }}</h4>
+                  <ul class="cat-list" data-mm-list>
+                    {% for link in menu_obj.links %}
+                      <li><a href="{{ link.url }}" data-idx="{{ forloop.index0 }}" class="{% if forloop.first %}is-active{% endif %}">{{ link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <div style="opacity:.7;">Assign a menu (must contain collection links).</div>
+                {% endif %}
+              </div>
+
+              <div class="products-area" data-mm-views>
+                {% if menu_handle != blank and menu_obj and menu_obj.links and menu_obj.links.size > 0 %}
+                  {% for link in menu_obj.links %}
+                    {% assign resolved_collection = nil %}
+
+                    {%- comment -%} Try native collection link first {%- endcomment -%}
+                    {% if link.type == 'collection_link' and link.object %}
+                      {% assign resolved_collection = link.object %}
+                    {% else %}
+                      {%- comment -%} Fallback: parse /collections/<handle> from URL {%- endcomment -%}
+                      {% assign parts = link.url | split: '/collections/' %}
+                      {% if parts.size > 1 %}
+                        {% assign handle_part = parts[1] | split: '/' | first %}
+                        {% assign resolved_collection = collections[handle_part] %}
+                      {% endif %}
+                    {% endif %}
+
+                    <div class="view {% if forloop.first %}is-active{% endif %}" data-idx="{{ forloop.index0 }}">
+                      {% if resolved_collection %}
+                        {% assign items = resolved_collection.products | slice: 0, block.settings.limit %}
+                        {% if items.size > 0 %}
+                          <ul class="prod-list">
+                            {% for product in items %}
+                              <li><a href="{{ product.url }}">{{ product.title }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        {% else %}
+                          <div style="opacity:.7;">No products in “{{ resolved_collection.title }}”.</div>
+                        {% endif %}
+                      {% else %}
+                        <div style="opacity:.7;">Link “{{ link.title }}” is not a collection.</div>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+<script>
+/* Diagnostic JS: swaps product-title views based on hover; logs what it finds */
+(function(){
+  var root = document.currentScript.previousElementSibling;
+  if(!root) return;
+
+  root.querySelectorAll('.nav > li').forEach(function(li){
+    var btn = li.querySelector('button');
+    var panel = li.querySelector('.panel');
+    if(!btn || !panel) return;
+    li.addEventListener('mouseenter', function(){ btn.setAttribute('aria-expanded','true'); });
+    li.addEventListener('mouseleave', function(){ btn.setAttribute('aria-expanded','false'); });
+  });
+
+  root.querySelectorAll('.panel').forEach(function(panel, i){
+    var list = panel.querySelector('[data-mm-list]');
+    var viewsWrap = panel.querySelector('[data-mm-views]');
+    if(!list || !viewsWrap) return;
+
+    var links = list.querySelectorAll('a[data-idx]');
+    var views  = viewsWrap.querySelectorAll('.view[data-idx]');
+    if(links.length !== views.length){
+      console.warn('MegaMenu diag: mismatch links/views', {links: links.length, views: views.length, panelIndex: i});
+    }
+
+    function activate(idx){
+      links.forEach(function(a){ a.classList.toggle('is-active', a.dataset.idx === idx); });
+      views.forEach(function(v){ v.classList.toggle('is-active', v.dataset.idx === idx); });
+    }
+    links.forEach(function(a){
+      a.addEventListener('mouseenter', function(e){ e.preventDefault(); activate(a.dataset.idx); });
+      a.addEventListener('focus', function(e){ activate(a.dataset.idx); });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Mega Menu (diagnostic)",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "url", "id": "logo_link", "label": "Logo link" },
+    { "type": "range", "id": "logo_height", "min": 18, "max": 60, "step": 1, "unit": "px", "label": "Logo height", "default": 28 },
+
+    { "type": "range", "id": "max_width", "min": 900, "max": 1600, "step": 10, "unit": "px", "label": "Max content width", "default": 1300 },
+
+    { "type": "color", "id": "bg", "label": "Bar background", "default": "transparent" },
+    { "type": "color", "id": "link_color", "label": "Top link color", "default": "#111111" },
+    { "type": "color", "id": "link_hover_color", "label": "Top link hover color", "default": "#000000" },
+
+    { "type": "color", "id": "panel_bg", "label": "Dropdown background", "default": "#ffffff" },
+    { "type": "color", "id": "panel_text", "label": "Dropdown text color", "default": "#111111" },
+    { "type": "color", "id": "link_heading_color", "label": "Links heading color", "default": "#6b7280" },
+
+    { "type": "range", "id": "panel_align_offset", "min": -300, "max": 300, "step": 10, "unit": "px", "label": "Align dropdown (nudge X)", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Menu item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Top-level label", "default": "Scooters" },
+        { "type": "link_list", "id": "menu", "label": "Menu with collection links" },
+        { "type": "text", "id": "menu_heading", "label": "Left heading", "default": "Browse collections" },
+
+        { "type": "range", "id": "limit", "min": 3, "max": 12, "step": 1, "label": "Products to show (per collection)", "default": 6 }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "Mega Menu (diagnostic)", "category": "Header" } ]
+}
+{% endschema %}

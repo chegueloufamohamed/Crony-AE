@@ -1,0 +1,432 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "sidebar": {
+      "type": "product-sidebar",
+      "settings": {
+        "wide_display": true,
+        "slideshow_text_animation": "fadeInDown",
+        "slideshow_animation": "fade",
+        "slideshow_speed": 6,
+        "activate_adaptiveHeight": true,
+        "mobile_text_below_image": true,
+        "mobile_text_color": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "main": {
+      "type": "product-template",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "display_savings": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "custom_liquid_K4LrjA": {
+          "type": "custom-liquid",
+          "name": "Tabby",
+          "settings": {
+            "custom_liquid": "{% render 'tabby-installments'%}\n<div style=\"height:5px;\"></div>"
+          }
+        },
+        "custom_liquid_ngChCf": {
+          "type": "custom-liquid",
+          "name": "Tamara",
+          "settings": {
+            "custom_liquid": "{% render 'tamara' %}"
+          }
+        },
+        "form": {
+          "type": "form",
+          "settings": {
+            "show_gift_card_recipient_form": true
+          }
+        },
+        "complementary_products_TYb4tV": {
+          "type": "complementary_products",
+          "disabled": true,
+          "settings": {
+            "heading": "Pairs well with",
+            "product_recommendation_limit": 5,
+            "products_per_slide": 2
+          }
+        },
+        "custom_liquid_wKQ7ny": {
+          "type": "custom-liquid",
+          "name": "Payment Icons",
+          "settings": {
+            "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0662/3621/9628/files/compressed_payments.webp?format=png\" width=\"100%\" height=\"100px\" style=\"background:unset;\">"
+          }
+        },
+        "custom_liquid_9bYczR": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<p style=\"text-align:center;\">Easy Return / Refund Guarantee</p>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "description",
+        "custom_liquid_K4LrjA",
+        "custom_liquid_ngChCf",
+        "form",
+        "complementary_products_TYb4tV",
+        "custom_liquid_wKQ7ny",
+        "custom_liquid_9bYczR",
+        "share"
+      ],
+      "custom_css": [
+        ".desc-box {display: none;}"
+      ],
+      "settings": {
+        "product_breadcrumb": false,
+        "media_position": "is-flex-row",
+        "set_product_height": true,
+        "product_height": 500,
+        "video_looping": false,
+        "product_thumbs": true,
+        "gallery_arrows": true,
+        "enable_product_lightbox": false,
+        "activate_zoom": true,
+        "slideshow_speed": 0,
+        "slideshow_animation": "slide",
+        "thumbnail_position": "bottom",
+        "enable_thumbnail_slider": true,
+        "show_only_selected_variant_image": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_dME4Ka": {
+      "type": "custom-liquid",
+      "name": "Product Description",
+      "settings": {
+        "custom_liquid": "<style>\n  .product-description-wrapper {\n    max-width: 1200px;\n    margin: 60px auto;\n    padding: 0 20px;\n  }\n\n  .product-description-title {\n    text-align: center;\n    font-size: 2.5rem;\n    font-weight: 700;\n    letter-spacing: 2px;\n    margin-bottom: 30px;\n    color: #1a1a1a;\n  }\n\n  .product-description-box {\n    background: transparent;\n    border-radius: 0;\n    padding: 0;\n    box-shadow: none;\n    position: relative;\n    overflow: hidden;\n  }\n\n  .product-description-content {\n    font-size: 1rem;\n    line-height: 1.8;\n    color: #333;\n    position: relative;\n    max-height: 7.2em; /* 4 lines × 1.8 line-height */\n    overflow: hidden;\n    transition: max-height 0.4s ease;\n  }\n\n  .product-description-content.expanded {\n    max-height: none;\n  }\n\n  .product-description-content::after {\n    content: '';\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    height: 3.6em; /* 2 lines × 1.8 line-height */\n    background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 30%, rgba(255, 255, 255, 1) 100%);\n    pointer-events: none;\n    opacity: 1;\n    transition: opacity 0.4s ease;\n  }\n\n  .product-description-content.expanded::after {\n    opacity: 0;\n  }\n\n  .product-description-content p {\n    margin-bottom: 1em;\n  }\n\n  .product-description-content p:last-child {\n    margin-bottom: 0;\n  }\n\n  .description-toggle-wrapper {\n    text-align: center;\n    margin-top: 25px;\n  }\n\n  .description-toggle-btn {\n    background: #1a1a1a;\n    color: white;\n    border: none;\n    padding: 10px 40px;\n    font-size: 1rem;\n    font-weight: 600;\n    border-radius: 50px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);\n    letter-spacing: 0.5px;\n  }\n\n  .description-toggle-btn:hover {\n    background: #000000;\n    transform: translateY(-2px);\n    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);\n  }\n\n  .description-toggle-btn:active {\n    transform: translateY(0);\n  }\n\n  /* Hide button if content is short */\n  .description-toggle-wrapper.hidden {\n    display: none;\n  }\n\n  @media (max-width: 768px) {\n    .product-description-title {\n      font-size: 2rem;\n      margin-bottom: 25px;\n    }\n\n    .product-description-box {\n      padding: 0;\n    }\n\n    .product-description-content {\n      font-size: 0.95rem;\n      line-height: 1.7;\n      max-height: 6.8em; /* 4 lines × 1.7 line-height */\n    }\n\n    .product-description-content::after {\n      height: 3.4em; /* 2 lines × 1.7 line-height */\n    }\n\n    .description-toggle-btn {\n      padding: 9px 32px;\n      font-size: 0.95rem;\n    }\n  }\n\n  @media (max-width: 480px) {\n    .product-description-title {\n      font-size: 1.5rem;\n      letter-spacing: 1px;\n    }\n\n    .product-description-box {\n      padding: 0;\n      border-radius: 0;\n    }\n\n    .product-description-content {\n      font-size: 0.9rem;\n    }\n\n    .description-toggle-btn {\n      padding: 9px 28px;\n      font-size: 0.9rem;\n    }\n  }\n</style>\n\n<div class=\"product-description-wrapper\">\n  <h2 class=\"product-description-title\">PRODUCT DESCRIPTION</h2>\n  \n  <div class=\"product-description-box\">\n    <div class=\"product-description-content\" id=\"productDescription\">\n      {{ product.description }}\n    </div>\n    \n    <div class=\"description-toggle-wrapper\">\n      <button class=\"description-toggle-btn\" onclick=\"toggleDescription(this)\">\n        Show More ▼\n      </button>\n    </div>\n  </div>\n</div>\n\n<script>\n  function toggleDescription(button) {\n    const content = document.getElementById('productDescription');\n    const isExpanded = content.classList.contains('expanded');\n    \n    if (isExpanded) {\n      content.classList.remove('expanded');\n      button.innerHTML = 'Show More ▼';\n      // Scroll back to the description top smoothly\n      content.closest('.product-description-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });\n    } else {\n      content.classList.add('expanded');\n      button.innerHTML = 'Show Less ▲';\n    }\n  }\n\n  // Check if content needs \"Show More\" button\n  document.addEventListener('DOMContentLoaded', function() {\n    const content = document.getElementById('productDescription');\n    const toggleWrapper = content.closest('.product-description-box').querySelector('.description-toggle-wrapper');\n    \n    // Check if content height exceeds 4 lines\n    if (content.scrollHeight <= content.clientHeight) {\n      toggleWrapper.classList.add('hidden');\n      content.classList.add('expanded'); // Show all content if short\n    }\n  });\n</script>",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "custom_liquid_zjWEzX": {
+      "type": "custom-liquid",
+      "name": "Hero Banners",
+      "settings": {
+        "custom_liquid": "{% if product.metafields.custom.hero_banners.value %}\n  <div class=\"product-hero-banners\">\n    {% for banner in product.metafields.custom.hero_banners.value %}\n      <div class=\"hero-banner-item\">\n        <img \n          src=\"{{ banner | image_url: width: 1920 }}\" \n          alt=\"{{ product.title }} - Hero Banner {{ forloop.index }}\"\n          loading=\"lazy\"\n          width=\"1920\"\n          height=\"auto\"\n        >\n      </div>\n    {% endfor %}\n  </div>\n\n  <style>\n    .product-hero-banners {\n      margin: 30px 0;\n      width: 100%;\n    }\n    \n    .hero-banner-item {\n      margin-bottom: 15px;\n    }\n    \n    .hero-banner-item img {\n      width: 100%;\n      height: auto;\n      display: block;\n      border-radius: 8px;\n    }\n    \n    .hero-banner-item:last-child {\n      margin-bottom: 0;\n    }\n  </style>\n{% endif %}",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "custom_liquid_bULCqV": {
+      "type": "custom-liquid",
+      "name": "Videos",
+      "settings": {
+        "custom_liquid": "{% assign videos = product.metafields.custom.videos.value %}\n\n{% if videos != blank %}\n  \n  <div class=\"product-video-carousel\" style=\"position: relative; max-width: 100%; margin: 2rem 0;\">\n    <div class=\"video-container\" style=\"position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 26px; overflow: hidden; touch-action: pan-y;\">\n      {% assign video_count = 0 %}\n      {% for video in videos %}\n        {% assign video_count = forloop.length %}\n        <div class=\"video-slide\" data-slide=\"{{ forloop.index0 }}\" style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; {% if forloop.index0 != 0 %}display: none;{% endif %}\">\n          {{ video | video_tag: image_size: '1024x', autoplay: false, controls: true, style: 'width: 100%; height: 100%; object-fit: contain;' }}\n        </div>\n      {% endfor %}\n    </div>\n    \n    {% if video_count > 1 %}\n      <button class=\"video-carousel-prev\" style=\"position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;\">\n        <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\">\n          <path d=\"M12.5 15L7.5 10L12.5 5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n        </svg>\n      </button>\n      \n      <button class=\"video-carousel-next\" style=\"position: absolute; right: 10px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;\">\n        <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\">\n          <path d=\"M7.5 15L12.5 10L7.5 5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n        </svg>\n      </button>\n      \n      <div class=\"video-counter\" style=\"position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.7); color: white; padding: 5px 12px; border-radius: 20px; font-size: 14px; z-index: 10;\">\n        <span class=\"current-video\">1</span> / {{ video_count }}\n      </div>\n      \n      <style>\n        .video-carousel-prev:hover,\n        .video-carousel-next:hover {\n          background: rgba(0, 123, 255, 0.9);\n          transform: translateY(-50%) translateX(-3px);\n        }\n        \n        .video-carousel-next:hover {\n          transform: translateY(-50%) translateX(3px);\n        }\n        \n        .video-carousel-prev:active,\n        .video-carousel-next:active {\n          transform: translateY(-50%) scale(0.95);\n        }\n      </style>\n      \n      <script>\n        (function() {\n          const carousel = document.querySelector('.product-video-carousel');\n          if (!carousel) return;\n          \n          const videoContainer = carousel.querySelector('.video-container');\n          const slides = carousel.querySelectorAll('.video-slide');\n          const prevBtn = carousel.querySelector('.video-carousel-prev');\n          const nextBtn = carousel.querySelector('.video-carousel-next');\n          const counter = carousel.querySelector('.current-video');\n          const totalSlides = slides.length;\n          let currentSlide = 0;\n          \n          // Touch/Swipe variables\n          let touchStartX = 0;\n          let touchEndX = 0;\n          let touchStartY = 0;\n          let touchEndY = 0;\n          const swipeThreshold = 50; // Minimum distance for a swipe\n          \n          function pauseAllVideos() {\n            slides.forEach(slide => {\n              const video = slide.querySelector('video');\n              if (video) video.pause();\n            });\n          }\n          \n          function showSlide(index) {\n            pauseAllVideos();\n            slides.forEach((slide, i) => {\n              slide.style.display = i === index ? 'block' : 'none';\n            });\n            if (counter) counter.textContent = index + 1;\n            currentSlide = index;\n          }\n          \n          function goToPrevSlide() {\n            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;\n            showSlide(currentSlide);\n          }\n          \n          function goToNextSlide() {\n            currentSlide = (currentSlide + 1) % totalSlides;\n            showSlide(currentSlide);\n          }\n          \n          // Button click handlers\n          if (prevBtn) {\n            prevBtn.addEventListener('click', goToPrevSlide);\n          }\n          \n          if (nextBtn) {\n            nextBtn.addEventListener('click', goToNextSlide);\n          }\n          \n          // Touch event handlers\n          videoContainer.addEventListener('touchstart', function(e) {\n            touchStartX = e.changedTouches[0].screenX;\n            touchStartY = e.changedTouches[0].screenY;\n          }, { passive: true });\n          \n          videoContainer.addEventListener('touchend', function(e) {\n            touchEndX = e.changedTouches[0].screenX;\n            touchEndY = e.changedTouches[0].screenY;\n            handleSwipe();\n          }, { passive: true });\n          \n          function handleSwipe() {\n            const swipeDistanceX = touchEndX - touchStartX;\n            const swipeDistanceY = touchEndY - touchStartY;\n            \n            // Check if horizontal swipe is more significant than vertical\n            if (Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {\n              // Horizontal swipe detected\n              if (Math.abs(swipeDistanceX) > swipeThreshold) {\n                if (swipeDistanceX > 0) {\n                  // Swipe right - go to previous\n                  goToPrevSlide();\n                } else {\n                  // Swipe left - go to next\n                  goToNextSlide();\n                }\n              }\n            }\n          }\n          \n          // Optional: Keyboard navigation\n          document.addEventListener('keydown', function(e) {\n            if (e.key === 'ArrowLeft') {\n              goToPrevSlide();\n            } else if (e.key === 'ArrowRight') {\n              goToNextSlide();\n            }\n          });\n        })();\n      </script>\n    {% endif %}\n  </div>\n\n{% endif %}",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "custom_liquid_Y4F9cw": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "Specs",
+      "settings": {
+        "custom_liquid": "<style>\n  .specifications-wrapper {\n    max-width: 1200px;\n    margin: 60px auto;\n    padding: 0 20px;\n  }\n\n  .specifications-title {\n    text-align: center;\n    font-size: 2.5rem;\n    font-weight: 700;\n    letter-spacing: 2px;\n    margin-bottom: 40px;\n    color: #1a1a1a;\n  }\n\n  .specs-table {\n    width: 100%;\n    border-collapse: separate;\n    border: none;\n  }\n\n  .specs-table * {\n    border: none !important;\n  }\n\n  .specs-table tbody {\n    display: block;\n    border: none;\n  }\n\n  .specs-table tr {\n    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);\n    border-radius: 12px;\n    transition: all 0.3s ease;\n    display: flex;\n    width: 100%;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);\n    margin-bottom: 12px;\n    border: none !important;\n  }\n\n  .specs-table tr:last-child {\n    margin-bottom: 0;\n  }\n\n  .specs-table tr:hover {\n    transform: translateX(8px);\n    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);\n  }\n\n  .specs-table tr:nth-child(even) {\n    background: linear-gradient(135deg, #fef7f7 0%, #fff 100%);\n  }\n\n  .specs-table tr:nth-child(odd) {\n    background: linear-gradient(135deg, #f0f4ff 0%, #fff 100%);\n  }\n\n  .specs-table th {\n    text-align: left;\n    padding: 24px 30px;\n    font-weight: 600;\n    font-size: 1rem;\n    color: #c41e3a;\n    width: 35%;\n    border-top-left-radius: 12px;\n    border-bottom-left-radius: 12px;\n    border: none !important;\n  }\n\n  .specs-table td {\n    text-align: left;\n    padding: 24px 30px;\n    font-size: 1rem;\n    color: #333;\n    font-weight: 500;\n    border-top-right-radius: 12px;\n    border-bottom-right-radius: 12px;\n    border: none !important;\n  }\n\n  .specs-table tr:nth-child(n+7) {\n    display: none;\n  }\n\n  .specs-table.show-all tr {\n    display: flex !important;\n  }\n\n  .specs-toggle-wrapper {\n    text-align: center;\n    margin-top: 30px;\n  }\n\n  .specs-toggle-btn {\n    background: #1a1a1a;\n    color: white;\n    border: none;\n    padding: 10px 40px;\n    font-size: 1rem;\n    font-weight: 600;\n    border-radius: 50px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);\n    letter-spacing: 0.5px;\n  }\n\n  .specs-toggle-btn:hover {\n    background: #000000;\n    transform: translateY(-2px);\n    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);\n  }\n\n  .specs-toggle-btn:active {\n    transform: translateY(0);\n  }\n\n  .specs-toggle-wrapper.hidden {\n    display: none;\n  }\n\n  .specs-source-hidden {\n    display: none !important;\n  }\n\n  @media (max-width: 768px) {\n    .specifications-title {\n      font-size: 2rem;\n      margin-bottom: 30px;\n    }\n\n    .specs-table th,\n    .specs-table td {\n      padding: 18px 20px;\n      font-size: 0.9rem;\n    }\n\n    .specs-table th {\n      width: 40%;\n    }\n\n    .specs-table tr:hover {\n      transform: translateX(4px);\n    }\n\n    .specs-toggle-btn {\n      padding: 9px 32px;\n      font-size: 0.95rem;\n    }\n  }\n\n  @media (max-width: 480px) {\n    .specifications-title {\n      font-size: 1.5rem;\n      letter-spacing: 1px;\n    }\n\n    .specs-table th,\n    .specs-table td {\n      padding: 15px 16px;\n      font-size: 0.85rem;\n    }\n\n    .specs-toggle-btn {\n      padding: 9px 28px;\n      font-size: 0.9rem;\n    }\n  }\n</style>\n\n<div class=\"specifications-wrapper js-specs-wrapper\" style=\"display:none;\">\n  <h2 class=\"specifications-title\">SPECIFICATIONS</h2>\n\n  <div class=\"specs-source-hidden js-specs-source\">\n    {{ product.metafields.custom.specifications }}\n  </div>\n\n  <div class=\"js-specs-rendered\"></div>\n\n  <div class=\"specs-toggle-wrapper hidden\">\n    <button class=\"specs-toggle-btn js-specs-toggle\" type=\"button\">\n      Show More ▼\n    </button>\n  </div>\n</div>\n\n<script>\n  (function () {\n    function escapeHtml(text) {\n      var div = document.createElement('div');\n      div.textContent = text;\n      return div.innerHTML;\n    }\n\n    function buildSpecsTable(rawText) {\n      if (!rawText) return '';\n\n      var text = rawText\n        .replace(/\\r\\n/g, '\\n')\n        .replace(/\\r/g, '\\n')\n        .trim();\n\n      if (!text) return '';\n\n      text = text.replace(/;\\s*/g, '\\n');\n      text = text.replace(/,\\s*(?=[A-Za-z0-9\\u0600-\\u06FF][^,:]{0,40}\\s*:)/g, '\\n');\n\n      var lines = text\n        .split('\\n')\n        .map(function(line) { return line.trim(); })\n        .filter(function(line) { return line.length > 0; });\n\n      if (!lines.length) return '';\n\n      var rows = '';\n\n      lines.forEach(function(line) {\n        var key = '';\n        var value = '';\n\n        if (line.indexOf(':') > -1) {\n          var parts = line.split(':');\n          key = parts.shift().trim();\n          value = parts.join(':').trim();\n        }\n\n        if (key && value) {\n          rows += '<tr><th>' + escapeHtml(key) + '</th><td>' + escapeHtml(value) + '</td></tr>';\n        }\n      });\n\n      if (!rows) {\n        return '<div>' + escapeHtml(rawText) + '</div>';\n      }\n\n      return '<table class=\"specs-table\"><tbody>' + rows + '</tbody></table>';\n    }\n\n    function initSpecsBlock(wrapper) {\n      var source = wrapper.querySelector('.js-specs-source');\n      var rendered = wrapper.querySelector('.js-specs-rendered');\n      var toggleWrapper = wrapper.querySelector('.specs-toggle-wrapper');\n      var toggleBtn = wrapper.querySelector('.js-specs-toggle');\n\n      if (!source || !rendered) return;\n\n      var rawHtml = source.innerHTML.trim();\n      var rawText = source.textContent.trim();\n\n      if (!rawHtml && !rawText) {\n        wrapper.style.display = 'none';\n        return;\n      }\n\n      var looksLikeHtml =\n        rawHtml.indexOf('<table') !== -1 ||\n        rawHtml.indexOf('<tr') !== -1 ||\n        rawHtml.indexOf('<td') !== -1 ||\n        rawHtml.indexOf('<th') !== -1 ||\n        rawHtml.indexOf('<tbody') !== -1;\n\n      if (looksLikeHtml) {\n        rendered.innerHTML = rawHtml;\n      } else {\n        rendered.innerHTML = buildSpecsTable(rawText);\n      }\n\n      var table = rendered.querySelector('.specs-table');\n\n      if (!table) {\n        toggleWrapper.classList.add('hidden');\n        wrapper.style.display = 'block';\n        return;\n      }\n\n      var rowCount = table.querySelectorAll('tbody tr').length;\n\n      if (rowCount > 6) {\n        toggleWrapper.classList.remove('hidden');\n      } else {\n        table.classList.add('show-all');\n        toggleWrapper.classList.add('hidden');\n      }\n\n      toggleBtn.addEventListener('click', function() {\n        var isShowingAll = table.classList.contains('show-all');\n\n        if (isShowingAll) {\n          table.classList.remove('show-all');\n          toggleBtn.innerHTML = 'Show More ▼';\n          wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });\n        } else {\n          table.classList.add('show-all');\n          toggleBtn.innerHTML = 'Show Less ▲';\n        }\n      });\n\n      wrapper.style.display = 'block';\n    }\n\n    document.addEventListener('DOMContentLoaded', function() {\n      var wrappers = document.querySelectorAll('.js-specs-wrapper');\n      wrappers.forEach(function(wrapper) {\n        initSpecsBlock(wrapper);\n      });\n    });\n  })();\n</script>",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "custom_liquid_FFWzwd": {
+      "type": "custom-liquid",
+      "name": "Specs Test 2",
+      "settings": {
+        "custom_liquid": "<style>\n  .specifications-wrapper {\n    max-width: 1200px;\n    margin: 60px auto;\n    padding: 0 20px;\n  }\n\n  .specifications-title {\n    text-align: center;\n    font-size: 2.5rem;\n    font-weight: 700;\n    letter-spacing: 2px;\n    margin-bottom: 40px;\n    color: #1a1a1a;\n  }\n\n  .specs-table {\n    width: 100%;\n    border-collapse: separate;\n    border: none;\n  }\n\n  .specs-table * {\n    border: none !important;\n  }\n\n  .specs-table tbody {\n    display: block;\n    border: none;\n  }\n\n  .specs-table tr {\n    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);\n    border-radius: 12px;\n    transition: all 0.3s ease;\n    display: flex;\n    width: 100%;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);\n    margin-bottom: 12px;\n    border: none !important;\n  }\n\n  .specs-table tr:last-child {\n    margin-bottom: 0;\n  }\n\n  .specs-table tr:hover {\n    transform: translateX(8px);\n    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);\n  }\n\n  .specs-table tr:nth-child(even) {\n    background: linear-gradient(135deg, #fef7f7 0%, #fff 100%);\n  }\n\n  .specs-table tr:nth-child(odd) {\n    background: linear-gradient(135deg, #f0f4ff 0%, #fff 100%);\n  }\n\n  .specs-table th {\n    text-align: left;\n    padding: 24px 30px;\n    font-weight: 600;\n    font-size: 1rem;\n    color: #c41e3a;\n    width: 35%;\n    border-top-left-radius: 12px;\n    border-bottom-left-radius: 12px;\n    border: none !important;\n  }\n\n  .specs-table td {\n    text-align: left;\n    padding: 24px 30px;\n    font-size: 1rem;\n    color: #333;\n    font-weight: 500;\n    border-top-right-radius: 12px;\n    border-bottom-right-radius: 12px;\n    border: none !important;\n  }\n\n  .specs-table tr:nth-child(n+7) {\n    display: none;\n  }\n\n  .specs-table.show-all tr {\n    display: flex !important;\n  }\n\n  .specs-toggle-wrapper {\n    text-align: center;\n    margin-top: 30px;\n  }\n\n  .specs-toggle-btn {\n    background: #1a1a1a;\n    color: white;\n    border: none;\n    padding: 10px 40px;\n    font-size: 1rem;\n    font-weight: 600;\n    border-radius: 50px;\n    cursor: pointer;\n    transition: all 0.3s ease;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);\n    letter-spacing: 0.5px;\n  }\n\n  .specs-toggle-btn:hover {\n    background: #000000;\n    transform: translateY(-2px);\n    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);\n  }\n\n  .specs-toggle-btn:active {\n    transform: translateY(0);\n  }\n\n  .specs-toggle-wrapper.hidden {\n    display: none;\n  }\n\n  .specs-source-hidden {\n    display: none !important;\n  }\n\n  @media (max-width: 768px) {\n    .specifications-title {\n      font-size: 2rem;\n      margin-bottom: 30px;\n    }\n\n    .specs-table th,\n    .specs-table td {\n      padding: 18px 20px;\n      font-size: 0.9rem;\n    }\n\n    .specs-table th {\n      width: 40%;\n    }\n\n    .specs-table tr:hover {\n      transform: translateX(4px);\n    }\n\n    .specs-toggle-btn {\n      padding: 9px 32px;\n      font-size: 0.95rem;\n    }\n  }\n\n  @media (max-width: 480px) {\n    .specifications-title {\n      font-size: 1.5rem;\n      letter-spacing: 1px;\n    }\n\n    .specs-table th,\n    .specs-table td {\n      padding: 15px 16px;\n      font-size: 0.85rem;\n    }\n\n    .specs-toggle-btn {\n      padding: 9px 28px;\n      font-size: 0.9rem;\n    }\n  }\n</style>\n\n<div class=\"specifications-wrapper\">\n  <h2 class=\"specifications-title\">SPECIFICATIONS</h2>\n\n  <div class=\"specs-source-hidden js-specs-source\">\n    {{ product.metafields.custom.specifications }}\n  </div>\n\n  <div class=\"js-specs-rendered\"></div>\n\n  <div class=\"specs-toggle-wrapper hidden\">\n    <button class=\"specs-toggle-btn js-specs-toggle\" type=\"button\">\n      Show More ▼\n    </button>\n  </div>\n</div>\n\n<script>\n  (function () {\n    function escapeHtml(text) {\n      var div = document.createElement('div');\n      div.textContent = text;\n      return div.innerHTML;\n    }\n\n    function buildSpecsTable(rawText) {\n      if (!rawText) return '';\n\n      var text = rawText\n        .replace(/\\r\\n/g, '\\n')\n        .replace(/\\r/g, '\\n')\n        .trim();\n\n      if (!text) return '';\n\n      text = text.replace(/;\\s*/g, '\\n');\n      text = text.replace(/,\\s*(?=[A-Za-z0-9\\u0600-\\u06FF][^,:]{0,40}\\s*:)/g, '\\n');\n\n      var lines = text\n        .split('\\n')\n        .map(function(line) { return line.trim(); })\n        .filter(function(line) { return line.length > 0; });\n\n      if (!lines.length) return '';\n\n      var rows = '';\n\n      lines.forEach(function(line) {\n        var key = '';\n        var value = '';\n\n        if (line.indexOf(':') > -1) {\n          var parts = line.split(':');\n          key = parts.shift().trim();\n          value = parts.join(':').trim();\n        }\n\n        if (key && value) {\n          rows += '<tr><th>' + escapeHtml(key) + '</th><td>' + escapeHtml(value) + '</td></tr>';\n        }\n      });\n\n      if (!rows) {\n        return '<div>' + escapeHtml(rawText) + '</div>';\n      }\n\n      return '<table class=\"specs-table\"><tbody>' + rows + '</tbody></table>';\n    }\n\n    function initSpecsBlock(wrapper) {\n      var source = wrapper.querySelector('.js-specs-source');\n      var rendered = wrapper.querySelector('.js-specs-rendered');\n      var toggleWrapper = wrapper.querySelector('.specs-toggle-wrapper');\n      var toggleBtn = wrapper.querySelector('.js-specs-toggle');\n\n      if (!source || !rendered) return;\n\n      var rawHtml = source.innerHTML.trim();\n      var rawText = source.textContent.trim();\n\n      if (!rawHtml && !rawText) {\n        rendered.innerHTML = '';\n        return;\n      }\n\n      var looksLikeHtml =\n        rawHtml.indexOf('<table') !== -1 ||\n        rawHtml.indexOf('<tr') !== -1 ||\n        rawHtml.indexOf('<td') !== -1 ||\n        rawHtml.indexOf('<th') !== -1 ||\n        rawHtml.indexOf('<tbody') !== -1;\n\n      if (looksLikeHtml) {\n        rendered.innerHTML = rawHtml;\n      } else {\n        rendered.innerHTML = buildSpecsTable(rawText);\n      }\n\n      var table = rendered.querySelector('.specs-table');\n\n      if (!table) {\n        toggleWrapper.classList.add('hidden');\n        return;\n      }\n\n      var rowCount = table.querySelectorAll('tbody tr').length;\n\n      if (rowCount > 6) {\n        toggleWrapper.classList.remove('hidden');\n      } else {\n        table.classList.add('show-all');\n        toggleWrapper.classList.add('hidden');\n      }\n\n      toggleBtn.addEventListener('click', function() {\n        var isShowingAll = table.classList.contains('show-all');\n\n        if (isShowingAll) {\n          table.classList.remove('show-all');\n          toggleBtn.innerHTML = 'Show More ▼';\n          wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });\n        } else {\n          table.classList.add('show-all');\n          toggleBtn.innerHTML = 'Show Less ▲';\n        }\n      });\n    }\n\n    document.addEventListener('DOMContentLoaded', function() {\n      var wrappers = document.querySelectorAll('.specifications-wrapper');\n      wrappers.forEach(function(wrapper) {\n        initSpecsBlock(wrapper);\n      });\n    });\n  })();\n</script>",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "custom_liquid_rCbcUb": {
+      "type": "custom-liquid",
+      "name": "Product FAQ",
+      "settings": {
+        "custom_liquid": "<!-- Crony ae: Product FAQ (Accordion, no outer box, aligned with specs, consistent color) -->\n<section id=\"crony-faq\"\n         class=\"crony-faq\"\n         aria-labelledby=\"cronyFaqTitle\"\n         dir=\"ltr\">\n\n  <div class=\"crony-faq__wrap\">\n    <h2 id=\"cronyFaqTitle\" class=\"crony-faq__title\">Frequently Asked Questions</h2>\n\n    <div class=\"crony-faq__grid\" role=\"list\">\n      <!-- Column A -->\n      <div class=\"crony-faq__col\" role=\"list\">\n        <!-- Warranty -->\n        <article class=\"crony-faq__item\" role=\"listitem\">\n          <button class=\"crony-faq__btn\" aria-expanded=\"false\" aria-controls=\"faq-warranty\">\n            <span>Do Crony products come with a warranty?</span>\n            <svg class=\"crony-faq__icon\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\">\n              <path d=\"M6 9l6 6 6-6\" fill=\"none\" stroke=\"#e63946\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n            </svg>\n          </button>\n          <div class=\"crony-faq__panel\" id=\"faq-warranty\" hidden>\n            <p>Yes. Every product is covered by a limited warranty: <strong>Please reach  our support team for more information.</strong></p>\n          </div>\n        </article>\n\n        <!-- Shipping -->\n        <article class=\"crony-faq__item\" role=\"listitem\">\n          <button class=\"crony-faq__btn\" aria-expanded=\"false\" aria-controls=\"faq-shipping\">\n            <span>How fast is delivery?</span>\n            <svg class=\"crony-faq__icon\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\">\n              <path d=\"M6 9l6 6 6-6\" fill=\"none\" stroke=\"#e63946\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n            </svg>\n          </button>\n          <div class=\"crony-faq__panel\" id=\"faq-shipping\" hidden>\n            <p><strong>UAE orders</strong> are usually delivered <strong>in two to three days</strong>. Tracking will be shared by SMS/Email.</p>\n          </div>\n        </article>\n\n        <!-- Returns -->\n        <article class=\"crony-faq__item\" role=\"listitem\">\n          <button class=\"crony-faq__btn\" aria-expanded=\"false\" aria-controls=\"faq-returns\">\n            <span>Can I return or exchange my product?</span>\n            <svg class=\"crony-faq__icon\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\">\n              <path d=\"M6 9l6 6 6-6\" fill=\"none\" stroke=\"#e63946\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n            </svg>\n          </button>\n          <div class=\"crony-faq__panel\" id=\"faq-returns\" hidden>\n            <p>Yes, within <strong>7 days</strong> of delivery if unused and in original packaging. Damaged or faulty items are replaced immediately.</p>\n          </div>\n        </article>\n      </div>\n\n      <!-- Column B -->\n      <div class=\"crony-faq__col\" role=\"list\">\n        <!-- Payments -->\n        <article class=\"crony-faq__item\" role=\"listitem\">\n          <button class=\"crony-faq__btn\" aria-expanded=\"false\" aria-controls=\"faq-payments\">\n            <span>Are payments secure? Do you offer installments?</span>\n            <svg class=\"crony-faq__icon\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\">\n              <path d=\"M6 9l6 6 6-6\" fill=\"none\" stroke=\"#e63946\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n            </svg>\n          </button>\n          <div class=\"crony-faq__panel\" id=\"faq-payments\" hidden>\n            <p>Yes—checkout is encrypted. We accept <strong>Visa, MasterCard, Apple Pay, Google Pay, PayPal</strong>, plus installment options like <strong>Tabby and Tamara</strong>.</p>\n          </div>\n        </article>\n\n        <!-- After-Sales -->\n        <article class=\"crony-faq__item\" role=\"listitem\">\n          <button class=\"crony-faq__btn\" aria-expanded=\"false\" aria-controls=\"faq-service\">\n            <span>Do you provide repairs and spare parts?</span>\n            <svg class=\"crony-faq__icon\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\">\n              <path d=\"M6 9l6 6 6-6\" fill=\"none\" stroke=\"#e63946\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n            </svg>\n          </button>\n          <div class=\"crony-faq__panel\" id=\"faq-service\" hidden>\n            <p>Yes, our service team stocks parts and handles repairs. Book service directly via WhatsApp.</p>\n          </div>\n        </article>\n\n        <!-- Contact -->\n        <article class=\"crony-faq__item\" role=\"listitem\">\n          <button class=\"crony-faq__btn\" aria-expanded=\"false\" aria-controls=\"faq-contact\">\n            <span>Need help with your order?</span>\n            <svg class=\"crony-faq__icon\" viewBox=\"0 0 24 24\" width=\"20\" height=\"20\">\n              <path d=\"M6 9l6 6 6-6\" fill=\"none\" stroke=\"#e63946\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n            </svg>\n          </button>\n          <div class=\"crony-faq__panel\" id=\"faq-contact\" hidden>\n            <p>We’re here 7 days a week. Chat with us on WhatsApp or email <a href=\"mailto:support@crony.ae\">support@crony.ae</a>.</p>\n          </div>\n        </article>\n      </div>\n    </div>\n  </div>\n</section>\n\n<style>\n  /* Prevent iOS Safari from coloring text blue */\n  #crony-faq {\n    -webkit-text-size-adjust: 100%;\n    -webkit-touch-callout: none;\n    -webkit-user-select: text;\n  }\n\n  /* Remove blue auto-link style (iOS Mail & Safari) */\n  a, span, p, h2, button {\n    color: inherit;\n    text-decoration: none !important;\n  }\n\n  /* --- Remove big box & match width with specs --- */\n  .crony-faq {\n    background: transparent !important;\n    border: 0 !important;\n    padding: 0 !important;\n    margin: 28px 0 16px !important;\n  }\n\n  .crony-faq__wrap {\n    max-width: none !important;\n    margin: 0 !important;\n    padding: 0 !important;\n    width: 100%;\n  }\n\n  .crony-faq__title {\n    font-size: 22px;\n    font-weight: 700;\n    margin-bottom: 20px;\n    text-align: center;\n    color: #000 !important; /* Force black on all devices */\n  }\n\n  .crony-faq__grid {\n    display: grid;\n    gap: 16px;\n  }\n\n  .crony-faq__col {\n    display: grid;\n    gap: 12px;\n  }\n\n  @media (min-width: 900px) {\n    .crony-faq__grid {\n      grid-template-columns: 1fr 1fr;\n      gap: 20px;\n    }\n  }\n\n  .crony-faq__item {\n    background: #fff;\n    border: 1px solid #ddd;\n    border-radius: 10px;\n    transition: all 0.25s ease;\n  }\n\n  .crony-faq__item:hover {\n    transform: translateY(-3px);\n    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);\n    border-color: #ccc;\n  }\n\n  .crony-faq__btn {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 16px 18px;\n    background: none;\n    border: 0;\n    font-size: 15px;\n    font-weight: 600;\n    text-align: left;\n    cursor: pointer;\n    color: #000 !important; /* Force button text black */\n    -webkit-text-fill-color: #000 !important; /* iOS Safari fix */\n  }\n\n  .crony-faq__icon {\n    transition: transform 0.25s ease;\n  }\n\n  .crony-faq__btn[aria-expanded=\"true\"] .crony-faq__icon {\n    transform: rotate(180deg);\n  }\n\n  .crony-faq__panel {\n    padding: 0 18px 16px 18px;\n    font-size: 14px;\n    line-height: 1.6;\n    color: #555;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.35s ease, padding-top 0.35s ease;\n  }\n\n  .crony-faq__panel.is-open {\n    padding-top: 4px;\n    max-height: 300px;\n  }\n</style>\n\n<script>\n  (function () {\n    const items = document.querySelectorAll('#crony-faq .crony-faq__item');\n    items.forEach((item, idx) => {\n      const btn = item.querySelector('.crony-faq__btn');\n      const panel = item.querySelector('.crony-faq__panel');\n\n      if (panel && btn && !panel.id) {\n        panel.id = 'crony-faq-panel-' + idx;\n        btn.setAttribute('aria-controls', panel.id);\n      }\n\n      btn.addEventListener('click', () => {\n        const expanded = btn.getAttribute('aria-expanded') === 'true';\n        btn.setAttribute('aria-expanded', String(!expanded));\n        if (!expanded) {\n          panel.hidden = false;\n          requestAnimationFrame(() => panel.classList.add('is-open'));\n        } else {\n          panel.classList.remove('is-open');\n          panel.addEventListener('transitionend', function onEnd() {\n            panel.hidden = true;\n            panel.removeEventListener('transitionend', onEnd);\n          });\n        }\n      });\n    });\n  })();\n</script>",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "176079979613a9869e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8b7527c_JBJGxV": {
+          "type": "ai_gen_block_8b7527c",
+          "settings": {
+            "layout": "slider",
+            "max_products": 12,
+            "content_alignment": "center",
+            "section_padding_top": 50,
+            "section_padding_bottom": 50,
+            "section_bg_color": "#ffffff",
+            "heading": "Recently Viewed",
+            "heading_size": 30,
+            "heading_color": "#333333",
+            "heading_transform": "uppercase",
+            "heading_letter_spacing": 2,
+            "heading_spacing": 30,
+            "subtitle": "",
+            "subtitle_size": 15,
+            "subtitle_color": "#6b6b6b",
+            "products_per_row": 4,
+            "products_per_row_mobile": 2,
+            "grid_columns_desktop": 4,
+            "grid_columns_mobile": 2,
+            "product_gap": 20,
+            "products_spacing": 30,
+            "card_bg_color": "#ffffff",
+            "card_padding": 15,
+            "card_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e0e0e0",
+            "card_text_alignment": "center",
+            "card_hover_lift": -5,
+            "card_hover_shadow": 10,
+            "image_radius": 4,
+            "image_spacing": 15,
+            "title_size": 15,
+            "title_color": "#737373",
+            "title_weight": "600",
+            "title_transform": "none",
+            "title_padding_top": 0,
+            "title_padding_bottom": 10,
+            "price_size": 16,
+            "price_color": "#333333",
+            "price_weight": "bold",
+            "price_padding_top": 8,
+            "price_padding_bottom": 8,
+            "compare_price_size": 14,
+            "compare_price_color": "#ff0000",
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 15,
+            "button_text": "Buy Now",
+            "button_size": 14,
+            "button_weight": "bold",
+            "button_transform": "uppercase",
+            "button_bg_color": "#1b1f23",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#5ec6ff",
+            "button_hover_text_color": "#ffffff",
+            "button_padding_vertical": 5,
+            "button_padding_horizontal": 24,
+            "button_radius": 26,
+            "button_border_width": 0,
+            "button_border_color": "#1b1f23",
+            "button_hover_border_color": "#5ec6ff",
+            "show_arrows": true,
+            "show_arrows_mobile": "none",
+            "arrow_size": 40,
+            "arrow_icon_size": 20,
+            "arrow_bg_color": "#000000",
+            "arrow_color": "#ffffff",
+            "arrow_hover_bg_color": "#5ec6ff",
+            "arrow_hover_color": "#ffffff",
+            "arrow_radius": 20,
+            "arrow_opacity": 0.8,
+            "arrow_position": -20,
+            "show_view_all": true,
+            "view_all_text": "View All Products",
+            "view_all_link": "",
+            "view_all_size": 14,
+            "view_all_weight": "bold",
+            "view_all_transform": "uppercase",
+            "view_all_bg_color": "#ffffff",
+            "view_all_text_color": "#1b1f23",
+            "view_all_hover_bg_color": "#1b1f23",
+            "view_all_hover_text_color": "#ffffff",
+            "view_all_padding_vertical": 12,
+            "view_all_padding_horizontal": 30,
+            "view_all_radius": 4,
+            "view_all_border_width": 2,
+            "view_all_border_color": "#1b1f23",
+            "view_all_hover_border_color": "#1b1f23",
+            "empty_message": "No recently viewed products yet",
+            "view_all_spacing": 20
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8b7527c_JBJGxV"
+      ],
+      "custom_css": [
+        ".ai-recently-viewed-title-avtc1zjnlmnlimnozvaigenblock8b7527cjbjgxv {padding-top: 25px;}"
+      ],
+      "settings": {}
+    },
+    "1760806082786b8dc3": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0feb8c6_yPQ63z": {
+          "type": "ai_gen_block_0feb8c6",
+          "settings": {
+            "heading": "You May Also Like",
+            "layout": "slider",
+            "alignment": "center",
+            "content_alignment": "center",
+            "products_per_row_desktop": 4,
+            "products_per_row_mobile": 2,
+            "collection_source": "same_collection",
+            "manual_collection": "",
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "background_color": "#f6f7f9",
+            "heading_font_size": 30,
+            "heading_color": "#333333",
+            "card_bg_color": "#ffffff",
+            "card_padding": 12,
+            "card_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e0e0e0",
+            "card_hover_lift": -3,
+            "card_hover_shadow": 8,
+            "title_font_size": 14,
+            "title_color": "#656565",
+            "title_hover_color": "#656565",
+            "title_font_weight": "600",
+            "title_padding_top": 0,
+            "title_padding_bottom": 11,
+            "price_font_size": 16,
+            "price_color": "#333333",
+            "compare_price_color": "#ff0000",
+            "price_padding_top": 7,
+            "price_padding_bottom": 2,
+            "star_size": 20,
+            "star_color": "#ffc107",
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 10,
+            "button_text": "BUY NOW",
+            "button_font_size": 13,
+            "button_padding_vertical": 5,
+            "button_bg_color": "#1b1f23",
+            "button_hover_bg_color": "#5ec6ff",
+            "button_text_color": "#ffffff",
+            "button_radius": 26,
+            "show_nav_buttons": true,
+            "show_nav_buttons_mobile": "none",
+            "nav_button_size": 44,
+            "nav_icon_size": 20,
+            "nav_button_color": "#1b1f23",
+            "nav_button_hover_color": "#5ec6ff",
+            "nav_button_radius": 22,
+            "nav_button_opacity": 0.9,
+            "nav_button_offset": -20
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0feb8c6_yPQ63z"
+      ],
+      "settings": {}
+    },
+    "custom_liquid_bbKNTr": {
+      "type": "custom-liquid",
+      "name": "Reviews",
+      "settings": {
+        "custom_liquid": "{% render 'product-reviews' %}",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "show_product_recommendations": true,
+        "wide_display": false,
+        "product_recommendations_style": "grid",
+        "product_recommendations_heading": "You may also like",
+        "products_per_row": 3,
+        "recommended_products_limit": 4
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Subscribe",
+        "newsletter_text": "<p>Sign up to get the latest on sales, new releases and more …</p>",
+        "newsletter_section_text_align": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "custom_liquid_gfxegY": {
+      "type": "custom-liquid",
+      "name": "Sticky Add To Card",
+      "settings": {
+        "custom_liquid": "{% render 'sticky-add-to-cart' %}",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "sidebar",
+    "main",
+    "custom_liquid_dME4Ka",
+    "custom_liquid_zjWEzX",
+    "custom_liquid_bULCqV",
+    "custom_liquid_Y4F9cw",
+    "custom_liquid_FFWzwd",
+    "custom_liquid_rCbcUb",
+    "176079979613a9869e",
+    "1760806082786b8dc3",
+    "custom_liquid_bbKNTr",
+    "recommendations",
+    "newsletter",
+    "custom_liquid_gfxegY"
+  ]
+}

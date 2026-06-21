@@ -1,0 +1,1990 @@
+{% comment %}
+  Mega Menu Section - Flexible Two-Level Menu
+  File: sections/mega-menu.liquid
+{% endcomment %}
+
+<div class="mega-menu-wrapper">
+  {%- comment -%} Top Bar: Social Icons on Left, Cart on Right {%- endcomment -%}
+  <div class="mega-menu-top-bar">
+    <div class="mega-menu-top-container">
+      {%- comment -%} Left: Social Media Icons {%- endcomment -%}
+      <div class="top-bar-left">
+        {% if section.settings.facebook_url != blank %}
+          <a href="{{ section.settings.facebook_url }}" target="_blank" class="social-icon" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if section.settings.instagram_url != blank %}
+          <a href="{{ section.settings.instagram_url }}" target="_blank" class="social-icon" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if section.settings.twitter_url != blank %}
+          <a href="{{ section.settings.twitter_url }}" target="_blank" class="social-icon" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if section.settings.youtube_url != blank %}
+          <a href="{{ section.settings.youtube_url }}" target="_blank" class="social-icon" aria-label="YouTube">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if section.settings.tiktok_url != blank %}
+          <a href="{{ section.settings.tiktok_url }}" target="_blank" class="social-icon" aria-label="TikTok">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Right: Cart Icon {%- endcomment -%}
+      <div class="top-bar-right">
+        <a href="{{ routes.cart_url }}" class="top-cart-link">
+          {% if section.settings.cart_icon != blank %}
+            {{ section.settings.cart_icon | image_url: width: 24 | image_tag: alt: 'Cart', class: 'cart-icon-image' }}
+          {% else %}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 2L7 6M17 2l2 4M3 6h18M5 6l1 12a2 2 0 002 2h8a2 2 0 002-2l1-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {% endif %}
+          <span class="top-cart-count">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mega-menu-container">
+    
+    {%- comment -%} Column 1: Logo {%- endcomment -%}
+<div class="mega-menu-logo">
+  {% if section.settings.logo != blank %}
+    <a href="{{ routes.root_url }}" class="logo-link">
+      <img 
+        src="{{ section.settings.logo | image_url: width: 260 }}" 
+        srcset="{{ section.settings.logo | image_url: width: 260 }} 1x,
+                {{ section.settings.logo | image_url: width: 520 }} 2x"
+        alt="{{ shop.name }}" 
+        width="130" 
+        height="28"
+        loading="eager"
+        class="logo-image">
+    </a>
+  {% else %}
+    <a href="{{ routes.root_url }}" class="logo-link logo-text">
+      {{ shop.name }}
+    </a>
+  {% endif %}
+</div>
+
+    {%- comment -%} Column 2: Menu Items {%- endcomment -%}
+    <nav class="mega-menu-nav">
+      <ul class="menu-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu_item' %}
+            <li class="menu-item" data-menu-item data-block-index="{{ forloop.index0 }}">
+              {% if block.settings.collection != blank %}
+                <a href="/collections/all-products?collection={{ block.settings.collection.handle }}" class="menu-link">
+                  {{ block.settings.menu_text }}
+                  <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              {% elsif block.settings.custom_link != blank %}
+                <a href="{{ block.settings.custom_link }}" class="menu-link">
+                  {{ block.settings.menu_text }}
+                  <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              {% else %}
+                <a href="#" class="menu-link">
+                  {{ block.settings.menu_text }}
+                  <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+
+    {%- comment -%} Column 3: Search Button {%- endcomment -%}
+    <div class="mega-menu-search">
+      <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+        <div class="search-button">
+          <input 
+            type="search" 
+            name="q" 
+            class="search-input" 
+            placeholder="Search..."
+            autocomplete="off"
+          />
+          <button type="submit" class="search-icon-button" aria-label="Search">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="11" cy="11" r="8" stroke-width="2"/>
+              <path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {%- comment -%} Mobile Controls Wrapper - Contains burger menu and search on mobile {%- endcomment -%}
+    <div class="mobile-controls-wrapper">
+      {%- comment -%} Search for mobile - now on the LEFT {%- endcomment -%}
+      <div class="mega-menu-search-mobile">
+        <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+          <div class="search-button">
+            <input 
+              type="search" 
+              name="q" 
+              class="search-input" 
+              placeholder="Search..."
+              autocomplete="off"
+            />
+            <button type="submit" class="search-icon-button" aria-label="Search">
+              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                <path d="M21 21l-4.35-4.35" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {%- comment -%} Burger menu - now on the RIGHT {%- endcomment -%}
+      <div class="mobile-trigger-bar" data-mobile-trigger-bar>
+        <button class="hamburger-btn" type="button" aria-label="Open menu" aria-controls="mobileMenuDrawer" aria-expanded="false" data-hamburger>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+{%- comment -%} === Off-canvas Mobile Menu === {%- endcomment -%}
+<div class="mobile-menu-overlay" data-mobile-overlay hidden></div>
+
+<aside id="mobileMenuDrawer" class="mobile-menu-drawer" aria-hidden="true" role="dialog" aria-modal="true" data-mobile-drawer hidden>
+  <div class="mobile-drawer-header">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" type="button" aria-label="Close menu" data-drawer-close>&times;</button>
+  </div>
+
+  <nav class="mobile-drawer-nav" role="navigation">
+    <ul class="mobile-root-list">
+      {% for block in section.blocks %}
+        {% if block.type == 'menu_item' %}
+          {% assign parent_index = forloop.index0 %}
+          {% assign dropdown_type = block.settings.dropdown_type | default: 'collection' %}
+
+          {% assign has_sub = false %}
+          {% if dropdown_type == 'sub_items' %}
+            {% assign next_index = parent_index | plus: 1 %}
+            {% for check in section.blocks offset: next_index %}
+              {% if check.type == 'menu_item' %}{% break %}{% endif %}
+              {% if check.type == 'sub_item' %}{% assign has_sub = true %}{% break %}{% endif %}
+            {% endfor %}
+          {% endif %}
+
+          <li class="mobile-root-item">
+            {% if dropdown_type == 'all_collections' %}
+              {%- comment -%} Quick Collections in Mobile {%- endcomment -%}
+              <details class="mobile-accordion">
+                <summary class="mobile-accordion-summary">
+                  <span>
+                    {{ block.settings.menu_text }}
+                  </span>
+                  <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </summary>
+                <ul class="mobile-sub-list">
+                  {% assign sorted_collections = collections | sort: 'title' %}
+                  {% for collection in sorted_collections %}
+                    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+                      <li class="mobile-sub-item">
+                        <a class="mobile-link" href="/collections/all-products?collection={{ collection.handle }}">{{ collection.title }} ({{ collection.products_count }})</a>
+                      </li>
+                    {% endunless %}
+                  {% endfor %}
+                </ul>
+              </details>
+            {% elsif has_sub %}
+              <details class="mobile-accordion">
+                <summary class="mobile-accordion-summary">
+                  <span>
+                    {{ block.settings.menu_text }}
+                  </span>
+                  <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </summary>
+                <ul class="mobile-sub-list">
+                  {% assign next_index = parent_index | plus: 1 %}
+                  {% for sub in section.blocks offset: next_index %}
+                    {% if sub.type == 'menu_item' %}{% break %}{% endif %}
+                    {% if sub.type == 'sub_item' %}
+                      <li class="mobile-sub-item">
+                        {% if sub.settings.collection != blank %}
+                          <a class="mobile-link" href="/collections/all-products?collection={{ sub.settings.collection.handle }}">
+                            {{ sub.settings.sub_item_text }}
+                          </a>
+                        {% else %}
+                          <span class="mobile-link mobile-link--muted">
+                            {{ sub.settings.sub_item_text }}
+                          </span>
+                        {% endif %}
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+            {% else %}
+              {% if block.settings.collection != blank %}
+                <a class="mobile-link" href="/collections/all-products?collection={{ block.settings.collection.handle }}">
+                  {{ block.settings.menu_text }}
+                </a>
+              {% elsif block.settings.custom_link != blank %}
+                <a class="mobile-link" href="{{ block.settings.custom_link }}">
+                  {{ block.settings.menu_text }}
+                </a>
+              {% else %}
+                <span class="mobile-link mobile-link--muted">
+                  {{ block.settings.menu_text }}
+                </span>
+              {% endif %}
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+</aside>
+
+
+  {%- comment -%} Dropdown Panels {%- endcomment -%}
+  {% assign current_parent_index = -1 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'menu_item' %}
+      {% assign current_parent_index = forloop.index0 %}
+      {% assign dropdown_type = block.settings.dropdown_type | default: 'collection' %}
+      
+      {%- comment -%} Check if there are sub-items following this menu item {%- endcomment -%}
+      {% assign has_sub_items = false %}
+      {% if dropdown_type == 'sub_items' %}
+        {% assign next_index = forloop.index0 | plus: 1 %}
+        {% for check_block in section.blocks offset: next_index %}
+          {% if check_block.type == 'menu_item' %}
+            {% break %}
+          {% elsif check_block.type == 'sub_item' %}
+            {% assign has_sub_items = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      <div class="mega-dropdown {% if has_sub_items %}has-sub-items{% endif %}" data-dropdown-for="{{ forloop.index0 }}">
+        <div class="mega-dropdown-inner">
+          
+          {% if has_sub_items %}
+            {%- comment -%} TWO-LEVEL: Sub-Items on Left + Products on Right {%- endcomment -%}
+            
+            <div class="dropdown-nav">
+              <h3 class="dropdown-title">
+                {{ block.settings.menu_text }}
+              </h3>
+              <ul class="sub-items-list">
+                {% assign next_index = forloop.index0 | plus: 1 %}
+                {% for sub_block in section.blocks offset: next_index %}
+                  {% if sub_block.type == 'menu_item' %}
+                    {% break %}
+                  {% elsif sub_block.type == 'sub_item' %}
+                    <li class="sub-item" data-sub-item data-collection-id="{{ sub_block.settings.collection.id }}">
+                      <a href="/collections/all-products?collection={{ sub_block.settings.collection.handle }}" class="sub-item-link">
+                        {{ sub_block.settings.sub_item_text }}
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="dropdown-products">
+              {% assign next_index = forloop.index0 | plus: 1 %}
+              {% for sub_block in section.blocks offset: next_index %}
+                {% if sub_block.type == 'menu_item' %}
+                  {% break %}
+                {% elsif sub_block.type == 'sub_item' %}
+                  <div class="products-section" data-products-for="{{ sub_block.settings.collection.id }}">
+                    <div class="products-header">
+                      <h4>{{ sub_block.settings.collection.title }}</h4>
+                      <div class="dropdown-actions">
+                        <a href="/collections/all-products?collection={{ sub_block.settings.collection.handle }}" class="view-all-link">
+                          View All ({{ sub_block.settings.collection.products_count }})
+                        </a>
+                        <button class="close-dropdown-btn" aria-label="Close menu" type="button">
+                          Close <span class="close-x-icon">X</span></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="products-grid">
+                      {% assign product_limit = section.settings.products_per_row | default: 4 %}
+                      {% for product in sub_block.settings.collection.products limit: product_limit %}
+                        <div class="product-card">
+                          <a href="{{ product.url }}" class="product-link">
+                            {% if product.featured_image %}
+                              <div class="product-image">
+                                <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" loading="lazy" width="250" height="250">
+                              </div>
+                            {% else %}
+                              <div class="product-image product-image-placeholder">
+                                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              </div>
+                            {% endif %}
+                            
+                            <div class="product-info">
+                              <h5 class="product-title">{{ product.title }}</h5>
+                              <div class="product-price">
+                                {% if product.compare_at_price > product.price %}
+                                  <span class="price-sale">{{ product.price | money }}</span>
+                                  <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                                {% else %}
+                                  <span class="price">{{ product.price | money }}</span>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </a>
+                          <a href="{{ product.url }}" class="product-buy-button">
+                            {{ section.settings.buy_button_text | default: 'Buy Now' }}
+                          </a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+          {% elsif dropdown_type == 'collection' and block.settings.collection != blank %}
+            {%- comment -%} SIMPLE: Direct Collection Products {%- endcomment -%}
+            
+            <div class="dropdown-simple">
+              <div class="dropdown-header">
+                <h3>{{ block.settings.collection.title }}</h3>
+                <div class="dropdown-actions">
+                  <a href="/collections/all-products?collection={{ block.settings.collection.handle }}" class="view-all-link">
+                    View All ({{ block.settings.collection.products_count }})
+                  </a>
+                  <button class="close-dropdown-btn" aria-label="Close menu" type="button">
+                    Close <span class="close-x-icon">X</span></span>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="products-grid">
+                {% assign product_limit = section.settings.products_per_row | default: 4 %}
+                {% for product in block.settings.collection.products limit: product_limit %}
+                  <div class="product-card">
+                    <a href="{{ product.url }}" class="product-link">
+                      {% if product.featured_image %}
+                        <div class="product-image">
+                          <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.title }}" loading="lazy" width="250" height="250">
+                        </div>
+                      {% else %}
+                        <div class="product-image product-image-placeholder">
+                          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                      {% endif %}
+                      
+                      <div class="product-info">
+                        <h5 class="product-title">{{ product.title }}</h5>
+                        <div class="product-price">
+                          {% if product.compare_at_price > product.price %}
+                            <span class="price-sale">{{ product.price | money }}</span>
+                            <span class="price-compare">{{ product.compare_at_price | money }}</span>
+                          {% else %}
+                            <span class="price">{{ product.price | money }}</span>
+                          {% endif %}
+                        </div>
+                      </div>
+                    </a>
+                    <a href="{{ product.url }}" class="product-buy-button">
+                      {{ section.settings.buy_button_text | default: 'Buy Now' }}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+
+          {% elsif dropdown_type == 'all_collections' %}
+            {%- comment -%} QUICK COLLECTIONS: Display all store collections as rows {%- endcomment -%}
+            
+            <div class="dropdown-simple quick-collections-dropdown">
+              <div class="dropdown-header">
+                <h3>
+                  {{ block.settings.menu_text }}
+                </h3>
+                <div class="dropdown-actions">
+                  <button class="close-dropdown-btn" aria-label="Close menu" type="button">
+                    Close <span class="close-x-icon">X</span></span>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="collections-rows-list">
+                {% assign sorted_collections = collections | sort: 'title' %}
+                {% for collection in sorted_collections %}
+                  {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+                    <div class="collection-row-item">
+                      <a href="/collections/all-products?collection={{ collection.handle }}" class="collection-row-link">
+                        <span class="collection-name">{{ collection.title }}</span>
+                        <span class="collection-count">({{ collection.products_count }})</span>
+                      </a>
+                    </div>
+                  {% endunless %}
+                {% endfor %}
+              </div>
+            </div>
+
+          {% endif %}
+
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+</div>
+
+{%- comment -%} Page Overlay for Dropdowns - Must be outside wrapper for proper z-index stacking {%- endcomment -%}
+<div class="mega-menu-page-overlay" data-page-overlay></div>
+
+<style>
+  
+
+  /* ================ PERFORMANCE OPTIMIZATIONS ================ */
+  /* PERFORMANCE: CSS Containment for better rendering isolation */
+  .mega-menu-wrapper {
+    contain: layout style !important;
+  }
+  
+  .mega-dropdown {
+    contain: layout style paint !important;
+  }
+  
+  .product-card,
+  .collection-row-item,
+  .sub-item {
+    contain: layout style paint !important;
+  }
+  
+  /* PERFORMANCE: GPU Acceleration with will-change hints */
+  .mega-dropdown {
+    will-change: opacity, transform !important;
+  }
+  
+  .product-card:hover,
+  .sub-item:hover,
+  .menu-link:hover,
+  .social-icon:hover,
+  .collection-row-item:hover {
+    will-change: transform !important;
+  }
+  
+  .mobile-menu-drawer {
+    will-change: transform !important;
+  }
+  
+  /* PERFORMANCE: Optimize image rendering for faster display */
+  .product-image img,
+  .logo-image,
+  .cart-icon-image {
+    image-rendering: -webkit-optimize-contrast !important;
+  }
+  
+  /* PERFORMANCE: Hardware acceleration for smooth animations */
+  .hamburger-btn,
+  .product-buy-button,
+  .sub-item-link,
+  .menu-link {
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+  }
+
+
+  /* ================ TOP BAR STYLES ================ */
+  .mega-menu-wrapper .mega-menu-top-bar {
+    background-color: var(--top-bar-bg) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+  }
+
+  .mega-menu-wrapper .mega-menu-top-container {
+    max-width: var(--menu-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mega-menu-wrapper .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--social-icons-gap);
+  }
+
+  .mega-menu-wrapper .top-cart-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--top-bar-icon-color) !important;
+  }
+
+  .mega-menu-wrapper .top-cart-link svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mega-menu-wrapper .cart-icon-image {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .mega-menu-wrapper .top-cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--top-bar-badge-bg) !important;
+    color: var(--top-bar-badge-text) !important;
+    font-size: 0.7rem !important;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .mega-menu-wrapper .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--social-icons-gap);
+  }
+
+  .mega-menu-wrapper .social-icon {
+    color: var(--top-bar-icon-color) !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .mega-menu-wrapper .social-icon:hover {
+    opacity: 0.7;
+  }
+
+  .mega-menu-wrapper .social-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .mega-menu-wrapper .mega-menu-top-bar {
+      padding: 8px 0;
+    }
+
+    .mega-menu-wrapper .top-bar-right {
+      gap: 12px;
+    }
+
+    .mega-menu-wrapper .social-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .mega-menu-wrapper {
+    --mega-menu-bg: {{ section.settings.menu_bg_color | default: '#ffffff' }};
+    --top-bar-bg: {{ section.settings.top_bar_bg_color | default: "#f8f8f8" }};
+    --top-bar-icon-color: {{ section.settings.top_bar_icon_color | default: "#000000" }};
+    --top-bar-badge-bg: {{ section.settings.top_bar_badge_bg | default: "#000000" }};
+    --top-bar-badge-text: {{ section.settings.top_bar_badge_text | default: "#ffffff" }};
+    --social-icons-gap: {{ section.settings.social_icons_gap | default: 15 }}px;
+    --logo-width: {{ section.settings.logo_size_desktop | default: 200 }}px;
+    --mega-menu-border: {{ section.settings.menu_border_color | default: '#e5e5e5' }};
+    --menu-text-color: {{ section.settings.menu_text_color | default: '#000000' }};
+    --menu-text-hover: {{ section.settings.menu_text_hover_color | default: '#666666' }};
+    --menu-font-size: {{ section.settings.menu_font_size | default: 16 }}px;
+    --dropdown-bg: {{ section.settings.dropdown_bg_color | default: '#ffffff' }};
+    --dropdown-border: {{ section.settings.dropdown_border_color | default: '#e5e5e5' }};
+    --dropdown-title-size: {{ section.settings.dropdown_title_size | default: 20 }}px;
+    --dropdown-title-color: {{ section.settings.dropdown_title_color | default: '#000000' }};
+    --sub-item-font-size: {{ section.settings.sub_item_font_size | default: 15 }}px;
+    --sub-item-text: {{ section.settings.sub_item_text_color | default: '#333333' }};
+    --sub-item-hover-bg: {{ section.settings.sub_item_hover_bg | default: '#f5f5f5' }};
+    --sub-item-hover-text: {{ section.settings.sub_item_hover_text | default: '#000000' }};
+    --product-title-size: {{ section.settings.product_title_size | default: 14 }}px;
+    --product-title-padding: {{ section.settings.product_title_padding | default: 0 }}px;
+    --product-title-color: {{ section.settings.product_title_color | default: '#000000' }};
+    --product-price-size: {{ section.settings.product_price_size | default: 15 }}px;
+    --product-price-padding: {{ section.settings.product_price_padding | default: 0 }}px;
+    --product-price-color: {{ section.settings.product_price_color | default: '#000000' }};
+    --product-sale-color: {{ section.settings.product_sale_color | default: '#d62828' }};
+    --icon-color: {{ section.settings.icon_color | default: '#000000' }};
+    --buy-button-font-size: {{ section.settings.buy_button_font_size | default: 14 }}px;
+    --buy-button-padding: {{ section.settings.buy_button_padding | default: 8 }}px;
+    --buy-button-bg: {{ section.settings.buy_button_bg | default: '#000000' }};
+    --buy-button-text-color: {{ section.settings.buy_button_text_color | default: '#ffffff' }};
+    --buy-button-hover-bg: {{ section.settings.buy_button_hover_bg | default: '#333333' }};
+    --buy-button-hover-text: {{ section.settings.buy_button_hover_text | default: '#ffffff' }};
+    --buy-button-radius: {{ section.settings.buy_button_radius | default: 4 }}px;
+    --mobile-logo-padding: {{ section.settings.mobile_logo_padding | default: 16 }}px;
+  }
+
+  .mega-menu-wrapper {
+    background: var(--mega-menu-bg) !important;
+    border-bottom: 1px solid var(--mega-menu-border) !important;
+    position: relative;
+    z-index: 100;
+  }
+
+  .mega-menu-wrapper .mega-menu-container {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+  }
+
+  /* Column 1: Logo */
+  .mega-menu-wrapper .mega-menu-logo .logo-link {
+    display: block;
+  }
+
+  .mega-menu-wrapper .mega-menu-logo .logo-image {
+    max-height: 50px;
+    width: auto;
+    max-width: var(--logo-width);
+  }
+
+  .mega-menu-wrapper .mega-menu-logo .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--menu-text-color) !important;
+    text-decoration: none !important;
+  }
+
+  /* Column 2: Menu Items */
+  .mega-menu-wrapper .mega-menu-nav .menu-list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .mega-menu-wrapper .mega-menu-nav .menu-item {
+    margin: 0;
+    position: relative;
+  }
+
+  .mega-menu-wrapper .mega-menu-nav .menu-link {
+    text-decoration: none !important;
+    color: var(--menu-text-color) !important;
+    font-size: var(--menu-font-size) !important;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: color 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .mega-menu-wrapper .mega-menu-nav .menu-link:hover {
+    color: var(--menu-text-hover) !important;
+  }
+
+  .mega-menu-wrapper .dropdown-arrow {
+    transition: transform 0.2s;
+  }
+
+  .mega-menu-wrapper .menu-item:hover .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Column 3: Search Button */
+  .mega-menu-wrapper .mega-menu-search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .mega-menu-wrapper .search-form {
+    margin: 0;
+    padding: 0;
+  }
+
+  .mega-menu-wrapper .search-button {
+    background: transparent !important;
+    border: {{ section.settings.search_border_width | default: 2 }}px solid {{ section.settings.search_border_color | default: '#000000' }};
+    border-radius: 4px;
+    min-width: 180px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.3s ease;
+    padding: 0 16px;
+    box-shadow: none !important;
+  }
+
+  .mega-menu-wrapper .search-button:focus-within {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .mega-menu-wrapper .search-button * {
+    background: transparent !important;
+  }
+
+  .mega-menu-wrapper .search-input {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    color: {{ section.settings.search_input_text_color | default: '#000000' }} !important;
+    font-size: 15px;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+  }
+
+  .mega-menu-wrapper .search-input::placeholder {
+    color: {{ section.settings.search_text_color | default: '#666666' }};
+    opacity: 1;
+    background: transparent !important;
+  }
+
+  .mega-menu-wrapper .search-input::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  .mega-menu-wrapper .search-input:focus {
+    background: transparent !important;
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .mega-menu-wrapper .search-input:active {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  .mega-menu-wrapper .search-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    background-color: transparent !important;
+    background: transparent !important;
+    -webkit-text-fill-color: {{ section.settings.search_input_text_color | default: '#000000' }} !important;
+    color: {{ section.settings.search_input_text_color | default: '#000000' }} !important;
+  }
+
+  .mega-menu-wrapper .search-input::-webkit-search-decoration,
+  .mega-menu-wrapper .search-input::-webkit-search-results-button,
+  .mega-menu-wrapper .search-input::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  .mega-menu-wrapper .search-icon-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    outline: none;
+  }
+
+  .mega-menu-wrapper .search-icon-button:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .mega-menu-wrapper .search-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke: {{ section.settings.search_icon_color | default: '#000000' }};
+    stroke-width: {{ section.settings.search_icon_width | default: 2 }};
+    transition: stroke 0.3s ease;
+  }
+
+  .mega-menu-wrapper .search-button:hover {
+    border-color: var(--menu-text-hover);
+  }
+
+  .mega-menu-wrapper .search-button:hover .search-input::placeholder {
+    color: var(--menu-text-hover);
+  }
+
+  .mega-menu-wrapper .search-button:hover .search-icon {
+    stroke: var(--menu-text-hover);
+  }
+
+  /* Mega Dropdown */
+  .mega-menu-wrapper .mega-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--dropdown-bg) !important;
+    border-top: 1px solid var(--dropdown-border) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    width: 100%;
+  }
+
+  .mega-menu-wrapper .mega-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mega-menu-wrapper .mega-dropdown-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* Simple Dropdown (Direct Collection) */
+  .mega-menu-wrapper .dropdown-simple {
+    width: 100%;
+  }
+
+  /* Two-Level Dropdown */
+  .mega-menu-wrapper .mega-dropdown.has-sub-items .mega-dropdown-inner {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+  }
+
+  /* Left Side: Navigation */
+  .mega-menu-wrapper .dropdown-nav {
+    border-right: 1px solid var(--dropdown-border) !important;
+    padding-right: 2rem;
+  }
+
+  .mega-menu-wrapper .dropdown-title {
+    margin: 0 0 1.5rem 0 !important;
+    font-size: var(--dropdown-title-size) !important;
+    font-weight: 600;
+    color: var(--dropdown-title-color) !important;
+  }
+
+  .mega-menu-wrapper .sub-items-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mega-menu-wrapper .sub-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .mega-menu-wrapper .sub-item-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    text-decoration: none !important;
+    color: var(--sub-item-text) !important;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: var(--sub-item-font-size) !important;
+  }
+
+  .mega-menu-wrapper .sub-item-link:hover,
+  .mega-menu-wrapper .sub-item.active .sub-item-link {
+    background-color: var(--sub-item-hover-bg) !important;
+    color: var(--sub-item-hover-text) !important;
+  }
+
+  .mega-menu-wrapper .sub-item-link svg {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .mega-menu-wrapper .sub-item-link:hover svg,
+  .mega-menu-wrapper .sub-item.active .sub-item-link svg {
+    opacity: 1;
+  }
+
+  /* Collections Rows */
+  .mega-menu-wrapper .collections-rows {
+    padding: 1rem 0;
+  }
+
+  .mega-menu-wrapper .collections-rows-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mega-menu-wrapper .collection-row-item {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .mega-menu-wrapper .collection-row-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Right Side: Products */
+  .mega-menu-wrapper .dropdown-products {
+    position: relative;
+  }
+
+  .mega-menu-wrapper .products-section {
+    display: none;
+  }
+
+  .mega-menu-wrapper .products-section.active {
+    display: block;
+  }
+
+  /* Headers */
+  .mega-menu-wrapper .dropdown-header,
+  .mega-menu-wrapper .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .mega-menu-wrapper .dropdown-header h3 {
+    margin: 0 !important;
+    font-size: var(--dropdown-title-size) !important;
+    font-weight: 600;
+    color: var(--dropdown-title-color) !important;
+  }
+
+  .mega-menu-wrapper .products-header {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--dropdown-border) !important;
+  }
+
+  .mega-menu-wrapper .products-header h4 {
+    margin: 0 !important;
+    font-size: calc(var(--dropdown-title-size) - 4px) !important;
+    font-weight: 600;
+    color: var(--dropdown-title-color) !important;
+  }
+
+  .mega-menu-wrapper .view-all-link {
+    color: #666 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    transition: color 0.2s;
+  }
+
+  .mega-menu-wrapper .dropdown-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .mega-menu-wrapper .close-dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    transition: transform 0.2s ease;
+    line-height: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0;
+  }
+
+  .mega-menu-wrapper .close-x-icon {
+    display: inline-block;
+  }
+
+  .mega-menu-wrapper .close-dropdown-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .mega-menu-wrapper .close-dropdown-btn svg {
+    display: none;
+  }
+
+  .mega-menu-wrapper .view-all-link {
+    color: #666 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .mega-menu-wrapper .view-all-link:hover {
+    color: #666 !important;
+    transform: translateY(-2px);
+  }
+
+  /* Products Grid */
+  .mega-menu-wrapper .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .mega-menu-wrapper .product-card {
+    transition: transform 0.2s;
+  }
+
+  .mega-menu-wrapper .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .mega-menu-wrapper .product-link {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+  }
+
+  .mega-menu-wrapper .product-image {
+    width: {{ section.settings.desktop_product_image_width | default: 250 }}px;
+    height: {{ section.settings.desktop_product_image_width | default: 250 }}px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #f5f5f5 !important;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Laptop-specific product image sizing */
+  @media screen and (max-width: 1440px) {
+    .mega-menu-wrapper .product-image {
+      width: {{ section.settings.laptop_product_image_width | default: 150 }}px;
+      height: {{ section.settings.laptop_product_image_width | default: 150 }}px;
+    }
+  }
+
+  .mega-menu-wrapper .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  .mega-menu-wrapper .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .mega-menu-wrapper .product-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mega-menu-wrapper .placeholder-svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  .mega-menu-wrapper .product-info {
+    padding: 0 0.25rem;
+  }
+
+  .mega-menu-wrapper .mega-dropdown .product-card .product-title {
+    margin: 0 0 .5rem 0 !important;
+    font-size: var(--product-title-size) !important;
+    font-weight: 900;
+    padding: var(--product-title-padding) 0 !important;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--product-title-color) !important;
+    word-break: break-word;
+    max-height: calc(1.3em * 2);
+  }
+
+  .mega-menu-wrapper .product-price {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: var(--product-price-padding) 0 !important;
+  }
+
+  .mega-menu-wrapper .price, 
+  .mega-menu-wrapper .price-sale {
+    font-weight: 600;
+    font-size: var(--product-price-size) !important;
+  }
+
+  .mega-menu-wrapper .price {
+    color: var(--product-price-color) !important;
+  }
+
+  .mega-menu-wrapper .price-sale {
+    color: var(--product-sale-color) !important;
+  }
+
+  .mega-menu-wrapper .price-compare {
+    font-size: calc(var(--product-price-size) - 2px) !important;
+    color: #999 !important;
+    text-decoration: line-through !important;
+  }
+
+  .mega-menu-wrapper .product-buy-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: var(--buy-button-padding) 1rem !important;
+    margin-top: 0.75rem;
+    background: var(--buy-button-bg) !important;
+    color: var(--buy-button-text-color) !important;
+    text-decoration: none !important;
+    border-radius: var(--buy-button-radius);    transition: background-color 0.2s, color 0.2s;
+    font-size: var(--buy-button-font-size) !important;
+    border: none !important;
+  }
+
+  .mega-menu-wrapper .product-buy-button:hover {
+    background: var(--buy-button-hover-bg) !important;
+    color: var(--buy-button-hover-text) !important;
+  }
+
+  /* Column 3: Actions */
+  .mega-menu-wrapper .mega-menu-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /* ================ QUICK COLLECTIONS STYLES ================ */
+  .mega-menu-wrapper .quick-collections-dropdown .collections-rows-list {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.qc_columns | default: 2 }}, 1fr);
+    gap: {{ section.settings.qc_gap | default: 8 }}px;
+    padding: 1rem 0;
+    max-height: {{ section.settings.qc_max_height | default: 400 }}px;
+    overflow-y: auto;
+  }
+
+  .mega-menu-wrapper .collection-row-item {
+    margin: 0;
+  }
+
+  .mega-menu-wrapper .collection-row-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: {{ section.settings.qc_padding | default: 12 }}px 1rem;
+    text-decoration: none !important;
+    color: {{ section.settings.qc_text_color | default: '#000000' }} !important;
+    background: {{ section.settings.qc_bg_color | default: '#f5f5f5' }};
+    border-radius: {{ section.settings.qc_border_radius | default: 6 }}px;
+    font-size: var(--sub-item-font-size);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .mega-menu-wrapper .collection-row-link *,
+  .mega-menu-wrapper .collection-row-link span {
+    color: {{ section.settings.qc_text_color | default: '#000000' }} !important;
+  }
+
+  .mega-menu-wrapper .collection-row-link:hover {
+    background: {{ section.settings.qc_hover_bg | default: '#666666' }} !important;
+    color: {{ section.settings.qc_text_hover_color | default: '#ffffff' }} !important;
+    transform: translateX(4px);
+    border-color: {{ section.settings.qc_border_color | default: '#000000' }};
+  }
+
+  .mega-menu-wrapper .collection-row-link:hover *,
+  .mega-menu-wrapper .collection-row-link:hover span {
+    color: {{ section.settings.qc_text_hover_color | default: '#ffffff' }} !important;
+  }
+
+  .mega-menu-wrapper .collection-name {
+    font-weight: 500;
+    flex: 1;
+    color: {{ section.settings.qc_text_color | default: '#000000' }} !important;
+  }
+
+  .mega-menu-wrapper .collection-count {
+    font-size: 0.85em;
+    opacity: 0.7;
+    white-space: nowrap;
+    color: {{ section.settings.qc_text_color | default: '#000000' }} !important;
+  }
+
+  .mega-menu-wrapper .collection-row-link:hover .collection-name,
+  .mega-menu-wrapper .collection-row-link:hover .collection-count {
+    color: {{ section.settings.qc_text_hover_color | default: '#ffffff' }} !important;
+  }
+
+  @media (max-width: 768px) {
+    .mega-menu-wrapper .quick-collections-dropdown .collections-rows-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .mega-menu-wrapper .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .mega-menu-wrapper .mega-dropdown.has-sub-items .mega-dropdown-inner {
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+    }
+  }
+
+  /* Hide mobile controls wrapper on desktop */
+  .mobile-controls-wrapper {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    /* Restructure container for mobile: vertical layout */
+    .mega-menu-wrapper .mega-menu-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+    }
+
+    /* Section 2: Logo centered on its own row with padding */
+    .mega-menu-wrapper .mega-menu-logo {
+      order: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--mobile-logo-padding);
+    }
+
+    /* Hide desktop menu nav */
+    .mega-menu-wrapper .mega-menu-nav {
+      display: none;
+    }
+
+    /* Hide desktop search on mobile */
+    .mega-menu-wrapper .mega-menu-search {
+      display: none !important;
+    }
+
+    /* Section 3: Mobile controls wrapper - Full width bar with background */
+    .mobile-controls-wrapper {
+      order: 2;
+      display: flex !important;
+      justify-content: space-between;
+      align-items: center;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background: var(--mobile-bar-bg) !important;
+      padding: 12px 1rem;
+      border-radius: 0;
+      border: none;
+    }
+
+    /* Show mobile trigger bar */
+    .mobile-trigger-bar {
+      display: flex !important;
+      background: transparent !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+    }
+
+    /* Mobile search styling - 4 color settings */
+    .mega-menu-search-mobile {
+      display: flex;
+      align-items: center;
+    }
+
+    .mega-menu-search-mobile .search-button {
+      background: var(--mobile-search-box-color) !important;
+      border: 2px solid var(--mobile-search-border-color) !important;
+      border-radius: 4px;
+      min-width: 120px;
+      height: 36px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: none !important;
+    }
+
+    .mega-menu-search-mobile .search-input {
+      width: 100px;
+      background: transparent !important;
+      border: none !important;
+      outline: none !important;
+      color: var(--mobile-search-text-color) !important;
+      font-size: 14px;
+      box-shadow: none !important;
+    }
+
+    .mega-menu-search-mobile .search-input::placeholder {
+      color: var(--mobile-search-text-color) !important;
+      opacity: 0.7;
+    }
+
+    .mega-menu-search-mobile .search-input:focus {
+      background: transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .mega-menu-search-mobile .search-icon {
+      stroke: var(--mobile-search-icon-color) !important;
+      fill: none !important;
+    }
+
+    .mega-menu-search-mobile .search-icon-button {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      outline: none !important;
+    }
+
+    .mega-menu-search-mobile .search-icon-button:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Dropdown adjustments */
+    .mega-menu-wrapper .mega-dropdown.has-sub-items .mega-dropdown-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .mega-menu-wrapper .dropdown-nav {
+      border-right: none !important;
+      border-bottom: 1px solid var(--dropdown-border) !important;
+      padding-right: 0;
+      padding-bottom: 1rem;
+    }
+  }
+  /* ===== Mobile trigger bar and controls wrapper ===== */
+.mobile-trigger-bar{ display:none; }
+
+/* Hamburger: 3 white lines, no surrounding box */
+.hamburger-btn{
+  appearance:none; background:transparent; border:0; padding:6px; margin:0;
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.hamburger-btn .hamburger-line{
+  width:22px; height:2px; background: {{ section.settings.mobile_bar_text | default: '#ffffff' }};
+  margin:3px 0; border-radius:2px;
+}
+
+/* Drawer + overlay (mobile only) */
+.mobile-menu-overlay{ position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:9998; }
+.mobile-menu-drawer{
+  position:fixed; top:0; right:0; width:min(86vw, 360px); height:100vh;
+  background: var(--dropdown-bg); color: var(--menu-text-color);
+  z-index:9999; box-shadow:-8px 0 24px rgba(0,0,0,.2);
+  transform: translateX(100%); transition: transform .28s ease;
+  display:flex; flex-direction:column;
+}
+.mobile-menu-drawer.is-open{ transform: translateX(0); }
+
+.mobile-drawer-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 16px; border-bottom:1px solid var(--dropdown-border);
+}
+.drawer-title{ font-weight:700; }
+.drawer-close{ appearance:none; background:transparent; border:0; font-size:28px; line-height:1; cursor:pointer; }
+
+.mobile-drawer-nav{ padding:8px 0; overflow:auto; }
+.mobile-root-list{ list-style:none; margin:0; padding:0 6px; }
+.mobile-root-item{ border-bottom:1px solid var(--dropdown-border); }
+.mobile-link{ display:block; padding:14px 10px; text-decoration:none; color:var(--menu-text-color); font-size:16px; font-weight:500; }
+.mobile-link:hover{ color:var(--menu-text-hover); }
+.mobile-link--muted{ opacity:.6; cursor:default; }
+
+/* Accordion */
+.mobile-accordion-summary{
+  display:flex; align-items:center; justify-content:space-between; padding:14px 10px; cursor:pointer;
+}
+.mobile-accordion .chev{ transform:rotate(0); transition:transform .2s; }
+.mobile-accordion[open] .chev{ transform:rotate(180deg); }
+.mobile-sub-list{ list-style:none; margin:0; padding:0 10px 10px 10px; }
+.mobile-sub-item .mobile-link{ padding:10px 6px 10px 12px; font-size:15px; font-weight:400; }
+
+/* Hide drawer UI on desktop */
+@media (min-width: 769px){
+  .mobile-trigger-bar,
+  .mobile-menu-overlay,
+  .mobile-menu-drawer{ display:none !important; }
+}
+/* === Mobile drawer theming (fix empty-looking items) === */
+.mega-menu-wrapper{
+  /* New mobile-only variables (pull from section.settings via Liquid already added) */
+  --mobile-bar-bg: {{ section.settings.mobile_bar_bg | default: '#111111' }};
+  --mobile-bar-text: {{ section.settings.mobile_bar_text | default: '#ffffff' }};
+  --mobile-drawer-bg: {{ section.settings.mobile_drawer_bg | default: '#ffffff' }};
+  --mobile-drawer-text: {{ section.settings.mobile_drawer_text | default: '#000000' }};
+  --mobile-drawer-divider: {{ section.settings.mobile_drawer_divider | default: '#e5e5e5' }};
+  --mobile-overlay-color: {{ section.settings.mobile_overlay_color | default: '#000000' }};
+  
+  /* Mobile search styling variables - 4 settings */
+  --mobile-search-box-color: {{ section.settings.mobile_search_box_color | default: '#ffffff' }};
+  --mobile-search-border-color: {{ section.settings.mobile_search_border_color | default: '#000000' }};
+  --mobile-search-text-color: {{ section.settings.mobile_search_text_color | default: '#000000' }};
+  --mobile-search-icon-color: {{ section.settings.mobile_search_icon_color | default: '#000000' }};
+}
+
+/* trigger bar - keep transparent on mobile */
+@media (max-width: 768px){
+  .hamburger-btn .hamburger-line{ background: var(--mobile-bar-text) !important; }
+}
+
+/* overlay */
+.mobile-menu-overlay{
+  background-color: var(--mobile-overlay-color) !important;
+  opacity: .4; /* keep translucency even if a solid hex is chosen */
+}
+
+/* drawer shell */
+.mobile-menu-drawer{
+  background: var(--mobile-drawer-bg) !important;
+  color: var(--mobile-drawer-text) !important;
+}
+
+/* header + dividers */
+.mobile-drawer-header{
+  border-bottom: 1px solid var(--mobile-drawer-divider) !important;
+}
+.mobile-root-item{
+  border-bottom: 1px solid var(--mobile-drawer-divider) !important;
+}
+
+/* text colors inside drawer */
+.mobile-link,
+.mobile-accordion-summary,
+.drawer-title{
+  color: var(--mobile-drawer-text) !important;
+}
+.mobile-link:hover{
+  color: var(--menu-text-hover) !important; /* keep your existing hover tone */
+}
+
+/* accordion chevron inherits text color */
+.mobile-accordion .chev{
+  stroke: currentColor;
+  color: var(--mobile-drawer-text) !important;
+}
+/* Remove the visible seam on pages where menu sits above slideshow */
+.mega-menu-wrapper {
+  position: relative; /* to anchor the mask */
+}
+
+/* If your DOM always has the slideshow right after the menu on the target page,
+   this small mask covers any remaining 1px line without affecting clicks */
+.mega-menu-wrapper + .shopify-section--slideshow.under-menu ~ * { /* noop anchor */ }
+.mega-menu-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: #000;         /* match your desired top strip color */
+  pointer-events: none;     /* don't block dropdowns */
+  z-index: 101;             /* below dropdowns (which are 1000), above wrapper (100) */
+}
+
+/* Also neutralize the two borders that can create the hairline */
+.mega-menu-wrapper + .shopify-section--slideshow.under-menu,
+.mega-menu-wrapper + .shopify-section--slideshow {
+  /* no changes to slideshow—selector just scopes the overrides below */
+}
+.mega-menu-wrapper { border-bottom-color: transparent !important; }
+.mega-menu-wrapper .mega-menu-top-bar { border-bottom-color: transparent !important; }
+
+/* ================ FINAL OVERRIDE FOR QUICK COLLECTIONS TEXT COLOR ================ */
+/* This is the nuclear option - forces black text on collection links */
+.mega-menu-wrapper .quick-collections-dropdown a.collection-row-link,
+.mega-menu-wrapper .quick-collections-dropdown a.collection-row-link span.collection-name,
+.mega-menu-wrapper .quick-collections-dropdown a.collection-row-link span.collection-count,
+.mega-menu-wrapper .collection-row-link,
+.mega-menu-wrapper .collection-row-link *,
+.mega-menu-wrapper a.collection-row-link,
+div.mega-dropdown.quick-collections-dropdown a {
+  color: {{ section.settings.qc_text_color | default: '#000000' }} !important;
+}
+
+.mega-menu-wrapper .quick-collections-dropdown a.collection-row-link:hover,
+.mega-menu-wrapper .quick-collections-dropdown a.collection-row-link:hover span.collection-name,
+.mega-menu-wrapper .quick-collections-dropdown a.collection-row-link:hover span.collection-count,
+.mega-menu-wrapper .collection-row-link:hover,
+.mega-menu-wrapper .collection-row-link:hover *,
+.mega-menu-wrapper a.collection-row-link:hover,
+div.mega-dropdown.quick-collections-dropdown a:hover {
+  color: {{ section.settings.qc_text_hover_color | default: '#ffffff' }} !important;
+}
+
+  /* ================ PAGE OVERLAY FOR DROPDOWN ================ */
+  .mega-menu-page-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease !important;
+    z-index: 50 !important;
+    pointer-events: none !important;
+    display: block !important;
+  }
+
+  .mega-menu-page-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Ensure menu and dropdowns stay above overlay */
+  .mega-menu-wrapper {
+    position: relative !important;
+    z-index: 100 !important;
+  }
+  
+  .mega-menu-top-bar,
+  .mega-menu-container {
+    position: relative !important;
+    z-index: 101 !important;
+  }
+  
+  .mega-dropdown {
+    z-index: 1000 !important;
+  }
+
+</style>
+
+
+<script>
+  // ================ PERFORMANCE OPTIMIZATIONS ================ //
+  
+  // PERFORMANCE: Debounce function to limit function execution rate
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // PERFORMANCE: RequestAnimationFrame wrapper for smooth animations
+  function rafThrottle(callback) {
+    let rafId = null;
+    return function(...args) {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        callback.apply(this, args);
+        rafId = null;
+      });
+    };
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // PERFORMANCE: Cache DOM queries
+    const menuItems = document.querySelectorAll('[data-menu-item]');
+    
+    menuItems.forEach(item => {
+      const blockIndex = item.dataset.blockIndex;
+      const dropdown = document.querySelector(`[data-dropdown-for="${blockIndex}"]`);
+      
+      if (dropdown) {
+        // PERFORMANCE: Cache these queries per dropdown
+        const subItems = dropdown.querySelectorAll('[data-sub-item]');
+        const productsSections = dropdown.querySelectorAll('[data-products-for]');
+        const closeBtn = dropdown.querySelector('.close-dropdown-btn');
+        
+        // Show first sub-item and its products by default (for two-level menus)
+        if (subItems.length > 0) {
+          subItems[0].classList.add('active');
+          const firstCollectionId = subItems[0].dataset.collectionId;
+          const firstProductsSection = dropdown.querySelector(`[data-products-for="${firstCollectionId}"]`);
+          if (firstProductsSection) {
+            firstProductsSection.classList.add('active');
+          }
+        }
+        
+        // DELAY SETTING (in milliseconds)
+        const DROPDOWN_DELAY = 400;
+        
+        // Menu item hover handlers with RAF optimization
+        let showDropdownTimeout = null;
+        let hideDropdownTimeout = null;
+        
+        // PERFORMANCE: Use passive event listeners where possible
+        item.addEventListener('mouseenter', function() {
+          clearTimeout(hideDropdownTimeout);
+          showDropdownTimeout = setTimeout(function() {
+            // PERFORMANCE: Use RAF for smooth class addition
+            requestAnimationFrame(() => {
+              dropdown.classList.add('active');
+            });
+          }, DROPDOWN_DELAY);
+        }, { passive: true });
+        
+        item.addEventListener('mouseleave', function() {
+          clearTimeout(showDropdownTimeout);
+          hideDropdownTimeout = setTimeout(function() {
+            requestAnimationFrame(() => {
+              dropdown.classList.remove('active');
+            });
+          }, 100);
+        }, { passive: true });
+        
+        dropdown.addEventListener('mouseenter', function() {
+          clearTimeout(hideDropdownTimeout);
+          requestAnimationFrame(() => {
+            dropdown.classList.add('active');
+          });
+        }, { passive: true });
+        
+        dropdown.addEventListener('mouseleave', function() {
+          clearTimeout(showDropdownTimeout);
+          hideDropdownTimeout = setTimeout(function() {
+            requestAnimationFrame(() => {
+              dropdown.classList.remove('active');
+            });
+          }, 100);
+        }, { passive: true });
+        
+        // Sub-item hover handlers (for two-level menus)
+        // PERFORMANCE: Use RAF throttle for smoother transitions
+        subItems.forEach(subItem => {
+          const handleSubItemHover = rafThrottle(function() {
+            // Remove active from all sub-items
+            subItems.forEach(si => si.classList.remove('active'));
+            // Add active to current
+            subItem.classList.add('active');
+            
+            // Hide all product sections
+            productsSections.forEach(ps => ps.classList.remove('active'));
+            
+            // Show corresponding products
+            const collectionId = subItem.dataset.collectionId;
+            const productsSection = dropdown.querySelector(`[data-products-for="${collectionId}"]`);
+            if (productsSection) {
+              productsSection.classList.add('active');
+            }
+          });
+          
+          subItem.addEventListener('mouseenter', handleSubItemHover, { passive: true });
+        });
+        
+        // Close button handler
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            requestAnimationFrame(() => {
+              dropdown.classList.remove('active');
+              item.classList.remove('active');
+            });
+          });
+        }
+      }
+    });
+
+    // ================ PAGE OVERLAY CONTROL ================ //
+    const pageOverlay = document.querySelector('[data-page-overlay]');
+    
+    if (pageOverlay) {
+      menuItems.forEach(item => {
+        const blockIndex = item.dataset.blockIndex;
+        const dropdown = document.querySelector(`[data-dropdown-for="${blockIndex}"]`);
+        
+        if (dropdown) {
+          let showOverlayTimeout = null;
+          let hideOverlayTimeout = null;
+          
+          const DROPDOWN_DELAY = 400;
+          
+          const showOverlay = () => {
+            clearTimeout(hideOverlayTimeout);
+            showOverlayTimeout = setTimeout(() => {
+              requestAnimationFrame(() => {
+                pageOverlay.classList.add('active');
+              });
+            }, DROPDOWN_DELAY);
+          };
+          
+          const hideOverlay = () => {
+            clearTimeout(showOverlayTimeout);
+            hideOverlayTimeout = setTimeout(() => {
+              requestAnimationFrame(() => {
+                pageOverlay.classList.remove('active');
+              });
+            }, 100);
+          };
+          
+          item.addEventListener('mouseenter', showOverlay, { passive: true });
+          item.addEventListener('mouseleave', hideOverlay, { passive: true });
+          dropdown.addEventListener('mouseenter', showOverlay, { passive: true });
+          dropdown.addEventListener('mouseleave', hideOverlay, { passive: true });
+        }
+      });
+    }
+  });
+
+  // ================ MOBILE MENU ================ //
+  document.addEventListener('DOMContentLoaded', function(){
+    // PERFORMANCE: Cache DOM queries
+    const burger = document.querySelector('[data-hamburger]');
+    const drawer = document.querySelector('[data-mobile-drawer]');
+    const overlay = document.querySelector('[data-mobile-overlay]');
+    const closeBtn = document.querySelector('[data-drawer-close]');
+    const body = document.body;
+
+    function openDrawer(){
+      if(!drawer) return;
+      drawer.hidden = false;
+      overlay.hidden = false;
+      // PERFORMANCE: Use RAF for smooth animation start
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          drawer.classList.add('is-open');
+        });
+      });
+      burger?.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      body.style.overflow = 'hidden';
+    }
+    
+    function closeDrawer(){
+      if(!drawer) return;
+      // PERFORMANCE: Use RAF for smooth animation
+      requestAnimationFrame(() => {
+        drawer.classList.remove('is-open');
+      });
+      burger?.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      body.style.overflow = '';
+      setTimeout(() => { 
+        drawer.hidden = true; 
+        overlay.hidden = true; 
+      }, 280);
+    }
+
+    burger?.addEventListener('click', openDrawer);
+    overlay?.addEventListener('click', closeDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => { 
+      if(e.key === 'Escape' && !drawer.hidden){ 
+        closeDrawer(); 
+      }
+    });
+  });
+
+</script>
+
+{% schema %}
+{
+  "name": "Mega Menu",
+  "settings": [
+    { "type": "header", "content": "General Settings" },
+
+    { "type": "header", "content": "Top Bar Settings" },
+    { "type": "color", "id": "top_bar_bg_color", "label": "Top Bar Background Color", "default": "#f8f8f8" },
+    { "type": "color", "id": "top_bar_icon_color", "label": "Top Bar Icon Color", "default": "#000000" },
+    { "type": "color", "id": "top_bar_badge_bg", "label": "Cart Badge Background", "default": "#000000" },
+    { "type": "color", "id": "top_bar_badge_text", "label": "Cart Badge Text Color", "default": "#ffffff" },
+    { "type": "image_picker", "id": "cart_icon", "label": "Custom Cart Icon (Optional)", "info": "Upload a custom cart icon. Leave empty to use default SVG." },
+    { "type": "url", "id": "facebook_url", "label": "Facebook URL" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram URL" },
+    { "type": "url", "id": "twitter_url", "label": "Twitter URL" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube URL" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok URL" },
+    { "type": "range", "id": "social_icons_gap", "min": 5, "max": 30, "step": 5, "unit": "px", "label": "Social Icons Spacing", "default": 15, "info": "Space between social media icons" },
+
+    { "type": "image_picker", "id": "logo", "label": "Logo Image" },
+    { "type": "range", "id": "logo_size_desktop", "min": 50, "max": 400, "step": 10, "unit": "px", "label": "Logo Size (Desktop)", "default": 200, "info": "Maximum width of the logo on desktop" },
+
+    { "type": "range", "id": "products_per_row", "min": 3, "max": 6, "step": 1, "label": "Products per row", "default": 4 },
+
+    { "type": "header", "content": "Product Image Size Controls" },
+    { "type": "range", "id": "desktop_product_image_width", "min": 100, "max": 300, "step": 10, "unit": "px", "label": "Desktop Product Image Width", "default": 250, "info": "Width of product images in dropdown on desktop screens (1441px+). Smaller = shorter dropdown." },
+    { "type": "range", "id": "laptop_product_image_width", "min": 10, "max": 250, "step": 10, "unit": "px", "label": "Laptop Product Image Width", "default": 150, "info": "Width of product images in dropdown on laptop screens (≤1440px). Smaller images = shorter dropdown height." },
+
+    { "type": "header", "content": "Menu Bar Colors" },
+    { "type": "color", "id": "menu_bg_color", "label": "Menu Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "menu_border_color", "label": "Menu Border Color", "default": "#e5e5e5" },
+
+    { "type": "header", "content": "Menu Items Typography" },
+    { "type": "range", "id": "menu_font_size", "min": 12, "max": 24, "step": 1, "unit": "px", "label": "Menu Item Font Size", "default": 16 },
+    { "type": "color", "id": "menu_text_color", "label": "Menu Item Text Color", "default": "#000000" },
+    { "type": "color", "id": "menu_text_hover_color", "label": "Menu Item Hover Color", "default": "#666666" },
+
+    { "type": "header", "content": "Search Button" },
+    { "type": "color", "id": "search_border_color", "label": "Search Button Border Color", "default": "#000000" },
+    { "type": "range", "id": "search_border_width", "min": 1, "max": 4, "step": 1, "unit": "px", "label": "Search Button Border Width", "default": 2 },
+    { "type": "color", "id": "search_text_color", "label": "Search Placeholder Color", "default": "#666666", "info": "Color of the 'Search...' placeholder text" },
+    { "type": "color", "id": "search_input_text_color", "label": "Search Input Text Color", "default": "#000000", "info": "Color of the text when typing in the search box" },
+    { "type": "color", "id": "search_icon_color", "label": "Search Icon Color", "default": "#000000" },
+    { "type": "range", "id": "search_icon_width", "min": 1, "max": 4, "step": 0.5, "label": "Search Icon Stroke Width", "default": 2 },
+
+    { "type": "header", "content": "Dropdown Colors" },
+    { "type": "color", "id": "dropdown_bg_color", "label": "Dropdown Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "dropdown_border_color", "label": "Dropdown Border Color", "default": "#e5e5e5" },
+
+    { "type": "header", "content": "Dropdown Typography" },
+    { "type": "range", "id": "dropdown_title_size", "min": 16, "max": 32, "step": 1, "unit": "px", "label": "Dropdown Title Size", "default": 20 },
+    { "type": "color", "id": "dropdown_title_color", "label": "Dropdown Title Color", "default": "#000000" },
+
+    { "type": "header", "content": "Sub-Items Colors" },
+    { "type": "range", "id": "sub_item_font_size", "min": 12, "max": 20, "step": 1, "unit": "px", "label": "Sub-Item Font Size", "default": 15 },
+    { "type": "color", "id": "sub_item_text_color", "label": "Sub-Item Text Color", "default": "#333333" },
+    { "type": "color", "id": "sub_item_hover_bg", "label": "Sub-Item Hover Background", "default": "#f5f5f5" },
+    { "type": "color", "id": "sub_item_hover_text", "label": "Sub-Item Hover Text Color", "default": "#000000" },
+
+    { "type": "header", "content": "Product Cards" },
+    { "type": "range", "id": "product_title_size", "min": 12, "max": 20, "step": 1, "unit": "px", "label": "Product Title Size", "default": 14 },
+    { "type": "range", "id": "product_title_padding", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Product Title Vertical Padding", "default": 0, "info": "Top and bottom padding for product title" },
+    { "type": "color", "id": "product_title_color", "label": "Product Title Color", "default": "#000000" },
+    { "type": "range", "id": "product_price_size", "min": 12, "max": 20, "step": 1, "unit": "px", "label": "Product Price Size", "default": 15 },
+    { "type": "range", "id": "product_price_padding", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Product Price Vertical Padding", "default": 0, "info": "Top and bottom padding for product price" },
+    { "type": "color", "id": "product_price_color", "label": "Product Price Color", "default": "#000000" },
+    { "type": "color", "id": "product_sale_color", "label": "Sale Price Color", "default": "#d62828" },
+
+    { "type": "header", "content": "Buy Button" },
+    { "type": "text", "id": "buy_button_text", "label": "Button Text", "default": "Buy Now" },
+    { "type": "range", "id": "buy_button_font_size", "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Button Font Size", "default": 14 },
+    { "type": "range", "id": "buy_button_padding", "min": 4, "max": 20, "step": 1, "unit": "px", "label": "Button Vertical Padding", "default": 8, "info": "Top and bottom padding inside the button" },
+    { "type": "color", "id": "buy_button_bg", "label": "Button Background Color", "default": "#000000" },
+    { "type": "color", "id": "buy_button_text_color", "label": "Button Text Color", "default": "#ffffff" },
+    { "type": "color", "id": "buy_button_hover_bg", "label": "Button Hover Background", "default": "#333333" },
+    { "type": "color", "id": "buy_button_hover_text", "label": "Button Hover Text Color", "default": "#ffffff" },
+    { "type": "range", "id": "buy_button_radius", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Button Border Radius", "default": 4 },
+
+    { "type": "header", "content": "Actions" },
+    { "type": "color", "id": "icon_color", "label": "Icon Color", "default": "#000000" },
+
+    { "type": "header", "content": "Quick Collections" },
+    { "type": "range", "id": "qc_columns", "min": 1, "max": 4, "step": 1, "label": "Collections Per Row", "default": 2, "info": "Number of collection columns to display in the dropdown" },
+    { "type": "color", "id": "qc_text_color", "label": "Quick Collection Text Color", "default": "#000000", "info": "Text color for collection names" },
+    { "type": "color", "id": "qc_text_hover_color", "label": "Quick Collection Text Hover Color", "default": "#ffffff", "info": "Text color when hovering over a collection" },
+    { "type": "color", "id": "qc_bg_color", "label": "Collection Row Background", "default": "#f5f5f5", "info": "Background color for each collection item" },
+    { "type": "color", "id": "qc_hover_bg", "label": "Collection Row Hover Background", "default": "#666666", "info": "Background color when hovering over a collection" },
+    { "type": "color", "id": "qc_hover_text", "label": "Collection Row Hover Text", "default": "#ffffff", "info": "Text color when hovering over a collection" },
+    { "type": "color", "id": "qc_border_color", "label": "Collection Row Hover Border", "default": "#000000", "info": "Border color on hover" },
+    { "type": "range", "id": "qc_border_radius", "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Collection Row Border Radius", "default": 6 },
+    { "type": "range", "id": "qc_padding", "min": 4, "max": 24, "step": 2, "unit": "px", "label": "Collection Row Padding", "default": 12, "info": "Padding inside each collection row" },
+    { "type": "range", "id": "qc_gap", "min": 4, "max": 20, "step": 2, "unit": "px", "label": "Gap Between Rows", "default": 8, "info": "Space between collection rows" },
+    { "type": "range", "id": "qc_max_height", "min": 200, "max": 600, "step": 50, "unit": "px", "label": "Maximum Dropdown Height", "default": 400, "info": "Maximum height before scrolling" },
+
+    { "type": "header", "content": "Mobile Menu" },
+    { "type": "color", "id": "mobile_bar_bg", "label": "Mobile trigger bar background", "default": "#111111" },
+    { "type": "color", "id": "mobile_bar_text", "label": "Mobile trigger (hamburger) color", "default": "#ffffff" },
+    { "type": "color", "id": "mobile_drawer_bg", "label": "Mobile drawer background", "default": "#111111" },
+    { "type": "color", "id": "mobile_drawer_text", "label": "Mobile drawer text", "default": "#ffffff" },
+    { "type": "color", "id": "mobile_drawer_divider", "label": "Mobile drawer divider/border", "default": "#2a2a2a" },
+    { "type": "color", "id": "mobile_overlay_color", "label": "Mobile overlay color", "default": "#000000" },
+    { "type": "range", "id": "mobile_logo_padding", "min": 4, "max": 30, "step": 2, "unit": "px", "label": "Mobile Logo Section Height", "default": 16, "info": "Vertical padding around logo on mobile (smaller = shorter section)" },
+
+    { "type": "header", "content": "Mobile Search Box (Phone Only)" },
+    { "type": "color", "id": "mobile_search_box_color", "label": "Mobile search box background", "default": "#ffffff", "info": "Background color of the search box on mobile" },
+    { "type": "color", "id": "mobile_search_border_color", "label": "Mobile search box border color", "default": "#000000", "info": "Border color of the search box on mobile" },
+    { "type": "color", "id": "mobile_search_text_color", "label": "Mobile search text color", "default": "#000000", "info": "Color of text and placeholder in search box on mobile" },
+    { "type": "color", "id": "mobile_search_icon_color", "label": "Mobile search icon color", "default": "#000000", "info": "Color of the search icon on mobile" }
+  ],
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "Main Menu Item",
+      "settings": [
+        { "type": "text", "id": "menu_text", "label": "Menu Text", "default": "Menu Item" },
+        {
+          "type": "select",
+          "id": "dropdown_type",
+          "label": "Dropdown Type",
+          "options": [
+            { "value": "collection", "label": "Show Collection Products" },
+            { "value": "sub_items", "label": "Show Sub-Items Menu" },
+            { "value": "all_collections", "label": "Show All Collections as Rows" }
+          ],
+          "default": "collection",
+          "info": "Choose 'Show All Collections as Rows' to automatically display all store collections"
+        },
+        { "type": "collection", "id": "collection", "label": "Link to Collection", "info": "Only used when 'Show Collection Products' is selected (not needed for 'Show All Collections')" },
+        { "type": "url", "id": "custom_link", "label": "Custom Link (optional)", "info": "Only used when 'Show Sub-Items Menu' is selected (not needed for 'Show All Collections')" }
+      ]
+    },
+    {
+      "type": "sub_item",
+      "name": "↳ Sub Menu Item",
+      "settings": [
+        { "type": "text", "id": "sub_item_text", "label": "Sub Item Text", "default": "Sub Item" },
+        { "type": "collection", "id": "collection", "label": "Link to Collection" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Mega Menu" }
+  ]
+}
+{% endschema %}

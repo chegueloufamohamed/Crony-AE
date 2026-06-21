@@ -1,0 +1,1942 @@
+{% comment %}
+  CRONY.AE - Bilingual (EN/AR) White-themed Premium Landing Page
+  Created by Antigravity
+  Restricted to this self-contained file to keep your theme 100% safe.
+{% endcomment %}
+
+{% assign main_product = all_products[section.settings.target_product] %}
+
+{% comment %} Fallback data for preview/fallback mode {% endcomment %}
+{% assign fallback_title_en = "CRONY V10 Smart Electric Scooter" %}
+{% assign fallback_title_ar = "سكوتر كروني V10 الكهربائي الذكي" %}
+{% assign fallback_price = 118000 %}
+{% assign fallback_compare_price = 130000 %}
+
+{% if main_product != blank %}
+  {% assign product_title = main_product.title %}
+  {% assign product_price = main_product.price %}
+  {% assign product_compare_price = main_product.compare_at_price %}
+  {% assign product_variant_id = main_product.first_available_variant.id %}
+{% else %}
+  {% assign product_title = fallback_title_en %}
+  {% assign product_price = fallback_price %}
+  {% assign product_compare_price = fallback_compare_price %}
+  {% assign product_variant_id = "1234567890" %}
+{% endif %}
+
+
+  <!-- 02 PRODUCT HERO SECTION -->
+  <section id="crony-product-hero" class="crony-hero-section section-padding scroll-margin">
+    <div class="crony-container grid-two-col">
+      
+      <!-- Left: Gallery Column -->
+      <div class="gallery-column">
+        <div class="main-image-container">
+          <span class="badge-sale">
+            <span class="txt-en">10% OFF</span><span class="txt-ar">خصم 10%</span>
+          </span>
+          {% if main_product != blank and main_product.featured_image != blank %}
+            <img id="main-product-img" src="{{ main_product.featured_image | img_url: '800x800' }}" alt="{{ product_title }}" width="800" height="800" class="main-img">
+          {% else %}
+            <img id="main-product-img" src="{{ 'crony-v10-scooter.png' | asset_url }}" alt="{{ fallback_title_en }}" width="800" height="800" class="main-img">
+          {% endif %}
+        </div>
+        <div class="thumbnail-list">
+          {% if main_product != blank %}
+            {% for image in main_product.images limit: 5 %}
+              <div class="thumb-item {% if forloop.first %}active{% endif %}" onclick="switchGalleryImage(this, '{{ image | img_url: '800x800' }}')">
+                <img src="{{ image | img_url: '150x150' }}" alt="Thumbnail" width="150" height="150">
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="thumb-item active" onclick="switchGalleryImage(this, '{{ 'crony-v10-scooter.png' | asset_url }}')">
+              <img src="{{ 'crony-v10-scooter.png' | asset_url }}" alt="Thumbnail 1" width="150" height="150">
+            </div>
+            <div class="thumb-item" onclick="switchGalleryImage(this, 'https://cdn.shopify.com/s/files/1/0662/3621/9628/files/New_Project_2.webp')">
+              <img src="https://cdn.shopify.com/s/files/1/0662/3621/9628/files/New_Project_2.webp" alt="Thumbnail 2" width="150" height="150">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right: Details Column -->
+      <div class="details-column">
+        <div class="rating-stars">
+          <span class="stars">★★★★★</span>
+          <span class="reviews-count">
+            <span class="txt-en">4.9/5 (184 Verified Reviews)</span>
+            <span class="txt-ar">4.9/5 (184 تقييم عملاء موثق)</span>
+          </span>
+        </div>
+
+        <h1 class="product-title">
+          {% if main_product != blank %}
+            {{ product_title }}
+          {% else %}
+            <span class="txt-en">{{ fallback_title_en }}</span>
+            <span class="txt-ar">{{ fallback_title_ar }}</span>
+          {% endif %}
+        </h1>
+        <p class="tagline">
+          <span class="txt-en">Premium Electric Commuter Scooter - Speed, Power & Ultimate Safety</span>
+          <span class="txt-ar">أقوى سكوتر كهربائي للتنقل اليومي - سرعة، قوة، وأمان متكامل</span>
+        </p>
+
+        <!-- Price Container -->
+        <div class="price-container">
+          <span class="current-price">{{ product_price | money }}</span>
+          <span class="compare-price">{{ product_compare_price | money }}</span>
+          <span class="save-tag">
+            <span class="txt-en">Save {{ product_compare_price | minus: product_price | money }}!</span>
+            <span class="txt-ar">وفر {{ product_compare_price | minus: product_price | money }}!</span>
+          </span>
+        </div>
+
+        <!-- Inventory Urgency -->
+        <div class="inventory-bar">
+          <div class="inv-head">
+            <span class="inv-title">
+              <span class="txt-en">⚠️ HURRY! LIMITED STOCK</span>
+              <span class="txt-ar">⚠️ عاجل: الكمية محدودة جداً</span>
+            </span>
+            <span class="inv-count">
+              <span class="txt-en">Only 3 units left at this price!</span>
+              <span class="txt-ar">متبقي 3 قطع فقط بهذا السعر!</span>
+            </span>
+          </div>
+          <div class="inv-progress">
+            <div class="inv-progress-fill" style="width: 15%;"></div>
+          </div>
+        </div>
+
+        <div class="product-highlights">
+          <ul>
+            <li>
+              <span class="txt-en">🚚 <strong>Free & Fast Shipping</strong> across all UAE (24-48 Hours)</span>
+              <span class="txt-ar">🚚 <strong>شحن مجاني وسريع</strong> لجميع مدن الإمارات (24-48 ساعة)</span>
+            </li>
+            <li>
+              <span class="txt-en">🤝 <strong>Cash on Delivery (COD)</strong> available at your doorstep</span>
+              <span class="txt-ar">🤝 <strong>الدفع عند الاستلام (COD)</strong> متوفر عند باب بيتك</span>
+            </li>
+            <li>
+              <span class="txt-en">🛡️ <strong>1-Year Golden Warranty</strong> on motor & battery</span>
+              <span class="txt-ar">🛡️ <strong>ضمان ذهبي لمدة عام</strong> كامل على المحرك والبطارية</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Purchase Action Form -->
+        {% if main_product != blank %}
+          {% form 'product', main_product, class: 'product-buy-form' %}
+            <input type="hidden" name="id" value="{{ product_variant_id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn-primary btn-pulse" name="add">
+              <span class="txt-en">BUY NOW & SAVE 10%</span>
+              <span class="txt-ar">اشترِ الآن ووفر 10%</span>
+              <small>
+                <span class="txt-en">Cash on Delivery Available</span>
+                <span class="txt-ar">الدفع عند الاستلام متاح</span>
+              </small>
+            </button>
+          {% endform %}
+        {% else %}
+          <div class="product-buy-form">
+            <a href="https://uaecrony.myshopify.com/cart/{{ product_variant_id }}:1" class="btn-primary btn-pulse" id="mock-checkout-btn">
+              <span class="txt-en">BUY NOW & SAVE 10%</span>
+              <span class="txt-ar">اشترِ الآن ووفر 10%</span>
+              <small>
+                <span class="txt-en">Cash on Delivery Available</span>
+                <span class="txt-ar">الدفع عند الاستلام متاح</span>
+              </small>
+            </a>
+          </div>
+        {% endif %}
+
+        <!-- Trust Icons -->
+        <div class="trust-icons-grid">
+          <div class="trust-icon-item">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M18 18.5a1.5 1.5 0 0 1-3 0 1.5 1.5 0 0 1 3 0m-9 0a1.5 1.5 0 0 1-3 0 1.5 1.5 0 0 1 3 0M20 8l-3-4H4a2 2 0 0 0-2 2v10h2a3 3 0 0 0 6 0h4a3 3 0 0 0 6 0h2v-5l-3-3m-3-2.5l2.1 2.8H15V5.5M4 6h9v5H4V6m17 7h-2v-2h2v2z"/></svg>
+            <span>
+              <span class="txt-en">Free Fast Delivery</span>
+              <span class="txt-ar">توصيل مجاني وسريع</span>
+            </span>
+          </div>
+          <div class="trust-icon-item">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m0 4a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0 14.2c-2.5 0-4.7-1.3-6-3.2c0-2 4-3.1 6-3.1s6 1.1 6 3.1c-1.3 1.9-3.5 3.2-6 3.2z"/></svg>
+            <span>
+              <span class="txt-en">Cash on Delivery</span>
+              <span class="txt-ar">الدفع عند الاستلام</span>
+            </span>
+          </div>
+          <div class="trust-icon-item">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 22s8-4 8-10V5l-8-3l-8 3v7c0 6 8 10 8 10m0-18.1l6.1 2.3v5.8c0 4.5-5.3 7.9-6.1 8.5c-.8-.6-6.1-4-6.1-8.5V6.2L12 3.9z"/></svg>
+            <span>
+              <span class="txt-en">1-Year Warranty</span>
+              <span class="txt-ar">ضمان لمدة عام</span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 DESCRIPTION & FEATURES -->
+  <section id="crony-features" class="crony-desc-section section-padding scroll-margin alt-bg">
+    <div class="crony-container">
+      
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="txt-en">Why Choose the CRONY V10?</span>
+          <span class="txt-ar">لماذا تختار سكوتر كروني V10؟</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="txt-en">The ultimate solution to bypass daily traffic jams - save time and money!</span>
+          <span class="txt-ar">الحل الأمثل لتفادي زحام الطرقات يومياً - وفر وقتك ومالك!</span>
+        </p>
+      </div>
+
+      <!-- Grid features -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>
+            <span class="txt-en">1200W Powerful Motor</span>
+            <span class="txt-ar">محرك قوي بقوة 1200 واط</span>
+          </h3>
+          <p>
+            <span class="txt-en">Unmatched acceleration to tackle urban slopes and bridges up to 20° easily.</span>
+            <span class="txt-ar">تسارع قوي وسلس يساعدك على تخطي المرتفعات والجسور بزاوية صعود تصل إلى 20 درجة بكل سهولة.</span>
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔋</div>
+          <h3>
+            <span class="txt-en">48V/14AH Long Range Battery</span>
+            <span class="txt-ar">بطارية طويلة المدى 48V/14AH</span>
+          </h3>
+          <p>
+            <span class="txt-en">Commute freely with up to 35 km range per charge. Built-in BMS protection.</span>
+            <span class="txt-ar">تمنحك مسافة قيادة تصل إلى 35 كم في الشحنة الواحدة لتغطية تنقلاتك اليومية دون القلق من نفاد الشحن.</span>
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚲</div>
+          <h3>
+            <span class="txt-en">Dual Suspension Comfort</span>
+            <span class="txt-ar">نظام تعليق مزدوج مريح</span>
+          </h3>
+          <p>
+            <span class="txt-en">Front and rear spring shock absorbers ensure a smooth ride even on bumpy roads.</span>
+            <span class="txt-ar">مساعدين أماميين وخلفيين لامتصاص الصدمات والاهتزازات، لتستمتع بقيادة مريحة جداً حتى على الطرق غير الممهدة.</span>
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛑</div>
+          <h3>
+            <span class="txt-en">Dual Disc Braking System</span>
+            <span class="txt-ar">مكابح قرصية مزدوجة آمنة</span>
+          </h3>
+          <p>
+            <span class="txt-en">Dual front and rear disc brakes with E-ABS prevent lock-ups for instant safe stopping.</span>
+            <span class="txt-ar">نظام مكابح قرصية أمامي وخلفي مزدوج، مع E-ABS لمنع الانغلاق، يضمن لك مسافة توقف فائقة القصر والآمن.</span>
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3>
+            <span class="txt-en">Quick Folding in 3 Seconds</span>
+            <span class="txt-ar">تصميم قابل للطي السريع</span>
+          </h3>
+          <p>
+            <span class="txt-en">Easy folding mechanism locks the stem. Light enough to carry onto metro or store in trunks.</span>
+            <span class="txt-ar">تثبيت ذكي يسمح لك بطي السكوتر في 3 ثوانٍ فقط لحمله بيدك، وضعه في صندوق السيارة، أو ركوب المترو.</span>
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>
+            <span class="txt-en">Smart LCD Display</span>
+            <span class="txt-ar">شاشة عرض رقمية ذكية</span>
+          </h3>
+          <p>
+            <span class="txt-en">Tracks speed, battery status, and gear mode. Highly visible even under bright sunlight.</span>
+            <span class="txt-ar">شاشة LCD كبيرة تعرض السرعة الحالية، وضع القيادة، ومستوى البطارية بوضوح تام حتى تحت أشعة الشمس المباشرة.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 TECHNICAL SPECS & WARRANTY -->
+  <section id="crony-specs" class="crony-specs-section section-padding scroll-margin">
+    <div class="crony-container">
+      
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="txt-en">Specifications & Warranty</span>
+          <span class="txt-ar">المواصفات الفنية والضمان</span>
+        </h2>
+      </div>
+
+      <!-- Tab Layout -->
+      <div class="crony-tabs-wrapper">
+        <div class="tab-buttons">
+          <button class="tab-btn active" onclick="switchTab(event, 'tab-details')">
+            <span class="txt-en">Description</span><span class="txt-ar">الوصف والمميزات</span>
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab-tech')">
+            <span class="txt-en">Technical Specs</span><span class="txt-ar">المواصفات التقنية</span>
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'tab-warranty-details')">
+            <span class="txt-en">Warranty & Support</span><span class="txt-ar">الضمان والدعم</span>
+          </button>
+        </div>
+
+        <!-- Tab: Details -->
+        <div id="tab-details" class="tab-content active">
+          <p>
+            <span class="txt-en">The CRONY V10 Commuter Scooter is engineered specifically for city riders in the UAE. Crafted from high-strength aviation-grade aluminum, it offers durability without unnecessary weight. Equipped with a high-intensity front LED headlight, side atmospheric safety running lights, and active brake lights, it ensures maximum visibility and safety for night riding.</span>
+            <span class="txt-ar">صُمم سكوتر كروني V10 الكهربائي ليلبي احتياجات التنقل السريع والذكي في دولة الإمارات. يتمتع بهيكل خارجي متين مصنوع من الألمنيوم المخصص لصناعة الطائرات، مما يضمن خفة الوزن مع صلابة قصوى. ويتميز بإضاءات ليلية ممتازة تشمل كشاف LED أمامي ساطع، وإضاءة خلفية للفرامل، بالإضافة إلى شريط إضاءة جانبي لضمان رؤيتك بوضوح وتوفير أقصى درجات الأمان.</span>
+          </p>
+        </div>
+
+        <!-- Tab: Specs -->
+        <div id="tab-tech" class="tab-content">
+          <table class="specs-table">
+            <tr>
+              <td><strong><span class="txt-en">Max Speed</span><span class="txt-ar">السرعة القصوى</span></strong></td>
+              <td><span class="txt-en">Up to 45 km/h</span><span class="txt-ar">تصل إلى 45 كم/ساعة</span></td>
+            </tr>
+            <tr>
+              <td><strong><span class="txt-en">Battery Range</span><span class="txt-ar">المسافة المقطوعة</span></strong></td>
+              <td><span class="txt-en">25 - 35 km (varies by weight & terrain)</span><span class="txt-ar">من 25 إلى 35 كم (حسب الوزن والسرعة)</span></td>
+            </tr>
+            <tr>
+              <td><strong><span class="txt-en">Motor Peak Power</span><span class="txt-ar">قوة المحرك</span></strong></td>
+              <td><span class="txt-en">1200 Watts</span><span class="txt-ar">1200 واط (Peak Power)</span></td>
+            </tr>
+            <tr>
+              <td><strong><span class="txt-en">Battery Capacity</span><span class="txt-ar">سعة البطارية</span></strong></td>
+              <td><span class="txt-en">Lithium-ion 48V / 14AH</span><span class="txt-ar">ليثيوم أيون 48V / 14AH</span></td>
+            </tr>
+            <tr>
+              <td><strong><span class="txt-en">Full Charging Time</span><span class="txt-ar">زمن الشحن الكامل</span></strong></td>
+              <td><span class="txt-en">5 - 7 Hours</span><span class="txt-ar">من 5 إلى 7 ساعات</span></td>
+            </tr>
+            <tr>
+              <td><strong><span class="txt-en">Max Loading Capacity</span><span class="txt-ar">أقصى وزن للمستخدم</span></strong></td>
+              <td><span class="txt-en">120 kg</span><span class="txt-ar">120 كجم</span></td>
+            </tr>
+            <tr>
+              <td><strong><span class="txt-en">Scooter Net Weight</span><span class="txt-ar">الوزن الصافي للسكوتر</span></strong></td>
+              <td><span class="txt-en">18.5 kg</span><span class="txt-ar">18.5 كجم</span></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Tab: Warranty -->
+        <div id="tab-warranty-details" class="tab-content">
+          <div class="warranty-card">
+            <h3>
+              <span class="txt-en">🛡️ Golden Warranty & Returns Policy</span>
+              <span class="txt-ar">🛡️ الضمان الذهبي وسياسة الاسترجاع</span>
+            </h3>
+            <p>
+              <span class="txt-en">We stand behind our build quality. We provide:</span>
+              <span class="txt-ar">نحن نلتزم بتقديم أفضل جودة لعملائنا، لذلك نوفر لك:</span>
+            </p>
+            <ul>
+              <li>
+                <span class="txt-en"><strong>1-Year Warranty:</strong> Covers motor, battery, and electronic controllers against manufacturing defects.</span>
+                <span class="txt-ar"><strong>ضمان شامل لمدة عام:</strong> يغطي هذا الضمان المحرك الكهربائي، والبطارية، ولوحة التحكم ضد أي عيوب تصنيعية.</span>
+              </li>
+              <li>
+                <span class="txt-en"><strong>7-Day Replacement Policy:</strong> Direct replacement if any factory defects are found upon delivery.</span>
+                <span class="txt-ar"><strong>سياسة استبدال مرنة:</strong> يمكنك استبدال المنتج خلال 7 أيام في حال وجود أي عيب مصنعي عند الاستلام.</span>
+              </li>
+              <li>
+                <span class="txt-en"><strong>Local Spare Parts Support:</strong> Full warehouse of parts and professional technicians based in Dubai.</span>
+                <span class="txt-ar"><strong>دعم فني وصيانة متخصصة:</strong> نوفر جميع قطع الغيار الأصلية في دبي ولدينا فريق صيانة محترف لخدمتك.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 05 VIDEO SHOWCASE -->
+  <section id="crony-video" class="crony-video-section section-padding scroll-margin alt-bg">
+    <div class="crony-container">
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="txt-en">Watch the Scooter in Action</span>
+          <span class="txt-ar">شاهد السكوتر في العمل</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="txt-en">Check out the performance, sleek folding mechanisms, and ride stability</span>
+          <span class="txt-ar">شاهد بالفيديو قوة الأداء، التصميم الانسيابي، وسهولة الاستخدام والطي</span>
+        </p>
+      </div>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/c10hP4S-Kvk" title="CRONY Scooter Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 BUNDLE OFFERS -->
+  <section id="crony-bundles" class="crony-bundles-section section-padding scroll-margin">
+    <div class="crony-container">
+      
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="txt-en">Exclusive Savings & Bundles</span>
+          <span class="txt-ar">عروض التوفير الخاصة والمحدودة</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="txt-en">Pick your deal! All options include free delivery and Cash on Delivery in UAE</span>
+          <span class="txt-ar">اختر الباقة المناسبة لك ووفر الكثير! جميع العروض تشمل الشحن المجاني والدفع عند الاستلام</span>
+        </p>
+      </div>
+
+      <div class="bundles-grid">
+        
+        <!-- Bundle 1 -->
+        <div class="bundle-card">
+          <div class="bundle-badge">
+            <span class="txt-en">Single Pack</span><span class="txt-ar">حزمة منفردة</span>
+          </div>
+          <h3>
+            <span class="txt-en">1x CRONY V10 Scooter</span><span class="txt-ar">1 سكوتر كروني V10</span>
+          </h3>
+          <p class="bundle-desc">
+            <span class="txt-en">Perfect for daily individual commuting</span>
+            <span class="txt-ar">مثالي للتنقل الشخصي اليومي في المدينة</span>
+          </p>
+          <div class="bundle-price">
+            <span class="price-val">1,180 AED</span>
+            <span class="price-old">1,300 AED</span>
+          </div>
+          <ul class="bundle-features">
+            <li>✓ <span class="txt-en">1x CRONY V10 Scooter</span><span class="txt-ar">سكوتر كروني V10 الأصلي</span></li>
+            <li>✓ <span class="txt-en">1-Year Warranty</span><span class="txt-ar">ضمان ذهبي لمدة سنة كاملة</span></li>
+            <li>✓ <span class="txt-en">Free Fast Delivery</span><span class="txt-ar">شحن مجاني وسريع</span></li>
+            <li>✓ <span class="txt-en">Cash on Delivery</span><span class="txt-ar">الدفع عند الاستلام</span></li>
+          </ul>
+          <a href="https://uaecrony.myshopify.com/cart/{{ product_variant_id }}:1" class="btn-bundle">
+            <span class="txt-en">Order Single Pack</span><span class="txt-ar">اطلب الآن ووفر</span>
+          </a>
+        </div>
+
+        <!-- Bundle 2 (Popular) -->
+        <div class="bundle-card popular">
+          <div class="bundle-badge">
+            <span class="txt-en">Best Seller ⭐</span><span class="txt-ar">العرض الأكثر مبيعاً ⭐</span>
+          </div>
+          <h3>
+            <span class="txt-en">2x CRONY V10 (Twin Pack)</span><span class="txt-ar">2 سكوتر كروني V10 (مزدوج)</span>
+          </h3>
+          <p class="bundle-desc">
+            <span class="txt-en">Double savings for families, partners, or friends</span>
+            <span class="txt-ar">وفر أكثر عند شراء جهازين لك ولأفراد عائلتك أو أصدقائك</span>
+          </p>
+          <div class="bundle-price">
+            <span class="price-val">2,150 AED</span>
+            <span class="price-old">2,600 AED</span>
+          </div>
+          <div class="bundle-save">
+            <span class="txt-en">Save extra 450 AED!</span>
+            <span class="txt-ar">وفر 450 د.إ إضافية!</span>
+          </div>
+          <ul class="bundle-features">
+            <li>✓ <span class="txt-en">2x CRONY V10 Scooters</span><span class="txt-ar">2 سكوتر كروني V10 الأصليين</span></li>
+            <li>✓ <span class="txt-en">1-Year Warranty per unit</span><span class="txt-ar">ضمان ذهبي لمدة سنة لكل سكوتر</span></li>
+            <li>✓ <span class="txt-en">Free Fast Delivery</span><span class="txt-ar">شحن مجاني وسريع لكلا السكوترين</span></li>
+            <li>✓ <span class="txt-en">Cash on Delivery</span><span class="txt-ar">الدفع عند الاستلام متاح</span></li>
+          </ul>
+          <a href="https://uaecrony.myshopify.com/cart/{{ product_variant_id }}:2" class="btn-bundle btn-pulse">
+            <span class="txt-en">Order Twin Pack</span><span class="txt-ar">اطلب العرض المزدوج</span>
+          </a>
+        </div>
+
+        <!-- Bundle 3 -->
+        <div class="bundle-card">
+          <div class="bundle-badge">
+            <span class="txt-en">Safety Bundle</span><span class="txt-ar">باقة الأمان الكاملة</span>
+          </div>
+          <h3>
+            <span class="txt-en">V10 + Smart Helmet + Lock</span><span class="txt-ar">سكوتر V10 + خوذة سلامة + قفل</span>
+          </h3>
+          <p class="bundle-desc">
+            <span class="txt-en">Protect yourself and your ride with professional accessories</span>
+            <span class="txt-ar">احمِ نفسك وسكوترك مع باقة الحماية الاحترافية</span>
+          </p>
+          <div class="bundle-price">
+            <span class="price-val">1,290 AED</span>
+            <span class="price-old">1,450 AED</span>
+          </div>
+          <ul class="bundle-features">
+            <li>✓ <span class="txt-en">1x CRONY V10 Scooter</span><span class="txt-ar">سكوتر كروني V10 الأصلي</span></li>
+            <li>✓ <span class="txt-en">1x Smart LED Helmet</span><span class="txt-ar">خوذة رياضية مضيئة LED ذكية</span></li>
+            <li>✓ <span class="txt-en">1x Steel Lock</span><span class="txt-ar">قفل حماية فولاذي متين</span></li>
+            <li>✓ <span class="txt-en">Warranty & Free Delivery</span><span class="txt-ar">ضمان سنة + شحن مجاني</span></li>
+          </ul>
+          <a href="https://uaecrony.myshopify.com/cart/{{ product_variant_id }}:1" class="btn-bundle">
+            <span class="txt-en">Order Safety Bundle</span><span class="txt-ar">اطلب باقة الأمان</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 CUSTOMER REVIEWS -->
+  <section id="crony-reviews" class="crony-reviews-section section-padding scroll-margin alt-bg">
+    <div class="crony-container">
+      
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="txt-en">What Our Verified Customers Say</span>
+          <span class="txt-ar">ماذا يقول عملاؤنا الموثقون؟</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="txt-en">Read authentic reviews from buyers who changed their daily commute</span>
+          <span class="txt-ar">آراء حقيقية من أشخاص غيروا أسلوب حياتهم اليومي مع سكوتر كروني V10</span>
+        </p>
+      </div>
+
+      <div class="reviews-grid">
+        
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div class="rev-header">
+            <div class="rev-author">
+              <h4>
+                <span class="txt-en">Mohamed Bin Rashid</span><span class="txt-ar">محمد بن راشد</span>
+              </h4>
+              <span class="rev-loc">
+                <span class="txt-en">Abu Dhabi, UAE</span><span class="txt-ar">أبوظبي، الإمارات</span>
+              </span>
+            </div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <span class="badge-verified">
+            <span class="txt-en">✓ Verified Buyer</span><span class="txt-ar">✓ مشترٍ موثق</span>
+          </span>
+          <p class="rev-text">
+            <span class="txt-en">"The build quality is excellent and it climbs bridges with zero struggle. Delivery was super fast, received it the next day in Abu Dhabi. Highly recommended!"</span>
+            <span class="txt-ar">"السكوتر ممتاز جداً وقوي على المطبات. التوصيل كان سريع جداً واستلمته ثاني يوم في أبوظبي. البطارية تدوم طويلاً والتصميم مريح جداً للقيادة اليومية. أنصح به بشدة."</span>
+          </p>
+          <span class="rev-date">
+            <span class="txt-en">3 days ago</span><span class="txt-ar">منذ 3 أيام</span>
+          </span>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="rev-header">
+            <div class="rev-author">
+              <h4>
+                <span class="txt-en">Ahmed Al Shamsi</span><span class="txt-ar">أحمد الشامسي</span>
+              </h4>
+              <span class="rev-loc">
+                <span class="txt-en">Dubai, UAE</span><span class="txt-ar">دبي، الإمارات</span>
+              </span>
+            </div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <span class="badge-verified">
+            <span class="txt-en">✓ Verified Buyer</span><span class="txt-ar">✓ مشترٍ موثق</span>
+          </span>
+          <p class="rev-text">
+            <span class="txt-en">"Best lifestyle investment I've made! It saves me so much time avoiding the morning Dubai traffic block. Very simple to fold and store at the office."</span>
+            <span class="txt-ar">"أفضل قرار اتخذته هذا العام! السكوتر وفر علي الكثير من الوقت والمال للتنقل للدوام وتجنب زحمة دبي الصباحية. طيه سهل جداً وحجمه مناسب لحمله في المصعد والمكتب."</span>
+          </p>
+          <span class="rev-date">
+            <span class="txt-en">1 week ago</span><span class="txt-ar">منذ أسبوع</span>
+          </span>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="rev-header">
+            <div class="rev-author">
+              <h4>
+                <span class="txt-en">Sara Al Mheiri</span><span class="txt-ar">سارة المهيري</span>
+              </h4>
+              <span class="rev-loc">
+                <span class="txt-en">Sharjah, UAE</span><span class="txt-ar">الشارقة، الإمارات</span>
+              </span>
+            </div>
+            <div class="rev-stars">★★★★★</div>
+          </div>
+          <span class="badge-verified">
+            <span class="txt-en">✓ Verified Buyer</span><span class="txt-ar">✓ مشترٍ موثق</span>
+          </span>
+          <p class="rev-text">
+            <span class="txt-en">"Beautiful and extremely stable. The suspensions absorb potholes perfectly, and the dual brake system gives great safety at speed. Fantastic support team."</span>
+            <span class="txt-ar">"جودة السكوتر لا غبار عليها، فخم ومريح والسرعة ممتازة للشارع. نظام الفرامل مزدوج ويعطي شعوراً بالأمان والتحكم الكامل. فريق الدعم في الموقع متعاون جداً."</span>
+          </p>
+          <span class="rev-date">
+            <span class="txt-en">2 weeks ago</span><span class="txt-ar">منذ أسبوعين</span>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- 08 FREQUENTLY ASKED QUESTIONS -->
+  {% unless template.suffix == 'scooters-deals' %}
+  <section id="crony-faq" class="crony-faq-section section-padding scroll-margin">
+    <div class="crony-container">
+      
+      <div class="section-title-wrap">
+        <h2 class="section-title">
+          <span class="txt-en">Frequently Asked Questions</span>
+          <span class="txt-ar">الأسئلة الشائعة حول السكوتر</span>
+        </h2>
+        <p class="section-subtitle">
+          <span class="txt-en">Got questions? We have compiled the answers to the most common queries</span>
+          <span class="txt-ar">إليك إجابات لأكثر الأسئلة شيوعاً التي يطرحها عملاؤنا</span>
+        </p>
+      </div>
+
+      <div class="faq-accordion-wrapper">
+        
+        <!-- FAQ 1 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>
+              <span class="txt-en">Do I need a license to ride this scooter in the UAE?</span>
+              <span class="txt-ar">هل أحتاج إلى رخصة قيادة لاستخدام السكوتر في الإمارات؟</span>
+            </span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              <span class="txt-en">No, a special driving license is not required to ride this e-scooter in the UAE. However, riders should adhere to speed limits (typically 20 km/h in shared zones), ride on designated cycle tracks, and always wear a safety helmet.</span>
+              <span class="txt-ar">لا، لا تحتاج إلى رخصة قيادة خاصة لاستخدام هذا السكوتر في دولة الإمارات. ولكن، يجب دائماً الالتزام بالسرعات المحددة في المسارات المخصصة للدراجات والسكوترات، وارتداء الخوذة وأدوات السلامة لحمايتك.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>
+              <span class="txt-en">How long does the battery take to charge, and what is its range?</span>
+              <span class="txt-ar">كم من الوقت يستغرق شحن البطارية بالكامل، وكم تدوم؟</span>
+            </span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              <span class="txt-en">The battery takes approximately 5 to 7 hours for a full charge. A fully charged battery provides a range of 25 to 35 km depending on rider weight, speed settings, and slope angles.</span>
+              <span class="txt-ar">يستغرق الشحن الكامل للبطارية من 5 إلى 7 ساعات. عند شحن السكوتر بالكامل، يمنحك مدى قيادة يتراوح بين 25 إلى 35 كم، اعتماداً على وزن الراكب، والسرعة، وطبيعة الطرق.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>
+              <span class="txt-en">Is Cash on Delivery available, and how fast is shipping?</span>
+              <span class="txt-ar">ما هي سياسة التوصيل والدفع؟ وهل يتوفر الدفع عند الاستلام؟</span>
+            </span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              <span class="txt-en">Yes, we provide 100% free Cash on Delivery (COD) across the UAE. Delivery is fast: 24 hours for Dubai, Sharjah, and Ajman, and up to 48 hours for Abu Dhabi, Al Ain, and other emirates. You can pay cash or card to the agent at delivery.</span>
+              <span class="txt-ar">نعم، نوفر خدمة الدفع عند الاستلام بشكل كامل ومجاني لجميع إمارات الدولة. بمجرد تأكيد طلبك، نقوم بتوصيل السكوتر لك خلال 24 ساعة في دبي والشارقة وعجمان، وخلال 48 ساعة لبقية المناطق. يمكنك الدفع نقداً أو بالبطاقة للمندوب.</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>
+              <span class="txt-en">What does the warranty cover and how do I get support?</span>
+              <span class="txt-ar">ما الذي يغطيه الضمان وكيف يمكنني الحصول على الصيانة؟</span>
+            </span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              <span class="txt-en">The scooter comes with a 1-year golden warranty covering main components (motor, battery, and controller board) against manufacturing faults. We maintain a local service and spare parts center in Dubai to support all repairs and servicing.</span>
+              <span class="txt-ar">يأتي السكوتر بضمان ذهبي لمدة عام كامل يغطي المحرك، البطارية، واللوحة الإلكترونية ضد العيوب المصنعية. في حال احتجت إلى صيانة أو قطع غيار، يمكنك التواصل معنا وسيخدمك فريقنا في مركز الصيانة المتخصص بدبي.</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  {% endunless %}
+
+  <!-- STICKY BOTTOM BUY BAR (MOBILE ONLY) -->
+  <div class="crony-sticky-cta" id="crony-sticky-bar">
+    <div class="sticky-cta-container">
+      <div class="sticky-product-info">
+        <span class="sticky-title">{{ product_title | truncate: 25 }}</span>
+        <span class="sticky-price">{{ product_price | money }}</span>
+      </div>
+      <a href="https://uaecrony.myshopify.com/cart/{{ product_variant_id }}:1" class="btn-sticky-buy">
+        <span class="txt-en">Buy Now</span><span class="txt-ar">اشترِ الآن</span>
+      </a>
+    </div>
+  </div>
+
+
+<!-- EMBEDDED STYLES FOR ISOLATION -->
+<style>
+  /* Import Cairo font for Arabic text */
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Lato:wght@300;400;700;900&display=swap');
+
+  #crony-landing-section {
+    background-color: #ffffff; /* White background system */
+    color: #1f2937; /* Dark charcoal text */
+    padding-bottom: 80px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: visible; /* Prevent breaking sticky position */
+    font-family: 'Lato', 'Cairo', sans-serif;
+    transition: all 0.2s ease;
+  }
+
+  /* Language Swapping Rules */
+  .crony-lang-en .txt-ar { display: none !important; }
+  .crony-lang-ar .txt-en { display: none !important; }
+
+
+.crony-lang-en {
+    direction: ltr !important;
+    text-align: left !important;
+  }
+  .crony-lang-ar {
+    direction: rtl !important;
+    text-align: right !important;
+  }
+  .crony-lang-ar h1, .crony-lang-ar h2, .crony-lang-ar h3, .crony-lang-ar button, .crony-lang-ar table, .crony-lang-ar ul {
+    font-family: 'Cairo', sans-serif !important;
+  }
+
+  #crony-landing-section .crony-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section-padding {
+    padding: 70px 0;
+  }
+
+  .alt-bg {
+    background-color: #f9fafb !important; /* Soft white/light-gray contrast */
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .scroll-margin {
+    scroll-margin-top: 112px; /* Stacks below countdown bar (52px) + header (60px) */
+  }
+
+  /* 01 COUNTDOWN TIMER BAR */
+  .crony-countdown-bar {
+    background: #333333; /* Contrast gray topbar */
+    padding: 10px 0; /* Slightly more vertical padding for stacked layout */
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 101;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
+  .timer-content-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .timer-inner {
+    display: flex;
+    flex-direction: row; /* Horizontal row: text and digits side-by-side */
+    align-items: center;
+    gap: 15px;
+  }
+
+  /* Arabic Override: Text on the right, digits on the left */
+  .crony-lang-ar .timer-inner {
+    flex-direction: row-reverse !important;
+  }
+
+  .crony-countdown-bar .timer-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .crony-countdown-bar .timer-digits {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Increased gap since colons are removed */
+    direction: ltr; /* numbers read left-to-right */
+  }
+
+  .crony-countdown-bar .timer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #111827; /* Contrast black boxes */
+    border-radius: 6px;
+    padding: 6px 10px; /* Bigger padding for larger boxes */
+    min-width: 48px; /* Larger minimum width */
+  }
+
+  .crony-countdown-bar .timer-item .num {
+    font-size: 20px; /* Bigger countdown digits */
+    font-weight: 800;
+    color: #ffffff; /* White digits */
+    font-family: 'Lato', sans-serif;
+    line-height: 1;
+  }
+
+  .crony-countdown-bar .timer-item .lbl {
+    font-size: 10px; /* Slightly larger labels */
+    color: #9ca3af;
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .crony-countdown-bar .colon {
+    display: none !important; /* Remove the colons (two dots) */
+  }
+
+  .crony-top-lang-switcher {
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Cairo', 'Lato', sans-serif;
+    position: absolute;
+    inset-inline-end: 20px;
+  }
+
+  .crony-top-lang-switcher:hover {
+    border-color: #ff6f00;
+    color: #ff6f00;
+    background: rgba(255,111,0,0.08);
+    box-shadow: 0 0 10px rgba(255,111,0,0.2);
+  }
+
+  /* 02 HERO & PRODUCT */
+  .crony-hero-section {
+    background: #ffffff;
+  }
+
+  .grid-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .main-image-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fdfdfd;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-image-container .badge-sale {
+    position: absolute;
+    top: 15px;
+    z-index: 5;
+    background: #f70909;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 950;
+    padding: 4px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(247,9,9,0.3);
+  }
+  .crony-lang-en .badge-sale { left: 15px; }
+  .crony-lang-ar .badge-sale { right: 15px; }
+
+  .main-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .thumbnail-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .thumb-item {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #ffffff;
+    border: 2px solid transparent;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .thumb-item.active, .thumb-item:hover {
+    border-color: #ff6f00;
+    opacity: 1;
+  }
+
+  .thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Details Column */
+  .details-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rating-stars .stars {
+    color: #ffb800;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .rating-stars .reviews-count {
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .product-title {
+    font-size: 26px;
+    font-weight: 900;
+    color: #111827;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .tagline {
+    font-size: 14px;
+    color: #4b5563;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .price-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    width: fit-content;
+  }
+
+  .price-container .current-price {
+    font-size: 24px;
+    font-weight: 900;
+    color: #ff6f00;
+  }
+
+  .price-container .compare-price {
+    font-size: 16px;
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+
+  .price-container .save-tag {
+    background: rgba(255, 111, 0, 0.08);
+    color: #ff6f00;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 111, 0, 0.15);
+  }
+
+  /* Inventory urgency */
+  .inventory-bar {
+    background: rgba(239, 68, 68, 0.03);
+    border: 1px solid rgba(239, 68, 68, 0.1);
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .inventory-bar .inv-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .inventory-bar .inv-title {
+    color: #b91c1c;
+  }
+
+  .inventory-bar .inv-count {
+    color: #ef4444;
+  }
+
+  .inventory-bar .inv-progress {
+    height: 6px;
+    background: #f3f4f6;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .inventory-bar .inv-progress-fill {
+    height: 100%;
+    background: #ef4444;
+    border-radius: 3px;
+  }
+
+  /* Highlights */
+  .product-highlights ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .product-highlights li {
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.4;
+  }
+
+  /* Form / Primary Buttons */
+  .btn-primary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #ff6f00; /* Solid Vivid Orange */
+    color: #ffffff !important;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 111, 0, 0.3);
+    transition: all 0.25s ease;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .btn-primary span {
+    font-size: 17px;
+    font-family: inherit;
+  }
+
+  .btn-primary small {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-top: 3px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(255, 111, 0, 0.45);
+    background: #ef6c00;
+  }
+
+  .btn-pulse {
+    animation: btnPulse 2.5s infinite;
+  }
+  @keyframes btnPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); }
+    100% { transform: scale(1); }
+  }
+
+  /* Trust icons */
+  .trust-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 15px;
+    margin-top: 10px;
+  }
+
+  .trust-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .trust-icon-item svg {
+    width: 20px;
+    height: 20px;
+    color: #4b5563;
+  }
+
+  .trust-icon-item span {
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 700;
+  }
+
+  /* 03 FEATURES GRID */
+  .section-title-wrap {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: #111827;
+    margin: 0 0 10px 0;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  }
+
+  .feature-card:hover {
+    transform: translateY(-3px);
+    border-color: #ff6f00;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  }
+
+  .feature-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .feature-card h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 8px 0;
+  }
+
+  .feature-card p {
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* 04 TABS & SPECS */
+  .crony-tabs-wrapper {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  }
+
+  .tab-buttons {
+    display: flex;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 15px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .tab-btn.active {
+    color: #ff6f00;
+    background: #ffffff;
+    box-shadow: inset 0 -2px 0 #ff6f00;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 25px;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .tab-content p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0 0 15px 0;
+  }
+
+  .tab-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Specs table */
+  .specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .specs-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .specs-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Mirror padding-inline using CSS Logical Properties */
+  .crony-lang-en .specs-table td:first-child {
+    font-weight: 700;
+    color: #ff6f00;
+    width: 35%;
+    padding-right: 20px;
+  }
+  .crony-lang-ar .specs-table td:first-child {
+    font-weight: 700;
+    color: #ff6f00;
+    width: 35%;
+    padding-left: 20px;
+  }
+
+  .specs-table td:last-child {
+    color: #374151;
+  }
+
+  /* Warranty card */
+  .warranty-card h3 {
+    font-size: 16px;
+    color: #111827;
+    margin: 0 0 12px 0;
+    font-weight: 800;
+  }
+
+  .warranty-card ul {
+    margin: 12px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .crony-lang-en .warranty-card ul { padding-left: 15px; list-style: disc; }
+  .crony-lang-ar .warranty-card ul { padding-right: 15px; list-style: disc; }
+
+  .warranty-card li {
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 1.4;
+  }
+
+  /* 05 VIDEO SHOWCASE */
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid #e5e7eb;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* 06 BUNDLE OFFERS */
+  .bundles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  .bundle-card {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+  }
+
+  .bundle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+
+  .bundle-badge {
+    position: absolute;
+    top: -12px;
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+  }
+  .crony-lang-en .bundle-badge { right: 20px; }
+  .crony-lang-ar .bundle-badge { left: 20px; }
+
+  .bundle-card.popular {
+    border: 2px solid #ff6f00;
+    background: linear-gradient(180deg, #fdfbfa, #ffffff);
+    transform: scale(1.02);
+  }
+  .bundle-card.popular:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .bundle-card.popular .bundle-badge {
+    background: #ff6f00;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 2px 6px rgba(255,111,0,0.3);
+  }
+
+  .bundle-card h3 {
+    font-size: 16px;
+    font-weight: 900;
+    color: #111827;
+    margin: 8px 0 4px 0;
+  }
+
+  .bundle-desc {
+    font-size: 11px;
+    color: #6b7280;
+    margin: 0 0 15px 0;
+    line-height: 1.3;
+  }
+
+  .bundle-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .bundle-price .price-val {
+    font-size: 22px;
+    font-weight: 900;
+    color: #ff6f00;
+  }
+
+  .bundle-price .price-old {
+    font-size: 13px;
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+
+  .bundle-save {
+    background: rgba(255, 111, 0, 0.05);
+    color: #ff6f00;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 12px;
+    border: 1px dashed rgba(255, 111, 0, 0.2);
+  }
+
+  .bundle-features {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bundle-features li {
+    font-size: 12px;
+    color: #4b5563;
+  }
+
+  .btn-bundle {
+    display: block;
+    width: 100%;
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    margin-top: auto;
+  }
+
+  .bundle-card.popular .btn-bundle {
+    background: #ff6f00;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 2px 10px rgba(255,111,0,0.25);
+  }
+
+  .btn-bundle:hover {
+    background: #e5e7eb;
+  }
+
+  .bundle-card.popular .btn-bundle:hover {
+    background: #ef6c00;
+    box-shadow: 0 4px 15px rgba(255,111,0,0.45);
+  }
+
+  /* 07 REVIEWS */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .review-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+  }
+
+  .rev-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .rev-author h4 {
+    font-size: 13px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+  }
+
+  .rev-author .rev-loc {
+    font-size: 10px;
+    color: #6b7280;
+  }
+
+  .rev-stars {
+    color: #ffb800;
+    font-size: 12px;
+  }
+
+  .badge-verified {
+    display: inline-block;
+    color: #ff6f00;
+    font-size: 10px;
+    font-weight: 800;
+    background: rgba(255,111,0,0.05);
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,111,0,0.1);
+  }
+
+  .rev-text {
+    font-size: 12px;
+    color: #374151;
+    line-height: 1.55;
+    margin: 0 0 10px 0;
+  }
+
+  .rev-date {
+    display: block;
+    font-size: 10px;
+    color: #9ca3af;
+  }
+
+
+
+  /* 08 FAQ */
+  .faq-accordion-wrapper {
+    max-width: 750px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+  }
+  .crony-lang-en .faq-question { text-align: left; }
+  .crony-lang-ar .faq-question { text-align: right; }
+
+  .faq-question:hover {
+    background: #f9fafb;
+    color: #ff6f00;
+  }
+
+  .faq-question .faq-arrow {
+    font-size: 10px;
+    color: #9ca3af;
+    transition: transform 0.25s ease;
+  }
+
+  .faq-item.active .faq-question {
+    color: #ff6f00;
+    border-bottom: 1px solid #e5e7eb;
+    background: #fdfdfd;
+  }
+
+  .faq-item.active .faq-arrow {
+    transform: rotate(180deg);
+    color: #ff6f00;
+  }
+
+  .faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  }
+
+  .faq-item.active .faq-answer {
+    padding: 16px 20px;
+    max-height: 500px;
+  }
+
+  .faq-answer p {
+    font-size: 12px;
+    color: #4b5563;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* STICKY BOTTOM BUY BAR */
+  .crony-sticky-cta {
+    position: fixed;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 2px solid #ff6f00;
+    padding: 10px 20px;
+    z-index: 99;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.05);
+    transition: bottom 0.3s ease;
+    display: none;
+  }
+
+  .crony-sticky-cta.slide-up {
+    bottom: 0;
+  }
+
+  .sticky-cta-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .crony-lang-en .sticky-cta-container { direction: ltr; }
+  .crony-lang-ar .sticky-cta-container { direction: rtl; }
+
+  .sticky-product-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sticky-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: #111827;
+  }
+
+  .sticky-price {
+    font-size: 13px;
+    font-weight: 900;
+    color: #ff6f00;
+  }
+
+  .btn-sticky-buy {
+    background: #ff6f00;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(255, 111, 0, 0.2);
+    font-family: inherit;
+  }
+
+  .btn-sticky-buy:hover {
+    background: #ef6c00;
+  }
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 991px) {
+    .grid-two-col {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bundles-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .bundle-card.popular {
+      transform: none;
+    }
+
+    .bundle-card.popular:hover {
+      transform: translateY(-4px);
+    }
+
+    .reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .crony-nav-menu {
+      display: none; /* Hide header menu links on mobile to fit logo & lang switcher */
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-padding {
+      padding: 40px 0;
+    }
+
+    #crony-landing-section {
+      padding-bottom: 80px;
+    }
+
+    .crony-countdown-bar {
+      height: auto;
+      padding: 10px 10px;
+    }
+
+    .timer-content-wrap {
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .timer-inner {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .crony-top-lang-switcher {
+      position: static;
+      margin: 4px auto 0 auto;
+    }
+
+    .product-title {
+      font-size: 20px;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tab-btn {
+      font-size: 11px;
+      padding: 10px 5px;
+    }
+
+    .crony-sticky-cta {
+      display: block; /* enable sticky mobile bar */
+    }
+  }
+</style>
+
+<!-- BILINGUAL & INTERACTIVE SCRIPTS -->
+<script>
+  // Language switcher logic
+  function toggleLanguage() {
+    var wrapper = document.getElementById('crony-landing-section');
+    var switcherBtn = document.querySelector('.crony-top-lang-switcher');
+    
+    if (wrapper.classList.contains('crony-lang-en')) {
+      // Switch to Arabic
+      wrapper.classList.remove('crony-lang-en');
+      wrapper.classList.add('crony-lang-ar');
+      document.body.dir = "rtl"; // Mirror the whole page layout natively
+      localStorage.setItem('crony_landing_language', 'ar');
+    } else {
+      // Switch to English
+      wrapper.classList.remove('crony-lang-ar');
+      wrapper.classList.add('crony-lang-en');
+      document.body.dir = "ltr"; // Default page layout direction
+      localStorage.setItem('crony_landing_language', 'en');
+    }
+  }
+
+  // Load language preference from local storage if exists
+  function loadLanguagePreference() {
+    var savedLang = localStorage.getItem('crony_landing_language');
+    if (savedLang === 'ar') {
+      var wrapper = document.getElementById('crony-landing-section');
+      if (wrapper) {
+        wrapper.classList.remove('crony-lang-en');
+        wrapper.classList.add('crony-lang-ar');
+        document.body.dir = "rtl";
+      }
+    }
+  }
+
+  // Countdown timer logic
+  function initCountdown() {
+    var timerKey = 'crony_timer_deadline';
+    var deadline = localStorage.getItem(timerKey);
+    
+    if (!deadline) {
+      var durationMs = (23 * 60 * 60 + 45 * 60) * 1000;
+      deadline = new Date().getTime() + durationMs;
+      localStorage.setItem(timerKey, deadline);
+    } else {
+      deadline = parseInt(deadline, 10);
+      if (new Date().getTime() > deadline) {
+        var durationMs = (23 * 60 * 60 + 45 * 60) * 1000;
+        deadline = new Date().getTime() + durationMs;
+        localStorage.setItem(timerKey, deadline);
+      }
+    }
+
+    function updateTimer() {
+      var now = new Date().getTime();
+      var distance = deadline - now;
+
+      if (distance < 0) {
+        clearInterval(timerInterval);
+        document.getElementById('crony-timer').innerHTML = "<span class='num'>EXPIRED / منتهي</span>";
+        return;
+      }
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
+      document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('timer-mins').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('timer-secs').innerText = String(seconds).padStart(2, '0');
+    }
+
+    updateTimer();
+    var timerInterval = setInterval(updateTimer, 1000);
+  }
+
+  // Image Gallery switcher
+  function switchGalleryImage(element, imageUrl) {
+    document.getElementById('main-product-img').src = imageUrl;
+    var thumbs = document.querySelectorAll('.thumb-item');
+    thumbs.forEach(function(item) {
+      item.classList.remove('active');
+    });
+    element.classList.add('active');
+  }
+
+  // Tab panel switcher
+  function switchTab(evt, tabId) {
+    var tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(function(content) {
+      content.classList.remove('active');
+    });
+
+    var tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
+  }
+
+
+
+  // FAQ accordion toggler
+  function toggleFaq(element) {
+    var parent = element.parentElement;
+    parent.classList.toggle('active');
+  }
+
+
+  // Mobile Sticky bottom bar scroll trigger
+  function initStickyBar() {
+    var stickyBar = document.getElementById('crony-sticky-bar');
+    var mainForm = document.querySelector('.product-buy-form');
+    
+    if (!stickyBar || !mainForm) return;
+
+    window.addEventListener('scroll', function() {
+      var rect = mainForm.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        stickyBar.classList.add('slide-up');
+      } else {
+        stickyBar.classList.remove('slide-up');
+      }
+    });
+  }
+
+  // Smooth scroll for nav anchor links
+  function initAnchorScrolling() {
+    document.querySelectorAll('.crony-nav-menu a, .crony-logo-link').forEach(function(anchor) {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href');
+        var targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+
+  // Bind initializers on DOM load
+  document.addEventListener('DOMContentLoaded', function() {
+    loadLanguagePreference();
+    initCountdown();
+    initStickyBar();
+    initAnchorScrolling();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Crony Landing Page",
+  "settings": [
+    {
+      "type": "product",
+      "id": "target_product",
+      "label": "سكوتر الهبوط المستهدف (Target Product)",
+      "info": "اختر السكوتر من المخزن لربط زر الشراء والدفع مباشرة. إذا تُرك فارغاً، سيتم عرض بيانات تجريبية."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Crony Landing Page",
+      "category": "Custom Pages"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,557 @@
+{% assign ai_gen_id = block.id | replace: '_' | downcase %}
+
+{% style %}
+/* ---------------- Anti-theme bleed (scoped) ---------------- */
+.ai-related-products-{{ ai_gen_id }}:where(*) { isolation:isolate; }
+.ai-related-products-{{ ai_gen_id }} :where(h1,h2,h3,h4,h5,h6,p,a,span,small,button,li,strong,em){
+  all: revert;            /* neutralize theme type rules */
+  font-family: inherit;   /* keep only the theme’s font face */
+  color: inherit;
+}
+.ai-related-products-{{ ai_gen_id }} a { text-decoration: none; color: inherit; }
+
+/* lock frequent offenders so theme settings can't override */
+.ai-related-products-heading-{{ ai_gen_id }},
+.ai-related-products-title-{{ ai_gen_id }},
+.ai-related-products-price-{{ ai_gen_id }},
+.ai-related-products-compare-price-{{ ai_gen_id }},
+.ai-related-products-button-{{ ai_gen_id }}{
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  color: inherit !important;
+}
+/* ----------------------------------------------------------- */
+
+.ai-related-products-{{ ai_gen_id }} {
+  padding-top: {{ block.settings.padding_top }}px !important;
+  padding-bottom: {{ block.settings.padding_bottom }}px !important;
+  background-color: {{ block.settings.background_color }} !important;
+}
+
+.ai-related-products-container-{{ ai_gen_id }} {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+.ai-related-products-heading-{{ ai_gen_id }} {
+  font-size: {{ block.settings.heading_font_size }}px !important;
+  color: {{ block.settings.heading_color }} !important;
+  text-align: {{ block.settings.alignment }} !important;
+  margin-bottom: 30px !important;
+}
+
+.ai-related-products-wrapper-{{ ai_gen_id }} { position: relative !important; }
+
+.ai-related-products-grid-{{ ai_gen_id }} {
+  display: grid !important;
+  grid-template-columns: repeat({{ block.settings.products_per_row_desktop }}, 1fr) !important;
+  gap: 20px !important;
+}
+
+/* Make arrows straddle the edges like "Recently viewed" */
+.ai-related-products-slider-{{ ai_gen_id }} {
+  position: relative !important;
+  overflow: visible !important; /* show negative offsets */
+}
+
+.ai-related-products-slider-wrapper-{{ ai_gen_id }} {
+  display: flex !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  cursor: grab !important;
+  padding: 5px 0 !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+.ai-related-products-slider-wrapper-{{ ai_gen_id }}::-webkit-scrollbar { display: none; }
+.ai-related-products-slider-wrapper-{{ ai_gen_id }}.dragging { cursor: grabbing; scroll-behavior: auto; }
+
+/* CARD */
+.ai-related-products-card-{{ ai_gen_id }} {
+  background-color: {{ block.settings.card_bg_color }} !important;
+  border-radius: {{ block.settings.card_radius }}px !important;
+  overflow: hidden !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }} !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.ai-related-products-slider-{{ ai_gen_id }} .ai-related-products-card-{{ ai_gen_id }} {
+  flex: 0 0 calc((100% - ({{ block.settings.products_per_row_desktop | minus: 1 }} * 20px)) / {{ block.settings.products_per_row_desktop }}) !important;
+  scroll-snap-align: start !important;
+}
+.ai-related-products-card-{{ ai_gen_id }}:hover {
+  transform: translateY({{ block.settings.card_hover_lift }}px) !important;
+  box-shadow: 0 {{ block.settings.card_hover_shadow }}px {{ block.settings.card_hover_shadow | times: 2 }}px rgba(0,0,0,.12) !important;
+}
+
+.ai-related-products-image-link-{{ ai_gen_id }} { 
+  display: block !important; 
+  position: relative !important; 
+  overflow: hidden !important;
+  padding-bottom: 100% !important; /* Creates 1:1 aspect ratio container */
+  background-color: #f9f9f9 !important;
+}
+.ai-related-products-image-{{ ai_gen_id }} { 
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important; 
+  height: 100% !important; 
+  display: block !important; 
+  transition: transform 0.3s ease !important;
+  object-fit: cover !important; /* Crops image to fill container */
+  object-position: center top !important; /* Crops from bottom, keeps top visible */
+}
+.ai-related-products-card-{{ ai_gen_id }}:hover .ai-related-products-image-{{ ai_gen_id }} { transform: scale(1.05) !important; }
+
+.ai-related-products-image-placeholder-{{ ai_gen_id }} {
+  width: 100% !important;
+  padding-bottom: 100% !important;
+  background-color: #f4f4f4 !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  position: relative !important;
+}
+.ai-related-products-image-placeholder-{{ ai_gen_id }} svg { position: absolute !important; width: 50% !important; height: 50% !important; opacity: 0.2 !important; }
+
+.ai-related-products-info-{{ ai_gen_id }} {
+  padding: {{ block.settings.card_padding }}px !important;
+  text-align: {{ block.settings.content_alignment }} !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex-grow: 1 !important;
+}
+
+/* ===== PRODUCT TITLE — FORCE 2 LINES + ELLIPSIS; ignore theme except font-family ===== */
+.ai-related-products-title-{{ ai_gen_id }} {
+  /* Reset everything but keep theme font family */
+  all: initial !important;
+  font-family: inherit !important;
+
+  /* Schema-driven styles only */
+  font-size: {{ block.settings.title_font_size }}px !important;
+  color: {{ block.settings.title_color }} !important;
+  font-weight: {{ block.settings.title_font_weight }} !important;
+  margin: 0 !important;
+  padding-top: {{ block.settings.title_padding_top }}px !important;
+  padding-bottom: {{ block.settings.title_padding_bottom }}px !important;
+
+  /* Modern two-line clamp */
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: normal !important;
+
+  /* Lock exact two-line height so cards align */
+  line-height: 1.4 !important;
+  max-height: calc({{ block.settings.title_font_size }}px * 1.4 * 2) !important;
+  min-height: calc({{ block.settings.title_font_size }}px * 1.4 * 2) !important;
+
+  word-break: break-word !important;
+  hyphens: auto !important;
+}
+
+/* When title contains an anchor, keep schema styles */
+.ai-related-products-title-{{ ai_gen_id }} a {
+  all: unset !important;
+  font: inherit !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.ai-related-products-title-{{ ai_gen_id }} a:hover { color: {{ block.settings.title_hover_color }} !important; }
+
+/* PRICE ROW (compare on right) */
+.ai-related-products-price-row-{{ ai_gen_id }} {
+  display: flex !important; align-items: center !important; gap: 8px !important;
+  {% if block.settings.content_alignment == 'center' %}justify-content:center !important;
+  {% elsif block.settings.content_alignment == 'right' %}justify-content:flex-end !important;
+  {% else %}justify-content:flex-start !important;{% endif %}
+  padding-top: {{ block.settings.price_padding_top }}px !important;
+  padding-bottom: {{ block.settings.price_padding_bottom }}px !important;
+}
+.ai-related-products-price-{{ ai_gen_id }} {
+  font-size: {{ block.settings.price_font_size }}px !important;
+  color: {{ block.settings.price_color }} !important;
+  font-weight: 600 !important;
+  order: 1 !important;
+}
+.ai-related-products-compare-price-{{ ai_gen_id }} {
+  font-size: {{ block.settings.price_font_size }}px !important;
+  color: {{ block.settings.compare_price_color }} !important;
+  text-decoration: line-through !important;
+  position: relative !important;
+  order: 2 !important;
+}
+
+/* STARS */
+.ai-related-products-stars-{{ ai_gen_id }} {
+  display: flex !important; gap: 2px !important;
+  {% if block.settings.content_alignment == 'center' %}justify-content:center !important;
+  {% elsif block.settings.content_alignment == 'right' %}justify-content:flex-end !important;
+  {% else %}justify-content:flex-start !important;{% endif %}
+  padding-top: {{ block.settings.stars_padding_top }}px !important;
+  padding-bottom: {{ block.settings.stars_padding_bottom }}px !important;
+}
+.ai-related-products-star-{{ ai_gen_id }} { width: {{ block.settings.star_size }}px !important; height: {{ block.settings.star_size }}px !important; fill: {{ block.settings.star_color }} !important; }
+
+/* BUTTON (inner padding only) */
+.ai-related-products-button-{{ ai_gen_id }} {
+  display: block !important; width: 100% !important;
+  padding: {{ block.settings.button_padding_vertical }}px 0 !important;
+  background-color: {{ block.settings.button_bg_color }} !important;
+  color: {{ block.settings.button_text_color }} !important;
+  text-align: center !important; text-decoration: none !important;
+  border-radius: {{ block.settings.button_radius }}px !important;
+  font-size: {{ block.settings.button_font_size }}px !important;
+  font-weight: 600 !important;
+  transition: background-color .3s ease !important;
+  border: none !important;
+  margin-top: auto !important;
+}
+.ai-related-products-button-{{ ai_gen_id }}:hover { background-color: {{ block.settings.button_hover_bg_color }} !important; }
+
+/* NAV BUTTONS — identical placement logic to Recently Viewed */
+{% if block.settings.show_nav_buttons %}
+  .ai-related-products-nav-button-{{ ai_gen_id }} {
+    position: absolute !important; top: 50% !important; transform: translateY(-50%) !important;
+    width: {{ block.settings.nav_button_size }}px !important; height: {{ block.settings.nav_button_size }}px !important;
+    background-color: {{ block.settings.nav_button_color }} !important;
+    color: #ffffff !important;
+    border: none !important; border-radius: {{ block.settings.nav_button_radius }}px !important;
+    cursor: pointer !important; display: flex !important; align-items: center !important; justify-content: center !important;
+    transition: all .3s ease !important; z-index: 2 !important; opacity: {{ block.settings.nav_button_opacity }} !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+  }
+  .ai-related-products-nav-button-{{ ai_gen_id }}:hover { background-color: {{ block.settings.nav_button_hover_color }} !important; opacity: 1 !important; }
+  .ai-related-products-nav-button-{{ ai_gen_id }}[data-prev] { left: {{ block.settings.nav_button_offset }}px !important; }
+  .ai-related-products-nav-button-{{ ai_gen_id }}[data-next] { right: {{ block.settings.nav_button_offset }}px !important; }
+  .ai-related-products-nav-button-{{ ai_gen_id }} svg { width: {{ block.settings.nav_icon_size }}px !important; height: {{ block.settings.nav_icon_size }}px !important; }
+{% endif %}
+
+@media screen and (max-width: 768px) {
+  .ai-related-products-grid-{{ ai_gen_id }} {
+    grid-template-columns: repeat({{ block.settings.products_per_row_mobile }}, 1fr) !important;
+    gap: 15px !important;
+  }
+  .ai-related-products-slider-{{ ai_gen_id }} .ai-related-products-card-{{ ai_gen_id }} {
+    flex: 0 0 calc((100% - ({{ block.settings.products_per_row_mobile | minus: 1 }} * 15px)) / {{ block.settings.products_per_row_mobile }}) !important;
+  }
+  .ai-related-products-slider-wrapper-{{ ai_gen_id }} { gap: 15px !important; }
+  .ai-related-products-heading-{{ ai_gen_id }} { font-size: calc({{ block.settings.heading_font_size }}px * 0.8) !important; }
+  .ai-related-products-info-{{ ai_gen_id }} { padding: {{ block.settings.card_padding | times: 0.85 | round }}px !important; }
+
+  {% if block.settings.show_nav_buttons_mobile == 'none' %}
+    .ai-related-products-nav-button-{{ ai_gen_id }} { display: none !important; }
+  {% endif %}
+}
+{% endstyle %}
+
+<related-products-{{ ai_gen_id }} class="ai-related-products-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-related-products-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-related-products-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    {% liquid
+      assign related_products = blank
+      assign max_products = 12
+
+      if product
+        if block.settings.collection_source == 'same_collection'
+          if product.collections.size > 0
+            assign source_collection = product.collections.first
+            assign related_products = source_collection.products
+          endif
+        elsif block.settings.collection_source == 'same_type'
+          if product.type != blank
+            assign all_products = collections.all.products
+            assign related_products = all_products | where: 'type', product.type
+          endif
+        elsif block.settings.collection_source == 'same_vendor'
+          if product.vendor != blank
+            assign all_products = collections.all.products
+            assign related_products = all_products | where: 'vendor', product.vendor
+          endif
+        elsif block.settings.collection_source == 'same_tags'
+          if product.tags.size > 0
+            assign first_tag = product.tags.first
+            assign all_products = collections.all.products
+            assign related_products = all_products | where: 'tags', first_tag
+          endif
+        elsif block.settings.manual_collection != blank
+          assign related_products = block.settings.manual_collection.products
+        endif
+      endif
+    %}
+
+    <div class="ai-related-products-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.layout == 'slider' %}
+        <div class="ai-related-products-slider-{{ ai_gen_id }}">
+          {% if block.settings.show_nav_buttons %}
+            <button class="ai-related-products-nav-button-{{ ai_gen_id }}" data-prev aria-label="Previous">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="ai-related-products-nav-button-{{ ai_gen_id }}" data-next aria-label="Next">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          {% endif %}
+          <div class="ai-related-products-slider-wrapper-{{ ai_gen_id }}" data-slider>
+      {% else %}
+        <div class="ai-related-products-grid-{{ ai_gen_id }}">
+      {% endif %}
+
+      {% if related_products != blank and related_products.size > 0 %}
+        {% assign shown_ids = ',' %}
+        {% assign count = 0 %}
+        {% for related_product in related_products %}
+          {% if count >= max_products %}{% break %}{% endif %}
+          {% assign current_id_check = ',' | append: related_product.id | append: ',' %}
+          {% unless related_product.id == product.id %}
+            {% unless shown_ids contains current_id_check %}
+              {% assign shown_ids = shown_ids | append: related_product.id | append: ',' %}
+              {% assign count = count | plus: 1 %}
+
+              <div class="ai-related-products-card-{{ ai_gen_id }}">
+                <a href="{{ related_product.url }}" class="ai-related-products-image-link-{{ ai_gen_id }}">
+                  {% if related_product.featured_image %}
+                    <img src="{{ related_product.featured_image | image_url: width: 400 | replace: '.jpg', '_400x.jpg' | replace: '.png', '_400x.png' }}" alt="{{ related_product.featured_image.alt | escape }}" class="ai-related-products-image-{{ ai_gen_id }}" loading="lazy" width="400" height="400">
+                  {% else %}
+                    <div class="ai-related-products-image-placeholder-{{ ai_gen_id }}">{{ 'product-1' | placeholder_svg_tag }}</div>
+                  {% endif %}
+                </a>
+
+                <div class="ai-related-products-info-{{ ai_gen_id }}">
+                  <h3 class="ai-related-products-title-{{ ai_gen_id }}"><a href="{{ related_product.url }}">{{ related_product.title }}</a></h3>
+
+                  <div class="ai-related-products-price-row-{{ ai_gen_id }}">
+                    <span class="ai-related-products-price-{{ ai_gen_id }}">{{ related_product.price | money }}</span>
+                    {% if related_product.compare_at_price > related_product.price %}
+                      <span class="ai-related-products-compare-price-{{ ai_gen_id }}">{{ related_product.compare_at_price | money }}</span>
+                    {% endif %}
+                  </div>
+
+                  <div class="ai-related-products-stars-{{ ai_gen_id }}">
+                    {% assign star_count = 4 %}
+                    {% assign random_seed = related_product.id | modulo: 2 %}
+                    {% if random_seed == 0 %}{% assign star_count = 5 %}{% endif %}
+                    {% for i in (1..star_count) %}
+                      <svg class="ai-related-products-star-{{ ai_gen_id }}" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    {% endfor %}
+                  </div>
+
+                  <a href="{{ related_product.url }}" class="ai-related-products-button-{{ ai_gen_id }}">{{ block.settings.button_text }}</a>
+                </div>
+              </div>
+            {% endunless %}
+          {% endunless %}
+        {% endfor %}
+      {% else %}
+        {% for i in (1..6) %}
+          <div class="ai-related-products-card-{{ ai_gen_id }}">
+            <div class="ai-related-products-image-placeholder-{{ ai_gen_id }}">{{ 'product-1' | placeholder_svg_tag }}</div>
+            <div class="ai-related-products-info-{{ ai_gen_id }}">
+              <h3 class="ai-related-products-title-{{ ai_gen_id }}"><a href="#">Product Title Example</a></h3>
+              <div class="ai-related-products-price-row-{{ ai_gen_id }}"><span class="ai-related-products-price-{{ ai_gen_id }}">AED 99.00</span><span class="ai-related-products-compare-price-{{ ai_gen_id }}">AED 149.00</span></div>
+              <div class="ai-related-products-stars-{{ ai_gen_id }}">
+                {% for j in (1..5) %}<svg class="ai-related-products-star-{{ ai_gen_id }}" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}
+              </div>
+              <a href="#" class="ai-related-products-button-{{ ai_gen_id }}">{{ block.settings.button_text }}</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if block.settings.layout == 'slider' %}
+          </div>
+        </div>
+      {% else %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</related-products-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RelatedProducts{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.slider = this.querySelector('[data-slider]');
+        this.prevButton = this.querySelector('[data-prev]');
+        this.nextButton = this.querySelector('[data-next]');
+        this.isDragging = false;
+        this.startX = 0;
+        this.scrollLeft = 0;
+        this._onResize = this._debounce(()=> this.applyTitleClamp(), 150);
+      }
+      connectedCallback() {
+        if (this.slider) this.setupSlider();
+        // Clamp titles initially and on resize (JS fallback for non-supporting browsers)
+        this.applyTitleClamp();
+        window.addEventListener('resize', this._onResize);
+      }
+      disconnectedCallback(){
+        window.removeEventListener('resize', this._onResize);
+      }
+
+      setupSlider() {
+        if (this.prevButton && this.nextButton) {
+          this.prevButton.addEventListener('click', () => this.scroll(-1));
+          this.nextButton.addEventListener('click', () => this.scroll(1));
+          this.updateButtons();
+          this.slider.addEventListener('scroll', () => this.updateButtons());
+        }
+      }
+
+      scroll(direction) {
+        const cardWidth = this.slider.offsetWidth * 0.8;
+        const currentScroll = this.slider.scrollLeft;
+        const targetScroll = direction === -1 ? currentScroll - cardWidth : currentScroll + cardWidth;
+        this.slider.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      }
+
+      updateButtons() {
+        if (!this.prevButton || !this.nextButton) return;
+        this.prevButton.disabled = this.slider.scrollLeft <= 0;
+        this.nextButton.disabled = this.slider.scrollLeft >= this.slider.scrollWidth - this.slider.clientWidth - 1;
+      }
+
+      /* ===== HARD CLAMP FALLBACK (forces exactly two visible lines + …) ===== */
+      applyTitleClamp(){
+        const titles = this.querySelectorAll('.ai-related-products-title-{{ ai_gen_id }}');
+        titles.forEach(el=>{
+          // If previously truncated, restore original
+          if (el.dataset.fullText) el.textContent = el.dataset.fullText;
+
+          const cs = window.getComputedStyle(el);
+          const fontSize = parseFloat(cs.fontSize) || {{ block.settings.title_font_size }};
+          let lineHeight = parseFloat(cs.lineHeight);
+          if (isNaN(lineHeight)) lineHeight = fontSize * 1.4;
+          const target = lineHeight * 2;
+
+          el.style.maxHeight = target + 'px';
+          el.style.minHeight = target + 'px';
+          el.style.overflow = 'hidden';
+
+          if (el.scrollHeight > el.clientHeight + 1) {
+            const original = el.textContent.trim();
+            el.dataset.fullText = original;
+
+            // Binary search truncation
+            let lo = 0, hi = original.length, best = '';
+            while (lo <= hi) {
+              const mid = (lo + hi) >> 1;
+              el.textContent = original.slice(0, mid).trim() + '…';
+              if (el.scrollHeight <= el.clientHeight + 1) {
+                best = el.textContent;
+                lo = mid + 1;
+              } else {
+                hi = mid - 1;
+              }
+            }
+            if (best) el.textContent = best;
+          }
+        });
+      }
+
+      _debounce(fn, delay){ let t; return (...args)=>{ clearTimeout(t); t=setTimeout(()=>fn.apply(this,args), delay); }; }
+    }
+    customElements.define('related-products-{{ ai_gen_id }}', RelatedProducts{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Related products",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "General" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You May Also Like" },
+    { "type": "select", "id": "layout", "label": "Layout", "options": [{ "value": "grid", "label": "Grid" },{ "value": "slider", "label": "Slider" }], "default": "slider" },
+    { "type": "select", "id": "alignment", "label": "Heading alignment", "options": [{ "value": "left","label": "Left" },{ "value": "center","label": "Center" },{ "value": "right","label": "Right" }], "default": "center" },
+    { "type": "select", "id": "content_alignment", "label": "Product content alignment", "options": [{ "value": "left","label": "Left" },{ "value": "center","label": "Center" },{ "value": "right","label": "Right" }], "default": "left", "info": "Aligns title, price, and stars" },
+    { "type": "range", "id": "products_per_row_desktop", "min": 2, "max": 6, "step": 1, "label": "Products per row on desktop", "default": 4 },
+    { "type": "range", "id": "products_per_row_mobile", "min": 1, "max": 3, "step": 1, "label": "Products per row on mobile", "default": 2 },
+
+    { "type": "header", "content": "Product selection" },
+    { "type": "select", "id": "collection_source", "label": "Show products from", "options": [
+      { "value": "same_collection", "label": "Same collection" },
+      { "value": "same_type", "label": "Same product type" },
+      { "value": "same_vendor", "label": "Same vendor" },
+      { "value": "same_tags", "label": "Same tags" },
+      { "value": "manual", "label": "Manual collection" }], "default": "same_type" },
+    { "type": "collection", "id": "manual_collection", "label": "Collection", "info": "Only used when 'Manual collection' is selected" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding top", "default": 50 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Padding bottom", "default": 50 },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#f6f7f9" },
+
+    { "type": "header", "content": "Heading style" },
+    { "type": "range", "id": "heading_font_size", "min": 16, "max": 48, "step": 2, "unit": "px", "label": "Font size", "default": 30 },
+    { "type": "color", "id": "heading_color", "label": "Color", "default": "#333333" },
+
+    { "type": "header", "content": "Product card" },
+    { "type": "color", "id": "card_bg_color", "label": "Card background", "default": "#ffffff" },
+    { "type": "range", "id": "card_padding", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Inner padding", "default": 12 },
+    { "type": "range", "id": "card_radius", "min": 0, "max": 30, "step": 2, "unit": "px", "label": "Border radius", "default": 8 },
+    { "type": "range", "id": "card_border_width", "min": 0, "max": 5, "step": 1, "unit": "px", "label": "Border width", "default": 1 },
+    { "type": "color", "id": "card_border_color", "label": "Border color", "default": "#e0e0e0" },
+    { "type": "range", "id": "card_hover_lift", "min": -8, "max": 0, "step": 1, "unit": "px", "label": "Hover lift", "default": -3 },
+    { "type": "range", "id": "card_hover_shadow", "min": 0, "max": 20, "step": 2, "unit": "px", "label": "Hover shadow size", "default": 8 },
+
+    { "type": "header", "content": "Product title" },
+    { "type": "range", "id": "title_font_size", "min": 12, "max": 24, "step": 1, "unit": "px", "label": "Font size", "default": 14 },
+    { "type": "color", "id": "title_color", "label": "Color", "default": "#333333" },
+    { "type": "color", "id": "title_hover_color", "label": "Hover color", "default": "#03a196" },
+    { "type": "select", "id": "title_font_weight", "label": "Font weight", "options": [{ "value": "300", "label": "Light" }, { "value": "400", "label": "Normal" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semi-Bold" }, { "value": "700", "label": "Bold" }], "default": "400" },
+    { "type": "range", "id": "title_padding_top", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "title_padding_bottom", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Padding bottom", "default": 8 },
+
+    { "type": "header", "content": "Price" },
+    { "type": "range", "id": "price_font_size", "min": 12, "max": 24, "step": 1, "unit": "px", "label": "Font size", "default": 14 },
+    { "type": "color", "id": "price_color", "label": "Color", "default": "#333333" },
+    { "type": "color", "id": "compare_price_color", "label": "Compare at price color", "default": "#8c8b8b" },
+    { "type": "range", "id": "price_padding_top", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "price_padding_bottom", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Padding bottom", "default": 8 },
+
+    { "type": "header", "content": "Star rating" },
+    { "type": "range", "id": "star_size", "min": 10, "max": 30, "step": 2, "unit": "px", "label": "Star size", "default": 14 },
+    { "type": "color", "id": "star_color", "label": "Star color", "default": "#ffc107" },
+    { "type": "range", "id": "stars_padding_top", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "stars_padding_bottom", "min": 0, "max": 30, "step": 1, "unit": "px", "label": "Padding bottom", "default": 10 },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Buy Now" },
+    { "type": "range", "id": "button_font_size", "min": 12, "max": 20, "step": 1, "unit": "px", "label": "Font size", "default": 13 },
+    { "type": "range", "id": "button_padding_vertical", "min": 5, "max": 30, "step": 1, "unit": "px", "label": "Vertical padding", "default": 10 },
+    { "type": "color", "id": "button_bg_color", "label": "Background color", "default": "#1b1f23" },
+    { "type": "color", "id": "button_hover_bg_color", "label": "Hover background color", "default": "#5ec6ff" },
+    { "type": "color", "id": "button_text_color", "label": "Text color", "default": "#ffffff" },
+    { "type": "range", "id": "button_radius", "min": 0, "max": 30, "step": 2, "unit": "px", "label": "Border radius", "default": 4 },
+
+    { "type": "header", "content": "Slider navigation (match Recently Viewed)" },
+    { "type": "checkbox", "id": "show_nav_buttons", "label": "Show navigation buttons", "default": true },
+    { "type": "select", "id": "show_nav_buttons_mobile", "label": "Show on mobile", "options": [{ "value": "flex", "label": "Show" }, { "value": "none", "label": "Hide" }], "default": "none" },
+    { "type": "range", "id": "nav_button_size", "min": 30, "max": 60, "step": 2, "unit": "px", "label": "Button size", "default": 44 },
+    { "type": "range", "id": "nav_icon_size", "min": 14, "max": 32, "step": 2, "unit": "px", "label": "Icon size", "default": 20 },
+    { "type": "color", "id": "nav_button_color", "label": "Button color", "default": "#1b1f23" },
+    { "type": "color", "id": "nav_button_hover_color", "label": "Button hover color", "default": "#5ec6ff" },
+    { "type": "range", "id": "nav_button_radius", "min": 0, "max": 30, "step": 2, "unit": "px", "label": "Button radius", "default": 22 },
+    { "type": "range", "id": "nav_button_opacity", "min": 0, "max": 1, "step": 0.1, "label": "Button opacity", "default": 0.9 },
+    { "type": "range", "id": "nav_button_offset", "min": -40, "max": 40, "step": 2, "unit": "px", "label": "Left/Right offset (negative to straddle edge)", "default": -20 }
+  ],
+  "presets": [{ "name": "Related products" }]
+}
+{% endschema %}

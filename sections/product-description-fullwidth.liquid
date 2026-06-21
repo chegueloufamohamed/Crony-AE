@@ -1,0 +1,93 @@
+{% comment %}
+  Full-width collapsible product description
+{% endcomment %}
+
+{% if product.description != blank %}
+
+<style>
+  .fullwidth-desc {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 40px 20px;
+    background: #fafafa;
+  }
+
+  .fullwidth-desc__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .fullwidth-desc__heading {
+    font-size: 1.9rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 18px;
+    cursor: pointer;
+  }
+
+  .fullwidth-desc__content {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease;
+  }
+  .fullwidth-desc__content.open {
+    max-height: 2000px;
+  }
+
+  .fullwidth-desc__toggle {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+  .fullwidth-desc__toggle:hover {
+    background: #222;
+    transform: translateY(-1px);
+  }
+</style>
+
+<div class="fullwidth-desc" data-fwdesc>
+  <div class="fullwidth-desc__inner">
+
+    <div class="fullwidth-desc__heading">Product Description</div>
+
+    <div class="fullwidth-desc__content">
+      <div class="rte">
+        {{ product.description }}
+      </div>
+    </div>
+
+    <button class="fullwidth-desc__toggle" type="button">View more</button>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-fwdesc]').forEach(section => {
+    const btn = section.querySelector('.fullwidth-desc__toggle');
+    const content = section.querySelector('.fullwidth-desc__content');
+
+    btn.addEventListener('click', () => {
+      const open = content.classList.toggle('open');
+      btn.textContent = open ? "View less" : "View more";
+    });
+
+    // optional: clicking title toggles content too
+    section.querySelector('.fullwidth-desc__heading')
+      .addEventListener('click', () => btn.click());
+  });
+})();
+</script>
+
+{% endif %}

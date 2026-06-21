@@ -1,0 +1,421 @@
+{
+  "type": "header",
+  "name": "Landing Header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "promo_text": "<p>Exclusive Early Access</p>",
+        "social_icons_header": true,
+        "phone_number": "",
+        "top_bar_menu": "",
+        "show_cart": true,
+        "cart_icon": "cart",
+        "show_locale_selector": false,
+        "show_currency_selector": true,
+        "logo_display_width": 205,
+        "main_linklist": "new-main-menu-copy",
+        "main_linklist2": "",
+        "vertical_menu": true,
+        "dropdown_click": false,
+        "search_enabled": true,
+        "fixed_header": true,
+        "logo_position": "left",
+        "logo_alignment": "left",
+        "menu_position": "inline",
+        "menu_alignment": "center"
+      }
+    },
+    "mega_menu_1_8ViUzA": {
+      "type": "mega-menu-1",
+      "blocks": {
+        "column_iPJmm8": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_caption_top": "",
+            "image_link_top": "",
+            "menu_1": "scooters",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        },
+        "column_DQaA84": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_caption_top": "",
+            "image_link_top": "",
+            "menu_1": "",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_iPJmm8",
+        "column_DQaA84"
+      ],
+      "name": "Mega menu 1",
+      "settings": {
+        "parent": "Scooters"
+      }
+    },
+    "mega_menu_3_VRqaDx": {
+      "type": "mega-menu-3",
+      "blocks": {
+        "column_WyK7Gt": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_top": "shopify://shop_images/Best-Deals-Sale-Collection_600x_d4adad4a-9994-4bc0-95e0-76d57f5d143a.webp",
+            "image_caption_top": "New Arrival",
+            "image_link_top": "shopify://collections/new-arrival",
+            "menu_1": "",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        },
+        "column_GEmneL": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_top": "shopify://shop_images/Best-Deals-Sale-Collection_600x_d4adad4a-9994-4bc0-95e0-76d57f5d143a.webp",
+            "image_caption_top": "All Products",
+            "image_link_top": "shopify://collections/all-products",
+            "menu_1": "",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        },
+        "column_ARiQYN": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_top": "shopify://shop_images/Best-Deals-Sale-Collection_600x_d4adad4a-9994-4bc0-95e0-76d57f5d143a.webp",
+            "image_caption_top": "Exclusive Deal",
+            "image_link_top": "shopify://collections/exclusive-deal",
+            "menu_1": "",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_WyK7Gt",
+        "column_GEmneL",
+        "column_ARiQYN"
+      ],
+      "name": "Mega menu 3",
+      "settings": {
+        "parent": "/explore"
+      }
+    },
+    "mega_menu_4_ahQrDc": {
+      "type": "mega-menu-4",
+      "blocks": {
+        "column_mH7z7K": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_caption_top": "",
+            "image_link_top": "",
+            "menu_1": "support",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        },
+        "column_qFzHi8": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_caption_top": "",
+            "image_link_top": "",
+            "menu_1": "deals",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        },
+        "column_3b4rQP": {
+          "type": "column",
+          "settings": {
+            "richtext_top": "",
+            "image_top": "shopify://shop_images/Best-Deals-Sale-Collection_600x_d4adad4a-9994-4bc0-95e0-76d57f5d143a.webp",
+            "image_caption_top": "Contact",
+            "image_link_top": "shopify://policies/contact-information",
+            "menu_1": "",
+            "menu_1_link": "",
+            "menu_2": "",
+            "menu_2_link": "",
+            "menu_3": "",
+            "menu_3_link": "",
+            "menu_4": "",
+            "menu_4_link": "",
+            "image_caption_bottom": "",
+            "image_link_bottom": "",
+            "richtext_bottom": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_mH7z7K",
+        "column_qFzHi8",
+        "column_3b4rQP"
+      ],
+      "name": "Mega menu 4",
+      "settings": {
+        "parent": "/support"
+      }
+    },
+    "custom_mage_menu_YfAz3q": {
+      "type": "crony-mage-menu",
+      "blocks": {
+        "menu_item_QEbfRe": {
+          "type": "menu_item",
+          "settings": {
+            "menu_text": "Walkie Talkie",
+            "menu_text_ar": "أجهزة لاسلكي",
+            "dropdown_type": "collection",
+            "collection": "walkie-talkies",
+            "custom_link": ""
+          }
+        },
+        "menu_item_KEFywn": {
+          "type": "menu_item",
+          "settings": {
+            "menu_text": "Scooters",
+            "menu_text_ar": "سكوترات",
+            "dropdown_type": "sub_items",
+            "collection": "scooter",
+            "custom_link": ""
+          }
+        },
+        "sub_item_qxexpt": {
+          "type": "sub_item",
+          "settings": {
+            "sub_item_text": "Commuter E-Scooters",
+            "sub_item_text_ar": "سكوترات كهربائية للتنقل",
+            "collection": "commuter-e-scooters"
+          }
+        },
+        "sub_item_EXqXFd": {
+          "type": "sub_item",
+          "settings": {
+            "sub_item_text": "Performance E-Scooters",
+            "sub_item_text_ar": "سكوترات كهربائية عالية الأداء",
+            "collection": "performance-e-scooter"
+          }
+        },
+        "sub_item_rkxLrd": {
+          "type": "sub_item",
+          "settings": {
+            "sub_item_text": "Off-Road E-Scooters",
+            "sub_item_text_ar": "سكوترات كهربائية للطرق الوعرة",
+            "collection": "off-road-e-scooters"
+          }
+        },
+        "sub_item_gYag4X": {
+          "type": "sub_item",
+          "settings": {
+            "sub_item_text": "Kids E-Scooters",
+            "sub_item_text_ar": "سكوترات كهربائية للأطفال",
+            "collection": "kids-e-scooter"
+          }
+        },
+        "menu_item_Jmemji": {
+          "type": "menu_item",
+          "settings": {
+            "menu_text": "Harley Scooters",
+            "menu_text_ar": "سكوترات هارلي",
+            "dropdown_type": "collection",
+            "collection": "harley-electric-motorcycle",
+            "custom_link": ""
+          }
+        },
+        "menu_item_yXFnHJ": {
+          "type": "menu_item",
+          "disabled": true,
+          "settings": {
+            "menu_text": "Projectors",
+            "menu_text_ar": "بروجكترات",
+            "dropdown_type": "collection",
+            "collection": "projectors",
+            "custom_link": ""
+          }
+        },
+        "menu_item_yyhQ96": {
+          "type": "menu_item",
+          "settings": {
+            "menu_text": "Cameras",
+            "menu_text_ar": "كاميرات مراقبة",
+            "dropdown_type": "collection",
+            "collection": "surveillance-cameras",
+            "custom_link": ""
+          }
+        },
+        "menu_item_WYxUee": {
+          "type": "menu_item",
+          "settings": {
+            "menu_text": "More Products",
+            "menu_text_ar": "المزيد من المنتجات",
+            "dropdown_type": "all_collections",
+            "collection": "",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_item_QEbfRe",
+        "menu_item_KEFywn",
+        "sub_item_qxexpt",
+        "sub_item_EXqXFd",
+        "sub_item_rkxLrd",
+        "sub_item_gYag4X",
+        "menu_item_Jmemji",
+        "menu_item_yXFnHJ",
+        "menu_item_yyhQ96",
+        "menu_item_WYxUee"
+      ],
+      "name": "Mega Menu",
+      "settings": {
+        "top_bar_bg_color": "#6b6b6b",
+        "top_bar_icon_color": "#ffffff",
+        "top_bar_badge_bg": "#000000",
+        "top_bar_badge_text": "#ffffff",
+        "facebook_url": "https://www.facebook.com/crony.uae",
+        "instagram_url": "https://www.instagram.com/cronykwt/",
+        "twitter_url": "",
+        "youtube_url": "https://www.youtube.com/@CRONYOK",
+        "tiktok_url": "",
+        "social_icons_gap": 20,
+        "logo": "shopify://shop_images/Enhanced_Logo.webp",
+        "logo_size_desktop": 130,
+        "products_per_row": 4,
+        "desktop_product_image_width": 250,
+        "laptop_product_image_width": 150,
+        "menu_bg_color": "#333333",
+        "menu_border_color": "#e5e5e5",
+        "menu_font_size": 16,
+        "menu_text_color": "#ffffff",
+        "menu_text_hover_color": "#ffffff",
+        "search_border_color": "#ffffff",
+        "search_border_width": 2,
+        "search_text_color": "#ffffff",
+        "search_input_text_color": "#ffffff",
+        "search_icon_color": "#ffffff",
+        "search_icon_width": 2,
+        "dropdown_bg_color": "#ffffff",
+        "dropdown_border_color": "#e5e5e5",
+        "dropdown_title_size": 20,
+        "dropdown_title_color": "#000000",
+        "sub_item_font_size": 15,
+        "sub_item_text_color": "#333333",
+        "sub_item_hover_bg": "#f5f5f5",
+        "sub_item_hover_text": "#000000",
+        "product_title_size": 14,
+        "product_title_padding": 5,
+        "product_title_color": "#6b6b6b",
+        "product_price_size": 15,
+        "product_price_padding": 0,
+        "product_price_color": "#000000",
+        "product_sale_color": "#d62828",
+        "buy_button_text": "Buy Now",
+        "buy_button_font_size": 14,
+        "buy_button_padding": 4,
+        "buy_button_bg": "#000000",
+        "buy_button_text_color": "#ffffff",
+        "buy_button_hover_bg": "#5ec6ff",
+        "buy_button_hover_text": "#ffffff",
+        "buy_button_radius": 26,
+        "icon_color": "#000000",
+        "qc_columns": 4,
+        "qc_text_color": "#000000",
+        "qc_text_hover_color": "#000000",
+        "qc_bg_color": "#f5f5f5",
+        "qc_hover_bg": "#fdfdfd",
+        "qc_hover_text": "#000000",
+        "qc_border_color": "#b1b1b1",
+        "qc_border_radius": 6,
+        "qc_padding": 12,
+        "qc_gap": 8,
+        "qc_max_height": 400,
+        "mobile_bar_bg": "#333333",
+        "mobile_bar_text": "#ffffff",
+        "mobile_drawer_bg": "#333333",
+        "mobile_drawer_text": "#ffffff",
+        "mobile_drawer_divider": "#2a2a2a",
+        "mobile_overlay_color": "#000000",
+        "mobile_logo_padding": 8,
+        "mobile_search_box_color": "#353535",
+        "mobile_search_border_color": "#ffffff",
+        "mobile_search_text_color": "#ffffff",
+        "mobile_search_icon_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "header",
+    "mega_menu_1_8ViUzA",
+    "mega_menu_3_VRqaDx",
+    "mega_menu_4_ahQrDc",
+    "custom_mage_menu_YfAz3q"
+  ]
+}

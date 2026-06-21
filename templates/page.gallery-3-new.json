@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-gallery-template",
+      "blocks": {
+        "block-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/nevada2.png",
+            "image_link": ""
+          }
+        },
+        "block-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/promo-blouse.jpg",
+            "image_link": ""
+          }
+        },
+        "block-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/flo1.jpg",
+            "image_link": ""
+          }
+        },
+        "a65ba00a-262a-494b-8134-1b4cf013d42b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/diamond-ringl.jpg",
+            "image_link": ""
+          }
+        },
+        "f4edef7a-9b8a-41f6-b078-a282abfab915": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/nevada.png",
+            "image_link": ""
+          }
+        },
+        "7eb5952a-0f4d-45e3-97a7-5209fda4cdde": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/promo-outside_8eeedcaf-5e2c-40f3-aacb-71ef35942204.jpg",
+            "image_link": ""
+          }
+        },
+        "f68ce0c3-6daf-4c87-8d86-0b004479e7f2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/orchids.jpg",
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3",
+        "a65ba00a-262a-494b-8134-1b4cf013d42b",
+        "f4edef7a-9b8a-41f6-b078-a282abfab915",
+        "7eb5952a-0f4d-45e3-97a7-5209fda4cdde",
+        "f68ce0c3-6daf-4c87-8d86-0b004479e7f2"
+      ],
+      "settings": {
+        "show_divider": false,
+        "wide_display": false,
+        "gallery_type": "horizontal",
+        "grid-size": 3,
+        "enable_lightbox": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

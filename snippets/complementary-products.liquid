@@ -1,0 +1,68 @@
+<script
+  type="application/json"
+  data-complementary-products-data
+>
+{
+  "sectionId": {{ section.id | json }},
+  "productId": {{ product.id | json }},
+  "productRecommendationLimit": {{ block.settings.product_recommendation_limit | json }}
+}
+</script>
+
+{% liquid
+  assign heading = block.settings.heading
+  assign products_per_slide = block.settings.products_per_slide | default: 2
+
+  assign fallback1 = all_products["crony-scooter-safety-helmet-bicycle-helmets-matte-black-men-women-bike-mountain-road-bike-integrally-molded-cycling-adjustable-bike-helmets"]
+  assign fallback2 = all_products["crony-iron-man-led-display-backpack-upgrade-iron-man-led-backpack-screen-knight-motorcycle-backpack-cool-travel-bag-scooter-bag"]
+
+  assign has_dynamic = false
+  assign dynamic_products = null
+%}
+
+{%- comment -%}
+Shopify dynamic complementary products
+{%- endcomment -%}
+
+{% if recommendations.performed and recommendations.products_count > 0 %}
+  {% assign has_dynamic = true %}
+  {% assign dynamic_products = recommendations.products %}
+{% endif %}
+
+<div class="complementary-products" {{ block.shopify_attributes }} data-complementary-products data-html>
+  
+  {% if heading != blank %}
+    <h3 class="complementary-products__title">{{ heading }}</h3>
+  {% endif %}
+
+  <div class="complementary-products__container complementary-products__container--grid" data-slider-wrapper>
+    <div class="complementary-products__slider" data-slider>
+
+      {% if has_dynamic %}
+        {% for product in dynamic_products limit: 2 %}
+          <div class="complementary-products__grid">
+            {% render 'complementary-product', product: product %}
+          </div>
+        {% endfor %}
+
+      {% else %}
+        {%- comment -%}
+        FALLBACK MODE – Hard-coded products
+        {%- endcomment -%}
+
+        {% if fallback1 %}
+        <div class="complementary-products__grid">
+          {% render 'complementary-product', product: fallback1 %}
+        </div>
+        {% endif %}
+
+        {% if fallback2 %}
+        <div class="complementary-products__grid">
+          {% render 'complementary-product', product: fallback2 %}
+        </div>
+        {% endif %}
+      {% endif %}
+
+    </div>
+  </div>
+</div>

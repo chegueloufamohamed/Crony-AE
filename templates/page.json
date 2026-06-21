@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "settings": {}
+    },
+    "faq_kXW7Xr": {
+      "type": "faq",
+      "blocks": {
+        "heading_kGALUx": {
+          "type": "heading",
+          "settings": {
+            "faq_title": "Section heading"
+          }
+        },
+        "content_iy6mpp": {
+          "type": "content",
+          "settings": {
+            "title": "How can I secure the offer?",
+            "answer": "<p>Provide the answer to the question here.</p>"
+          }
+        },
+        "content_Xa4qYK": {
+          "type": "content",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Provide the answer to the question here.</p>"
+          }
+        },
+        "content_8FhDNU": {
+          "type": "content",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Provide the answer to the question here.</p>"
+          }
+        },
+        "content_NqngDe": {
+          "type": "content",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Provide the answer to the question here.</p>"
+          }
+        },
+        "content_r6UeTH": {
+          "type": "content",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Provide the answer to the question here.</p>"
+          }
+        },
+        "content_B3X7kH": {
+          "type": "content",
+          "settings": {
+            "title": "Question",
+            "answer": "<p>Provide the answer to the question here.</p>"
+          }
+        },
+        "image_9MFWLp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/faq-question-information-helpdesk-graphic-word.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kGALUx",
+        "content_iy6mpp",
+        "content_Xa4qYK",
+        "content_8FhDNU",
+        "content_NqngDe",
+        "content_r6UeTH",
+        "content_B3X7kH",
+        "image_9MFWLp"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "title": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Subscribe",
+        "newsletter_text": "<p>Sign up to get the latest on sales, new releases and more …</p>",
+        "newsletter_section_text_align": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_kXW7Xr",
+    "newsletter"
+  ]
+}

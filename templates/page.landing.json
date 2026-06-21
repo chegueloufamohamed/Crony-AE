@@ -1,0 +1,12 @@
+{
+  "layout": "theme.landing",
+  "sections": {
+    "crony_landing": {
+      "type": "crony-landing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "crony_landing"
+  ]
+}

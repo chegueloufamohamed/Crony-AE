@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="no-js no-touch" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="robots" content="index,follow">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.shop_bg_color }}">  
+
+<!-- GTM Deferred Load -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+
+// Store GTM load for after page interactive
+function loadGTM() {
+  if (window._gtmLoaded) return;
+  window._gtmLoaded = true;
+
+  // Load main GTM
+  (function(w,d,s,l,i){
+    w[l]=w[l]||[];
+    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),
+        dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;
+    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MN6KN2NC');
+}
+
+// Load GTM after user first interacts — not on initial page load
+var _gtmEvents = ['mousedown','mousemove','touchstart','scroll','keydown'];
+_gtmEvents.forEach(function(e) {
+  window.addEventListener(e, function() { loadGTM(); }, { once: true, passive: true });
+});
+
+// Safety fallback — load after 5 seconds no matter what
+setTimeout(loadGTM, 5000);
+</script>
+<!-- End Google Tag Manager -->
+
+    {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
+    <title>
+      {{ page_title }}
+      {% if current_tags %}
+        {{ 'general.meta.tagged_html' | t: tags: meta_tags }}
+      {% endif %}
+      {% if current_page != 1 %}
+        {{ 'general.meta.page' | t: page_number: current_page }}
+      {% endif %}
+      {% unless page_title contains shop.name %}
+        - {{ shop.name }}
+      {% endunless %}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}"/>
+    {% endif %}
+
+    <!-- Performance: preconnect to critical CDNs -->
+    <link rel="preconnect" href="https://fonts.shopifycdn.com">
+    <link rel="preconnect" href="https://cdn.shopify.com">
+    <link rel="preconnect" href="https://cdn.shopifycloud.com">
+
+    <!-- Fonts (Google) – non-blocking + cached -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Cairo:wght@400;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Cairo:wght@400;600;700;800&display=swap"
+          rel="stylesheet"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Cairo:wght@400;600;700;800&display=swap">
+    </noscript>
+
+    <link rel="dns-prefetch" href="https://v.shopify.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="https://vimeo.com">
+
+    {{ 'jquery.min.js' | asset_url | preload_tag: as: 'script' }}
+
+    <!-- Fancybox CSS: non-blocking -->
+    <link rel="preload" href="{{ 'fancybox.css' | asset_url }}" as="style">
+    <link rel="stylesheet"
+          href="{{ 'fancybox.css' | asset_url }}"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'fancybox.css' | asset_url }}">
+    </noscript>
+
+    <!-- Core styles: preload + non-blocking apply -->
+    <link rel="preload" href="{{ 'styles.css' | asset_url }}" as="style">
+    <link rel="stylesheet"
+          href="{{ 'styles.css' | asset_url }}"
+          media="print"
+          onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+    </noscript>
+
+    <!-- Icons -->
+    {% if settings.favicon != nil %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon | img_url: '180x180' }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '180x180' }}">
+    {% else %}
+      <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% if settings.show_multiple_currencies or settings.show_shipping_calculator %}
+      <script type="text/javascript"
+              src="/services/javascripts/currencies.js"
+              data-no-instant></script>
+    {% endif %}
+
+    {% if settings.show_multiple_currencies or shop.enabled_currencies.size > 1 %}
+      <script src="{{ 'currencies.js' | asset_url }}" defer></script>
+    {% endif %}
+
+    <script>
+      window.PXUTheme = window.PXUTheme || {};
+      window.PXUTheme.version = '9.5.1';
+      window.PXUTheme.name = 'Turbo';
+    </script>
+
+    <script>
+      {% render 'js-variables' %}
+    </script>
+
+    <!-- Custom scripts from theme settings -->
+    <script>
+      {{ settings.custom_scripts }}
+    </script>
+
+    {{ content_for_header }}
+
+    <style>
+      body {
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        font-family: 'Lato', 'Cairo', sans-serif;
+        overflow-x: hidden; /* Safe mobile horizontal scroll prevention without breaking sticky */
+      }
+
+      /* English / Default Menu Font Settings (Restoring Theme Settings) */
+      .mega-menu-wrapper,
+      .mobile-menu-drawer,
+      .mega-dropdown {
+        font-family: {{ settings.regular__font.family }}, {{ settings.regular__font.fallback_families }} !important;
+      }
+
+      .mega-menu-wrapper .menu-link,
+      .mobile-menu-drawer .mobile-link,
+      .mobile-drawer-header .drawer-title,
+      .dropdown-title,
+      .sub-item-link {
+        font-family: {{ settings.nav__font.family }}, {{ settings.nav__font.fallback_families }} !important;
+        font-weight: {{ settings.nav__font.weight }} !important;
+        font-style: {{ settings.nav__font.style }} !important;
+      }
+
+      /* Arabic Override: Make everything in the header use Cairo font when Arabic mode is active */
+      .crony-lang-ar .mega-menu-wrapper,
+      .crony-lang-ar .mobile-menu-drawer,
+      .crony-lang-ar .mega-dropdown,
+      .crony-lang-ar .mega-menu-wrapper *,
+      .crony-lang-ar .mobile-menu-drawer *,
+      .crony-lang-ar .mega-dropdown * {
+        font-family: 'Cairo', sans-serif !important;
+      }
+
+      /* Arabic Override: Keep header and countdown bar in LTR layout always (prevent flipping switcher, logo, search) */
+      .crony-lang-ar .header-group,
+      .crony-lang-ar .mega-menu-wrapper,
+      .crony-lang-ar .mobile-menu-drawer,
+      .crony-lang-ar .crony-countdown-bar {
+        direction: ltr !important;
+      }
+
+      /* Ensure the Arabic text spans inside them render RTL for correct flow */
+      .crony-lang-ar .mega-menu-wrapper .txt-ar,
+      .crony-lang-ar .mobile-menu-drawer .txt-ar,
+      .crony-lang-ar .crony-countdown-bar .txt-ar {
+        direction: rtl !important;
+        unicode-bidi: embed;
+      }
+
+      /* Ensure countdown timer content remains centered in Arabic */
+      .crony-lang-ar .crony-countdown-bar {
+        text-align: center !important;
+      }
+
+      /* Disable sticky header menu on landing page so it scrolls away while countdown bar stays sticky */
+      .header-group .sticky_nav,
+      .header-group .sticky_nav--stick {
+        display: none !important;
+      }
+    </style>
+  </head>
+
+  <body class="template-crony-landing"
+        data-money-format="
+          {%- if settings.currency_format == 'money_with_currency_format' -%}
+            {{- shop.money_with_currency_format | strip_html -}}
+          {%- else -%}
+            {{- shop.money_format | strip_html -}}
+          {%- endif -%}"
+        data-shop-currency="{{ shop.currency }}"
+        data-shop-url="{{ shop.url }}">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN6KN2NC"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');
+      if (window.Shopify && window.Shopify.designMode) document.documentElement.className += ' in-theme-editor';
+    </script>
+
+    <div id="crony-landing-section" class="crony-landing-wrapper crony-lang-en">
+      
+      <!-- 01 COUNTDOWN TIMER BAR (TOP OF PAGE) -->
+      <div class="crony-countdown-bar">
+        <div class="crony-container timer-content-wrap">
+          <div class="timer-inner">
+            <span class="timer-text">
+              <span class="txt-en">Special Offer Ends In:</span>
+              <span class="txt-ar">ينتهي العرض الخاص خلال:</span>
+            </span>
+            <div id="crony-timer" class="timer-digits">
+              <div class="timer-item">
+                <span id="timer-days" class="num">00</span>
+                <span class="lbl"><span class="txt-en">Days</span><span class="txt-ar">أيام</span></span>
+              </div>
+              <span class="colon">:</span>
+              <div class="timer-item">
+                <span id="timer-hours" class="num">00</span>
+                <span class="lbl"><span class="txt-en">Hours</span><span class="txt-ar">ساعات</span></span>
+              </div>
+              <span class="colon">:</span>
+              <div class="timer-item">
+                <span id="timer-mins" class="num">00</span>
+                <span class="lbl"><span class="txt-en">Mins</span><span class="txt-ar">دقائق</span></span>
+              </div>
+              <span class="colon">:</span>
+              <div class="timer-item">
+                <span id="timer-secs" class="num">00</span>
+                <span class="lbl"><span class="txt-en">Secs</span><span class="txt-ar">ثواني</span></span>
+              </div>
+            </div>
+          </div>
+          <!-- Language Switcher Button in Top Bar -->
+          <button class="crony-top-lang-switcher" onclick="toggleLanguage()" aria-label="Toggle Language">
+            <span class="txt-en">العربية</span>
+            <span class="txt-ar">English</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="header-group">
+        {% sections 'landing-header-group' %}
+      </div>
+
+      <main role="main" id="MainContent" class="section-wrapper">
+        {{ content_for_layout }}
+      </main>
+
+    </div>
+
+    <!-- Footer block is hidden for landing page -->
+
+    <div class="site-overlay" data-site-overlay></div>
+
+    {% if settings.quick_shop_enabled %}
+      {% render 'quick-shop' %}
+    {% endif %}
+
+    <!-- Core Scripts -->
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'vendors.js' | asset_url }}" defer></script>
+    <script src="{{ 'utilities.js' | asset_url }}" defer></script>
+
+    {%- if settings.minify -%}
+      <script src="{{ 'sections.min.js' | asset_url }}" defer></script>
+      <script src="{{ 'app.min.js' | asset_url }}" defer></script>
+    {%- else -%}
+      <script src="{{ 'sections.js' | asset_url }}" defer></script>
+      <script src="{{ 'app.js' | asset_url }}" defer></script>
+    {%- endif -%}
+
+    <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer></script>
+
+    {% render 'whatsapp-floating' %}
+    {% render 'back-to-top-floating' %}
+  </body>
+</html>

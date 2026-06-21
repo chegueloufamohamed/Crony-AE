@@ -1,0 +1,432 @@
+{% comment %}
+  CRONY Preloader Snippet
+  Filename: preloader.liquid
+  Usage: {% render 'preloader' %}
+{% endcomment %}
+
+<script>
+  // Add loading class IMMEDIATELY to prevent flash
+  document.documentElement.classList.add('crony-loading');
+  if (document.body) {
+    document.body.classList.add('crony-loading');
+  }
+</script>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Hide body content initially to prevent flash */
+  body.crony-loading {
+    overflow: hidden;
+  }
+
+  body.crony-loading > *:not(.crony-preloader) {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .crony-preloader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    z-index: 99999;
+    opacity: 1;
+  }
+
+  /* Lightning Canvas */
+  .crony-lightning-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* Flowing light streams */
+  .crony-light-stream {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%,
+      rgba(135, 206, 250, 0.3) 20%,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(135, 206, 250, 0.3) 80%,
+      transparent 100%);
+    filter: blur(2px);
+    opacity: 0;
+    animation: crony-flowStream 1.5s ease-in-out forwards;
+  }
+
+  .crony-light-stream.stream1 {
+    top: 30%;
+    animation-delay: 0s;
+    transform: rotate(-5deg);
+  }
+
+  .crony-light-stream.stream2 {
+    top: 50%;
+    animation-delay: 0.15s;
+    transform: rotate(3deg);
+  }
+
+  .crony-light-stream.stream3 {
+    top: 60%;
+    animation-delay: 0.3s;
+    transform: rotate(-2deg);
+  }
+
+  /* Particle swirls */
+  .crony-particle-swirl {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .crony-swirl-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(135, 206, 250, 0.6);
+    opacity: 0;
+  }
+
+  /* Logo container - appears after lightning */
+  .crony-logo-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    animation: crony-logoReveal 0.6s ease-out 0.8s forwards;
+  }
+
+  .crony-logo-text {
+    font-size: 72px;
+    font-weight: 900;
+    font-family: "Times New Roman", Times, serif;
+    letter-spacing: 0.02em;
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    color: white;
+    position: relative;
+  }
+
+  .crony-letter {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0.5);
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 40px rgba(135, 206, 250, 0.6),
+      0 0 60px rgba(135, 206, 250, 0.4);
+  }
+
+  .crony-letter:nth-child(1) { animation: crony-letterAppear 0.4s ease-out 1s forwards; }
+  .crony-letter:nth-child(2) { animation: crony-letterAppear 0.4s ease-out 1.1s forwards; }
+  .crony-letter:nth-child(3) { animation: crony-letterAppear 0.4s ease-out 1.2s forwards; }
+  .crony-letter:nth-child(4) { animation: crony-letterAppear 0.4s ease-out 1.3s forwards; }
+  .crony-letter:nth-child(5) { animation: crony-letterAppear 0.4s ease-out 1.4s forwards; }
+
+  .crony-loading-bar-container {
+    position: relative;
+    height: 4px;
+    background-color: rgba(51, 51, 51, 0.5);
+    margin-top: 24px;
+    border-radius: 9999px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.3);
+  }
+
+  .crony-loading-bar {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      rgba(135, 206, 250, 0.8), 
+      rgba(255, 255, 255, 1), 
+      rgba(135, 206, 250, 0.8));
+    border-radius: 9999px;
+    box-shadow: 0 0 15px rgba(135, 206, 250, 0.8);
+    animation: crony-loadingProgress 1s ease-out 1.5s forwards;
+    width: 0%;
+  }
+
+  @media (max-width: 768px) {
+    .crony-logo-text {
+      font-size: 48px;
+    }
+    
+    .crony-loading-bar-container {
+      width: 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .crony-logo-text {
+      font-size: 36px;
+    }
+    
+    .crony-loading-bar-container {
+      width: 150px;
+    }
+  }
+
+  @keyframes crony-flowStream {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%) scale(0.5);
+    }
+    30% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%) scale(1.5);
+    }
+  }
+
+  @keyframes crony-logoReveal {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes crony-letterAppear {
+    0% {
+      opacity: 0;
+      transform: scale(0.5) translateY(-20px);
+    }
+    60% {
+      transform: scale(1.1) translateY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes crony-loadingProgress {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  @keyframes crony-particleFlow {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0);
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--tx), var(--ty)) scale(1);
+    }
+  }
+
+  .crony-fade-out {
+    animation: crony-fadeOut 0.5s ease-out forwards;
+  }
+
+  @keyframes crony-fadeOut {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  /* Smooth content reveal */
+  body:not(.crony-loading) > *:not(.crony-preloader) {
+    animation: crony-contentReveal 0.5s ease-out forwards;
+  }
+
+  @keyframes crony-contentReveal {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  /* Performance optimization */
+  .crony-preloader, .crony-light-stream, .crony-swirl-particle, .crony-letter {
+    will-change: transform, opacity;
+  }
+</style>
+
+<div class="crony-preloader" id="cronyPreloader">
+  <!-- Flowing light streams -->
+  <div class="crony-light-stream stream1"></div>
+  <div class="crony-light-stream stream2"></div>
+  <div class="crony-light-stream stream3"></div>
+
+  <!-- Particle swirl container -->
+  <div class="crony-particle-swirl" id="cronyParticleSwirl"></div>
+
+  <!-- Canvas for additional effects -->
+  <canvas class="crony-lightning-canvas" id="cronyLightningCanvas"></canvas>
+
+  <!-- Logo appears after lightning -->
+  <div class="crony-logo-container">
+    <h1 class="crony-logo-text">
+      <span class="crony-letter">C</span>
+      <span class="crony-letter">R</span>
+      <span class="crony-letter">O</span>
+      <span class="crony-letter">N</span>
+      <span class="crony-letter">Y</span>
+    </h1>
+    <div class="crony-loading-bar-container">
+      <div class="crony-loading-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Create flowing particles
+    function createCronyParticles() {
+      const particleSwirl = document.getElementById('cronyParticleSwirl');
+      if (!particleSwirl) return;
+      
+      const particleCount = window.innerWidth < 768 ? 30 : 50; // Reduced for faster loading
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'crony-swirl-particle';
+        
+        const startX = Math.random() * 100;
+        const startY = 20 + Math.random() * 60;
+        const endX = (Math.random() * 200 - 50);
+        const endY = (Math.random() * 100 - 50);
+        
+        particle.style.left = startX + '%';
+        particle.style.top = startY + '%';
+        particle.style.setProperty('--tx', endX + 'vw');
+        particle.style.setProperty('--ty', endY + 'vh');
+        
+        const delay = Math.random() * 1;
+        const duration = 1.2 + Math.random() * 0.8;
+        
+        particle.style.animation = `crony-particleFlow ${duration}s ease-out ${delay}s forwards`;
+        
+        particleSwirl.appendChild(particle);
+      }
+    }
+
+    // Canvas lightning effect
+    function drawCronyLightning() {
+      const canvas = document.getElementById('cronyLightningCanvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let frame = 0;
+      const maxFrames = 45; // Reduced from 60 for faster animation
+
+      function animate() {
+        if (frame >= maxFrames) return;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const centerY = canvas.height / 2;
+        const time = frame / maxFrames;
+
+        for (let i = 0; i < 2; i++) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(135, 206, 250, ${0.3 * (1 - Math.abs(time - 0.5) * 2)})`;
+          ctx.lineWidth = 2;
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+
+          const offset = (i - 0.5) * 60;
+          const phase = time * Math.PI * 2 + i * 0.5;
+
+          for (let x = 0; x < canvas.width; x += 10) { // Increased step for better performance
+            const y = centerY + offset + Math.sin((x / canvas.width) * 4 + phase) * 30;
+            if (x === 0) {
+              ctx.moveTo(x, y);
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+
+          ctx.stroke();
+        }
+
+        frame++;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    // Initialize preloader
+    function initCronyPreloader() {
+      // Ensure body has loading class
+      document.body.classList.add('crony-loading');
+      
+      createCronyParticles();
+      drawCronyLightning();
+
+      // Complete preloader after 3 seconds (reduced from 4)
+      setTimeout(function() {
+        const preloader = document.getElementById('cronyPreloader');
+        if (preloader) {
+          preloader.classList.add('crony-fade-out');
+          // Remove loading class to show content
+          document.body.classList.remove('crony-loading');
+          // Remove from DOM after fade out
+          setTimeout(function() {
+            preloader.remove();
+          }, 500);
+        }
+      }, 3000);
+    }
+
+    // Run when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCronyPreloader);
+    } else {
+      initCronyPreloader();
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      const canvas = document.getElementById('cronyLightningCanvas');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,127 @@
+{% liquid
+  assign heading = settings.newsletter_popup_title | escape
+  assign text_color = settings.newsletter_popup_color
+  assign text_color_alpha = text_color | color_extract: 'alpha'
+  assign background_color = settings.newsletter_popup_background_color
+  assign background_color_alpha = background_color | color_extract: 'alpha'
+
+  # Default to Regular text color.
+  if text_color_alpha == 0
+    assign text_color = settings.regular_color
+  endif
+
+  # Default to Shop background color.
+  if background_color_alpha == 0
+    assign background_color = settings.shop_bg_color
+  endif
+%}
+
+{%- capture focal_point_style -%}
+  object-fit:cover; object-position:{{ settings.newsletter_bg.presentation.focal_point }};
+{%- endcapture -%}
+
+<div class="js-newsletter-popup">
+  <div
+    class="
+      newsletter-popup
+      align-{{ settings.newsletter_popup_image_align }}
+      {% if settings.newsletter_bg != blank %}
+        newsletter-image--true
+      {% else %}
+        newsletter-image--false
+      {% endif %}
+      {% if settings.display_first_name and settings.display_last_name %}
+        newsletter-both-names--true
+      {% else %}
+        newsletter-both-names--false
+      {% endif %}
+    "
+    style="
+      --newsletter-popup-color-text: {{ text_color }};
+      --newsletter-popup-color-background: {{ background_color }};
+    "
+  >
+    {% if settings.newsletter_bg != blank %}
+      <div class="newsletter-popup__image-wrapper">
+        <img
+          class="
+            newsletter-popup__image
+            lazyload
+            {{ settings.image_loading_style }}
+          "
+          src="{{ settings.newsletter_bg | img_url: '600x' }}"
+          alt="
+            {%- if settings.newsletter_bg.alt != blank -%}
+              {{- settings.newsletter_bg.alt -}}
+            {%- else -%}
+              {{- settings.newsletter_popup_title | escape -}}
+            {%- endif -%}
+          "
+          style="{{ focal_point_style }}"
+        >
+      </div>
+    {% endif %}
+
+    <div class="newsletter-popup__content">
+      <div class="newsletter-popup__info">
+        <div class="newsletter-description">
+          {% if heading != blank %}
+            <h2 class="newsletter-popup__heading">
+              {{- heading -}}
+            </h2>
+          {% endif %}
+
+          <div>{{ settings.newsletter_popup_text }}</div>
+
+          {% if settings.popup_button1 != blank or settings.popup_button2 != blank %}
+            <div class="newsletter-buttons">
+              {% if settings.popup_button1 != blank %}
+                <a
+                  {% if settings.popup_button1_link != blank %}
+                    href="{{ settings.popup_button1_link }}"
+                  {% else %}
+                    data-fancybox-close
+                  {% endif %}
+                  class="
+                    global-button
+                    newsletter-popup__button
+                    {% if settings.popup_button1_highlight %}
+                      newsletter-popup__button--highlighted
+                    {% else %}
+                      newsletter-popup__button--text
+                    {% endif %}
+                  "
+                >
+                  {{ settings.popup_button1 }}
+                </a>
+              {% endif %}
+
+              {% if settings.popup_button2 != blank %}
+                <a
+                  {% if settings.popup_button2_link != blank %}
+                    href="{{ settings.popup_button2_link }}"
+                  {% else %}
+                    data-fancybox-close
+                  {% endif %}
+                  class="
+                    global-button
+                    newsletter-popup__button
+                    {% if settings.popup_button2_highlight %}
+                      newsletter-popup__button--highlighted
+                    {% else %}
+                      newsletter-popup__button--text
+                    {% endif %}
+                  "
+                >
+                  {{ settings.popup_button2 }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% render 'newsletter-form' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

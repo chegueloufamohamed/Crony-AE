@@ -1,0 +1,886 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow-1": {
+      "type": "slideshow",
+      "blocks": {
+        "block-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Main-banner-Walkie-Talkie_283794b5-b4c2-4927-b65a-7f7247950140.webp",
+            "mobile_image": "shopify://shop_images/compressed_mobile_hero_banner.webp"
+          }
+        },
+        "block-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/banner-desktop.webp",
+            "mobile_image": "shopify://shop_images/banner-mobile.webp"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2"
+      ],
+      "settings": {
+        "slideshow_speed": 8,
+        "wide_display": true
+      }
+    },
+    "17606844021cf0f207": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5df576e_cF9Rhq": {
+          "type": "ai_gen_block_5df576e",
+          "name": "Custom Collection",
+          "settings": {
+            "collection": "walkie-talkies",
+            "products_to_show": 8,
+            "layout": "grid",
+            "products_per_row": 4,
+            "products_per_row_mobile": 2,
+            "grid_gap": 20,
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "background_color": "#ffffff",
+            "heading": "Top uae walkie talkie for you",
+            "heading_size": 32,
+            "heading_color": "#333333",
+            "heading_alignment": "center",
+            "heading_text_transform": "uppercase",
+            "heading_letter_spacing": 2,
+            "subheading": "",
+            "subheading_size": 16,
+            "subheading_color": "#666666",
+            "card_background_color": "#ffffff",
+            "card_padding": 15,
+            "card_border_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e5e5e5",
+            "card_items_alignment": "center",
+            "image_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#808080",
+            "product_title_hover_color": "#808080",
+            "product_title_text_transform": "none",
+            "product_title_weight": "600",
+            "product_title_padding_top": 0,
+            "product_title_padding_bottom": 10,
+            "price_size": 18,
+            "price_color": "#333333",
+            "price_weight": "700",
+            "product_price_padding_top": 5,
+            "product_price_padding_bottom": 5,
+            "show_stars": true,
+            "star_size": 16,
+            "stars_gap": 4,
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 17,
+            "star_color": "#f5a623",
+            "star_empty_color": "#d8d8d8",
+            "compare_price_size": 16,
+            "compare_price_color": "#ff0000",
+            "compare_price_weight": "400",
+            "button_text": "Buy now",
+            "button_text_size": 16,
+            "button_text_weight": "700",
+            "button_text_transform": "uppercase",
+            "button_letter_spacing": 1,
+            "button_background_color": "#1b1f23",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#5ec6ff",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 25,
+            "button_border_width": 0,
+            "button_border_color": "#1b1f23",
+            "button_hover_border_color": "#5ec6ff",
+            "button_padding_top": 5,
+            "button_padding_bottom": 5,
+            "button_padding_sides": 10,
+            "arrow_size": 50,
+            "arrow_background_color": "#ffffff",
+            "arrow_color": "#333333",
+            "arrow_hover_background_color": "#1b1f23",
+            "arrow_hover_color": "#ffffff",
+            "arrow_border_radius": 25,
+            "arrow_border_width": 1,
+            "arrow_border_color": "#e5e5e5",
+            "arrow_hover_border_color": "#1b1f23",
+            "arrow_position": 10,
+            "show_view_all": true,
+            "view_all_text": "View all",
+            "view_all_alignment": "center",
+            "view_all_text_size": 14,
+            "view_all_text_weight": "700",
+            "view_all_text_transform": "uppercase",
+            "view_all_letter_spacing": 1,
+            "view_all_background_color": "#333333",
+            "view_all_text_color": "#ffffff",
+            "view_all_hover_background_color": "#5ec6ff",
+            "view_all_hover_text_color": "#ffffff",
+            "view_all_border_radius": 25,
+            "view_all_border_width": 0,
+            "view_all_border_color": "#1b1f23",
+            "view_all_hover_border_color": "#1b1f23",
+            "view_all_padding_vertical": 10,
+            "view_all_padding_horizontal": 24
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5df576e_cF9Rhq"
+      ],
+      "name": "Custom Collection Talkie Walkie",
+      "settings": {}
+    },
+    "1760710824f9a64ed6": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b5fbd47_xHjgzJ": {
+          "type": "ai_gen_block_b5fbd47",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Hero_Banner_Walkie_Talkie.webp",
+            "desktop_height": 100,
+            "desktop_image_fit": "cover",
+            "mobile_image": "shopify://shop_images/Hero_Banner_Walkie_Talkie.webp",
+            "mobile_height": 95,
+            "mobile_image_fit": "cover",
+            "background_color": "#0e0e10",
+            "alt_text": "",
+            "loading_priority": true
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b5fbd47_xHjgzJ"
+      ],
+      "name": "Hero Banner Talkie Walkie",
+      "settings": {}
+    },
+    "divider_JaggTh": {
+      "type": "divider",
+      "name": "Divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "blocks_Mt8AnM": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5df576e_WM6wnm": {
+          "type": "ai_gen_block_5df576e",
+          "settings": {
+            "collection": "commuter-e-scooters",
+            "products_to_show": 8,
+            "layout": "grid",
+            "products_per_row": 4,
+            "products_per_row_mobile": 2,
+            "grid_gap": 20,
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "background_color": "#ffffff",
+            "heading": "Best Scooters You Can ride",
+            "heading_size": 32,
+            "heading_color": "#333333",
+            "heading_alignment": "center",
+            "heading_text_transform": "uppercase",
+            "heading_letter_spacing": 2,
+            "subheading": "",
+            "subheading_size": 16,
+            "subheading_color": "#666666",
+            "card_background_color": "#ffffff",
+            "card_padding": 15,
+            "card_border_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e5e5e5",
+            "card_items_alignment": "center",
+            "image_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#999595",
+            "product_title_hover_color": "#5ec6ff",
+            "product_title_text_transform": "none",
+            "product_title_weight": "600",
+            "product_title_padding_top": 0,
+            "product_title_padding_bottom": 0,
+            "price_size": 18,
+            "price_color": "#333333",
+            "price_weight": "700",
+            "product_price_padding_top": 5,
+            "product_price_padding_bottom": 5,
+            "show_stars": true,
+            "star_size": 16,
+            "stars_gap": 4,
+            "stars_padding_top": 6,
+            "stars_padding_bottom": 10,
+            "star_color": "#f5a623",
+            "star_empty_color": "#d8d8d8",
+            "compare_price_size": 16,
+            "compare_price_color": "#ff0000",
+            "compare_price_weight": "400",
+            "button_text": "Buy now",
+            "button_text_size": 14,
+            "button_text_weight": "700",
+            "button_text_transform": "uppercase",
+            "button_letter_spacing": 1,
+            "button_background_color": "#1b1f23",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#5ec6ff",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 25,
+            "button_border_width": 0,
+            "button_border_color": "#1b1f23",
+            "button_hover_border_color": "#5ec6ff",
+            "button_padding_top": 5,
+            "button_padding_bottom": 5,
+            "button_padding_sides": 10,
+            "arrow_size": 50,
+            "arrow_background_color": "#ffffff",
+            "arrow_color": "#333333",
+            "arrow_hover_background_color": "#1b1f23",
+            "arrow_hover_color": "#ffffff",
+            "arrow_border_radius": 25,
+            "arrow_border_width": 1,
+            "arrow_border_color": "#e5e5e5",
+            "arrow_hover_border_color": "#1b1f23",
+            "arrow_position": 10,
+            "show_view_all": true,
+            "view_all_text": "View all",
+            "view_all_alignment": "center",
+            "view_all_text_size": 16,
+            "view_all_text_weight": "700",
+            "view_all_text_transform": "uppercase",
+            "view_all_letter_spacing": 1,
+            "view_all_background_color": "#ffffff",
+            "view_all_text_color": "#1b1f23",
+            "view_all_hover_background_color": "#1b1f23",
+            "view_all_hover_text_color": "#ffffff",
+            "view_all_border_radius": 25,
+            "view_all_border_width": 2,
+            "view_all_border_color": "#1b1f23",
+            "view_all_hover_border_color": "#1b1f23",
+            "view_all_padding_vertical": 10,
+            "view_all_padding_horizontal": 24
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5df576e_WM6wnm"
+      ],
+      "name": "Custom Collection",
+      "settings": {}
+    },
+    "collection-list-1": {
+      "type": "collection-list",
+      "blocks": {
+        "block-1": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "limited-edition-last-chance",
+            "image": "shopify://shop_images/410138800_a45a6ea5-57ea-4855-8818-3a178e1c6925.jpg"
+          }
+        },
+        "collection_yR3byz": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "banknote-verifiers",
+            "image": "shopify://shop_images/Banknote_Verify.jpg"
+          }
+        },
+        "block-2": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "scooter",
+            "image": "shopify://shop_images/Scooter.jpg"
+          }
+        },
+        "block-3": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "walkie-talkies",
+            "image": "shopify://shop_images/Walkie_Talkies.jpg"
+          }
+        },
+        "block-4": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "electric-bicycles",
+            "image": "shopify://shop_images/Electric_Bike.jpg"
+          }
+        },
+        "block-6": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "surveillance-cameras",
+            "image": "shopify://shop_images/Security_Camera.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "collection_yR3byz",
+        "block-2",
+        "block-3",
+        "block-4",
+        "block-6"
+      ],
+      "settings": {
+        "title": "Collection list",
+        "align_height": false,
+        "collection_height": 200,
+        "frontpage_collections_per_row": 3,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "blocks_gV33DP": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5df576e_F6D6YL": {
+          "type": "ai_gen_block_5df576e",
+          "settings": {
+            "collection": "banknote-verifiers",
+            "products_to_show": 8,
+            "layout": "grid",
+            "products_per_row": 4,
+            "products_per_row_mobile": 2,
+            "grid_gap": 20,
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "background_color": "#ffffff",
+            "heading": "count your money with ease",
+            "heading_size": 32,
+            "heading_color": "#333333",
+            "heading_alignment": "center",
+            "heading_text_transform": "uppercase",
+            "heading_letter_spacing": 2,
+            "subheading": "",
+            "subheading_size": 16,
+            "subheading_color": "#666666",
+            "card_background_color": "#ffffff",
+            "card_padding": 15,
+            "card_border_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e5e5e5",
+            "card_items_alignment": "center",
+            "image_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#333333",
+            "product_title_hover_color": "#5ec6ff",
+            "product_title_text_transform": "none",
+            "product_title_weight": "600",
+            "product_title_padding_top": 0,
+            "product_title_padding_bottom": 10,
+            "price_size": 18,
+            "price_color": "#333333",
+            "price_weight": "700",
+            "product_price_padding_top": 0,
+            "product_price_padding_bottom": 15,
+            "show_stars": true,
+            "star_size": 16,
+            "stars_gap": 4,
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 14,
+            "star_color": "#f5a623",
+            "star_empty_color": "#d8d8d8",
+            "compare_price_size": 16,
+            "compare_price_color": "#ff0808",
+            "compare_price_weight": "400",
+            "button_text": "Buy now",
+            "button_text_size": 14,
+            "button_text_weight": "700",
+            "button_text_transform": "uppercase",
+            "button_letter_spacing": 1,
+            "button_background_color": "#1b1f23",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#5ec6ff",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 25,
+            "button_border_width": 0,
+            "button_border_color": "#1b1f23",
+            "button_hover_border_color": "#5ec6ff",
+            "button_padding_top": 5,
+            "button_padding_bottom": 5,
+            "button_padding_sides": 24,
+            "arrow_size": 50,
+            "arrow_background_color": "#ffffff",
+            "arrow_color": "#333333",
+            "arrow_hover_background_color": "#1b1f23",
+            "arrow_hover_color": "#ffffff",
+            "arrow_border_radius": 25,
+            "arrow_border_width": 1,
+            "arrow_border_color": "#e5e5e5",
+            "arrow_hover_border_color": "#1b1f23",
+            "arrow_position": 10,
+            "show_view_all": true,
+            "view_all_text": "View all",
+            "view_all_alignment": "center",
+            "view_all_text_size": 16,
+            "view_all_text_weight": "700",
+            "view_all_text_transform": "uppercase",
+            "view_all_letter_spacing": 1,
+            "view_all_background_color": "#ffffff",
+            "view_all_text_color": "#1b1f23",
+            "view_all_hover_background_color": "#1b1f23",
+            "view_all_hover_text_color": "#ffffff",
+            "view_all_border_radius": 25,
+            "view_all_border_width": 2,
+            "view_all_border_color": "#1b1f23",
+            "view_all_hover_border_color": "#1b1f23",
+            "view_all_padding_vertical": 10,
+            "view_all_padding_horizontal": 24
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5df576e_F6D6YL"
+      ],
+      "name": "Custom Collection",
+      "settings": {}
+    },
+    "image-text-1": {
+      "type": "image-text",
+      "blocks": {
+        "block-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Talkie_Walkie.webp",
+            "title": "Baofeng 8W UV-5R 5-8 KM Portable Dual-frequency ",
+            "text": "<p><strong>Dual-Frequency Power, Anywhere You Go</strong><br/><br/>Stay connected up to <strong>8 KM</strong> away with crystal-clear communication and unmatched durability. The UV-5R offers <strong>dual-band UHF/VHF performance</strong>, long-lasting <strong>4000 mAh battery</strong>, and a <strong>bright LCD display</strong> for easy use day or night. Perfect for professionals, outdoor adventurers, and security teams who demand reliability on every channel.</p>",
+            "button_label": "View",
+            "link": "shopify://products/baofeng-8w-bf-uv-5r-walkie-talkies-5-16km-portable-dual-frequency-walkie-talkies-1-pcs",
+            "text_color": "#1d1d1d",
+            "bg_color": "#ffffff",
+            "bg_color_gradient": ""
+          }
+        },
+        "block-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/V7.jpg",
+            "title": "CRONY V7 Electric Scooter",
+            "text": "<p>The <strong>CRONY X7</strong> is the ultimate <strong>beast of performance</strong> engineered for riders who demand power without limits.<br/><br/>Equipped with <strong>dual 5000 W motors</strong> and a <strong>72 V 50 Ah battery</strong>, it delivers breathtaking acceleration and a range of up to <strong>190 km</strong> on a single charge.<br/><br/>Its <strong>14-inch off-road tires</strong>, <strong>hydraulic suspension</strong>, and <strong>four-LED headlamps</strong> keep you in control on any terrain.<br/><br/>Designed with a <strong>big LCD display</strong>, <strong>oil brakes</strong>, and <strong>IP60 water resistance</strong>, the X7 combines strength, intelligence, and style in one unstoppable ride.</p><p><strong>CRONY X7 — Power Meets Precision.</strong></p>",
+            "button_label": "View",
+            "link": "shopify://products/crony-x7-14-inch-off-road-wide-tire-high-configuration-dual-motor-e-scooter",
+            "text_color": "#1b1f23",
+            "bg_color": "#ffffff",
+            "bg_color_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "block-2",
+        "block-1"
+      ],
+      "settings": {
+        "wide_display": false,
+        "featured_links_per_row": "1",
+        "frontpage_text_align": "left",
+        "frontpage_image_position": "row",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "blocks_JE9AJh": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5df576e_3cPPAV": {
+          "type": "ai_gen_block_5df576e",
+          "settings": {
+            "collection": "surveillance-cameras",
+            "products_to_show": 8,
+            "layout": "grid",
+            "products_per_row": 4,
+            "products_per_row_mobile": 2,
+            "grid_gap": 20,
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "background_color": "#ffffff",
+            "heading": "Surveillance cameras",
+            "heading_size": 32,
+            "heading_color": "#333333",
+            "heading_alignment": "center",
+            "heading_text_transform": "uppercase",
+            "heading_letter_spacing": 2,
+            "subheading": "",
+            "subheading_size": 16,
+            "subheading_color": "#666666",
+            "card_background_color": "#ffffff",
+            "card_padding": 15,
+            "card_border_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e5e5e5",
+            "card_items_alignment": "center",
+            "image_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#333333",
+            "product_title_hover_color": "#5ec6ff",
+            "product_title_text_transform": "none",
+            "product_title_weight": "600",
+            "product_title_padding_top": 0,
+            "product_title_padding_bottom": 10,
+            "price_size": 18,
+            "price_color": "#333333",
+            "price_weight": "700",
+            "product_price_padding_top": 0,
+            "product_price_padding_bottom": 15,
+            "show_stars": true,
+            "star_size": 16,
+            "stars_gap": 4,
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 12,
+            "star_color": "#f5a623",
+            "star_empty_color": "#d8d8d8",
+            "compare_price_size": 16,
+            "compare_price_color": "#ff0808",
+            "compare_price_weight": "400",
+            "button_text": "Buy now",
+            "button_text_size": 14,
+            "button_text_weight": "700",
+            "button_text_transform": "uppercase",
+            "button_letter_spacing": 1,
+            "button_background_color": "#1b1f23",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#5ec6ff",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 25,
+            "button_border_width": 0,
+            "button_border_color": "#1b1f23",
+            "button_hover_border_color": "#5ec6ff",
+            "button_padding_top": 5,
+            "button_padding_bottom": 5,
+            "button_padding_sides": 24,
+            "arrow_size": 50,
+            "arrow_background_color": "#ffffff",
+            "arrow_color": "#333333",
+            "arrow_hover_background_color": "#1b1f23",
+            "arrow_hover_color": "#ffffff",
+            "arrow_border_radius": 25,
+            "arrow_border_width": 1,
+            "arrow_border_color": "#e5e5e5",
+            "arrow_hover_border_color": "#1b1f23",
+            "arrow_position": 10,
+            "show_view_all": true,
+            "view_all_text": "View all",
+            "view_all_alignment": "center",
+            "view_all_text_size": 16,
+            "view_all_text_weight": "700",
+            "view_all_text_transform": "uppercase",
+            "view_all_letter_spacing": 1,
+            "view_all_background_color": "#ffffff",
+            "view_all_text_color": "#1b1f23",
+            "view_all_hover_background_color": "#1b1f23",
+            "view_all_hover_text_color": "#ffffff",
+            "view_all_border_radius": 25,
+            "view_all_border_width": 2,
+            "view_all_border_color": "#1b1f23",
+            "view_all_hover_border_color": "#1b1f23",
+            "view_all_padding_vertical": 10,
+            "view_all_padding_horizontal": 24
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5df576e_3cPPAV"
+      ],
+      "name": "Custom Collection",
+      "settings": {}
+    },
+    "divider_FKpbR6": {
+      "type": "divider",
+      "name": "Divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "image_text_6rWVHj": {
+      "type": "image-text",
+      "blocks": {
+        "image_dngwDy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Best-Deals-Sale-Collection_600x_d4adad4a-9994-4bc0-95e0-76d57f5d143a.webp",
+            "title": "All Products",
+            "text": "",
+            "button_label": "View all",
+            "link": "shopify://collections/all-products",
+            "text_color": "#1b1f23",
+            "bg_color": "#ffffff",
+            "bg_color_gradient": ""
+          }
+        },
+        "image_eMbUkh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Commuter-Scooter-Banner_600x_5b2d1cc3-d750-44cd-8838-ee3615e3837f.webp",
+            "title": "Scooter",
+            "text": "",
+            "button_label": "View all",
+            "link": "shopify://collections/scooter",
+            "text_color": "#1b1f23",
+            "bg_color": "#ffffff",
+            "bg_color_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_dngwDy",
+        "image_eMbUkh"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "wide_display": true,
+        "featured_links_per_row": "2",
+        "frontpage_text_align": "left",
+        "frontpage_image_position": "row",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "testimonials-1": {
+      "type": "testimonial",
+      "blocks": {
+        "block-1": {
+          "type": "image",
+          "settings": {
+            "title": "Mohamed.M",
+            "testimonial": "<p>\"Amazing quality and fast delivery! I was honestly surprised at how good the product feels. Definitely shopping here again.\"</p>",
+            "name": "",
+            "store_name": "",
+            "link": "",
+            "text_position": "center",
+            "text_align": "center",
+            "caption_content_background": "darken_bg"
+          }
+        },
+        "block-2": {
+          "type": "image",
+          "settings": {
+            "title": "Oualid .S",
+            "testimonial": "<p>\"The customer service is excellent. They answered all my questions quickly and made sure my order arrived on time. Highly recommend!\"</p>",
+            "name": "",
+            "store_name": "",
+            "link": "",
+            "text_position": "center",
+            "text_align": "center",
+            "caption_content_background": "darken_bg"
+          }
+        },
+        "block-3": {
+          "type": "image",
+          "settings": {
+            "title": "Youcef .R",
+            "testimonial": "<p>\"Great prices for such high-quality products. I’ve already told my friends and family about this store. Super satisfied!\"</p>",
+            "name": "",
+            "store_name": "",
+            "link": "",
+            "text_position": "center",
+            "text_align": "center",
+            "caption_content_background": "darken_bg"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3"
+      ],
+      "settings": {
+        "wide_display": true,
+        "testimonial_text_animation": "fadeInDown",
+        "testimonial_speed": 6,
+        "activate_adaptiveHeight": false,
+        "mobile_text_below_image": false,
+        "mobile_text_color": "#03a196",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "divider_fyk6j3": {
+      "type": "divider",
+      "name": "Divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "blocks_HWBzVw": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_5df576e_nxHYRr": {
+          "type": "ai_gen_block_5df576e",
+          "settings": {
+            "collection": "laser-stage-light",
+            "products_to_show": 8,
+            "layout": "grid",
+            "products_per_row": 4,
+            "products_per_row_mobile": 2,
+            "grid_gap": 20,
+            "padding_top": 50,
+            "padding_bottom": 50,
+            "background_color": "#ffffff",
+            "heading": "light up everything around",
+            "heading_size": 32,
+            "heading_color": "#333333",
+            "heading_alignment": "center",
+            "heading_text_transform": "uppercase",
+            "heading_letter_spacing": 2,
+            "subheading": "",
+            "subheading_size": 16,
+            "subheading_color": "#666666",
+            "card_background_color": "#ffffff",
+            "card_padding": 15,
+            "card_border_radius": 8,
+            "card_border_width": 1,
+            "card_border_color": "#e5e5e5",
+            "card_items_alignment": "center",
+            "image_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#333333",
+            "product_title_hover_color": "#5ec6ff",
+            "product_title_text_transform": "none",
+            "product_title_weight": "600",
+            "product_title_padding_top": 0,
+            "product_title_padding_bottom": 10,
+            "price_size": 18,
+            "price_color": "#333333",
+            "price_weight": "700",
+            "product_price_padding_top": 0,
+            "product_price_padding_bottom": 15,
+            "show_stars": true,
+            "star_size": 16,
+            "stars_gap": 4,
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 13,
+            "star_color": "#f5a623",
+            "star_empty_color": "#d8d8d8",
+            "compare_price_size": 16,
+            "compare_price_color": "#999999",
+            "compare_price_weight": "400",
+            "button_text": "Buy now",
+            "button_text_size": 14,
+            "button_text_weight": "700",
+            "button_text_transform": "uppercase",
+            "button_letter_spacing": 1,
+            "button_background_color": "#1b1f23",
+            "button_text_color": "#ffffff",
+            "button_hover_background_color": "#5ec6ff",
+            "button_hover_text_color": "#ffffff",
+            "button_border_radius": 25,
+            "button_border_width": 0,
+            "button_border_color": "#1b1f23",
+            "button_hover_border_color": "#5ec6ff",
+            "button_padding_top": 5,
+            "button_padding_bottom": 5,
+            "button_padding_sides": 24,
+            "arrow_size": 50,
+            "arrow_background_color": "#ffffff",
+            "arrow_color": "#333333",
+            "arrow_hover_background_color": "#1b1f23",
+            "arrow_hover_color": "#ffffff",
+            "arrow_border_radius": 25,
+            "arrow_border_width": 1,
+            "arrow_border_color": "#e5e5e5",
+            "arrow_hover_border_color": "#1b1f23",
+            "arrow_position": 10,
+            "show_view_all": true,
+            "view_all_text": "View all",
+            "view_all_alignment": "center",
+            "view_all_text_size": 16,
+            "view_all_text_weight": "700",
+            "view_all_text_transform": "uppercase",
+            "view_all_letter_spacing": 1,
+            "view_all_background_color": "#ffffff",
+            "view_all_text_color": "#1b1f23",
+            "view_all_hover_background_color": "#1b1f23",
+            "view_all_hover_text_color": "#ffffff",
+            "view_all_border_radius": 25,
+            "view_all_border_width": 2,
+            "view_all_border_color": "#1b1f23",
+            "view_all_hover_border_color": "#1b1f23",
+            "view_all_padding_vertical": 10,
+            "view_all_padding_horizontal": 24
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_5df576e_nxHYRr"
+      ],
+      "name": "Custom Collection",
+      "settings": {}
+    },
+    "divider_xhYPFA": {
+      "type": "divider",
+      "name": "Divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "newsletter-1": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Subscribe",
+        "newsletter_text": "<p>Sign up to get the latest on sales, new releases and more …</p>",
+        "newsletter_section_text_align": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "slideshow-1",
+    "17606844021cf0f207",
+    "1760710824f9a64ed6",
+    "divider_JaggTh",
+    "blocks_Mt8AnM",
+    "collection-list-1",
+    "blocks_gV33DP",
+    "image-text-1",
+    "blocks_JE9AJh",
+    "divider_FKpbR6",
+    "image_text_6rWVHj",
+    "testimonials-1",
+    "divider_fyk6j3",
+    "blocks_HWBzVw",
+    "divider_xhYPFA",
+    "newsletter-1"
+  ]
+}

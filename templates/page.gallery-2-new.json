@@ -1,0 +1,121 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-gallery-template",
+      "blocks": {
+        "block-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/eclipse-2.png",
+            "image_link": ""
+          }
+        },
+        "block-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/eclipse-3.png",
+            "image_link": ""
+          }
+        },
+        "block-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/eclipse-5.png",
+            "image_link": ""
+          }
+        },
+        "a65ba00a-262a-494b-8134-1b4cf013d42b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/joanna-kosinska-395404.jpg",
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3",
+        "a65ba00a-262a-494b-8134-1b4cf013d42b"
+      ],
+      "settings": {
+        "show_divider": false,
+        "wide_display": false,
+        "gallery_type": "masonry",
+        "grid-size": 2,
+        "enable_lightbox": true
+      }
+    },
+    "16579145509bdbb0dd": {
+      "type": "shoppable-image",
+      "blocks": {
+        "16579145508090a3fb-0": {
+          "type": "shoppable-image",
+          "settings": {
+            "image": "shopify://shop_images/free-image-1.jpg",
+            "card_styling": "square",
+            "elements_outline": true,
+            "hotspot_color": "#e1e6ea",
+            "product_1": "vita-hoops",
+            "image_alignment_1": "center-center",
+            "x_axis_1": 52,
+            "y_axis_1": 60,
+            "button_label_1": "View details",
+            "product_2": "",
+            "image_alignment_2": "center-center",
+            "x_axis_2": 69,
+            "y_axis_2": 31,
+            "button_label_2": "View product",
+            "product_3": "",
+            "image_alignment_3": "center-center",
+            "x_axis_3": 75,
+            "y_axis_3": 75,
+            "button_label_3": "View product",
+            "product_4": "",
+            "image_alignment_4": "center-center",
+            "x_axis_4": 20,
+            "y_axis_4": 80,
+            "button_label_4": "View product",
+            "call_to_action": "Your call-to-action",
+            "subtitle": "",
+            "text_align": "center",
+            "button_label": "View collection",
+            "button_link": "",
+            "button_style": "global-button--banner-text-highlighted",
+            "cta_bg_color": "#f2f2f2"
+          }
+        }
+      },
+      "block_order": [
+        "16579145508090a3fb-0"
+      ],
+      "settings": {
+        "wide_display": false,
+        "slideshow_text_animation": "fadeInDown",
+        "slideshow_animation": "fade",
+        "slideshow_speed": 0,
+        "title": "",
+        "quick_view": true,
+        "bottom_bar": false,
+        "product_thumbnails": true,
+        "cta": true,
+        "bottom_bar_image_style": "natural",
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16579145509bdbb0dd"
+  ]
+}

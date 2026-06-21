@@ -1,0 +1,38 @@
+{%- comment -%}
+  Tamara Widget (UAE)
+  - Public key updated for Crony.ae UAE Tamara account.
+  - Amount is passed in AED (major units) with correct decimal format.
+  - Do NOT place Merchant Key or Notification Token in this frontend snippet.
+    Those must stay on the server/app side only.
+{%- endcomment -%}
+
+{%- assign tamara_amount = product.price | divided_by: 100.0 -%}
+
+<script>
+  window.tamaraWidgetConfig = {
+    lang: "{{ request.locale.iso_code | escape }}",
+    country: "AE",
+    publicKey: "d54adbd1-143e-4f14-8d4c-4ee2beaed2b4",
+    css: `:host {
+      --font-primary: inherit !important;
+      --font-secondary: inherit !important;
+    }
+    .tamara-summary-widget__amount {
+      font-weight: 700 !important;
+    }`,
+    style: {
+      fontSize: "14px",
+      badgeRatio: 1.2
+    }
+  };
+</script>
+
+<script defer src="https://cdn.tamara.co/widget-v2/tamara-widget.js"></script>
+
+<tamara-widget
+  id="tamara-widget-custom"
+  type="tamara-summary"
+  amount="{{ tamara_amount | replace: ',', '' }}"
+  config='{"badgePosition":"right","showExtraContent":""}'
+  inline-type="2">
+</tamara-widget>

@@ -1,0 +1,247 @@
+<!-- snippets/scroll-progress-bar.liquid -->
+<style>
+  #scroll-progress-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    pointer-events: none;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  #scroll-progress-wrapper.visible {
+    opacity: 1;
+  }
+
+  /* ↓ thinner bar */
+  #scroll-progress-track {
+    position: relative;
+    width: 100%;
+    height: 3px; /* was 8px */
+    overflow: visible;
+  }
+
+  #scroll-progress-fill {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(270deg, 
+      #00d4ff 0%,
+      #0099ff 50%,
+      #0066ff 100%
+    );
+    box-shadow:
+      0 0 10px rgba(0, 153, 255, 0.45), /* was 20px / 0.6 */
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    position: relative;
+    overflow: hidden;
+
+    /* Rounded left edge (match new height) */
+    border-radius: 0 0 0 3px;
+    border-top-left-radius: 3px;  /* was 8px */
+    border-bottom-left-radius: 3px;
+
+    /* Fill from right -> left */
+    transform-origin: right center;
+    transform: scaleX(0);
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Glowing blue light effect inside the bar */
+  #scroll-progress-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(270deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 100%
+    );
+    animation: light-sweep 2s ease-in-out infinite;
+  }
+
+  /* Smaller glow head to fit the slimmer bar */
+  #scroll-progress-fill::after {
+    content: '';
+    position: absolute;
+    left: -3px;  /* was -4px */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;  /* was 16px */
+    height: 10px; /* was 16px */
+    background: radial-gradient(circle, 
+      rgba(255, 255, 255, 1) 0%,
+      rgba(0, 153, 255, 1) 40%,
+      rgba(0, 153, 255, 0.4) 100%
+    );
+    border-radius: 50%;
+    box-shadow: 
+      0 0 8px rgba(0, 153, 255, 1),   /* was 15px */
+      0 0 18px rgba(0, 153, 255, 0.45); /* was 30px / 0.5 */
+    animation: pulse-glow 1.5s ease-in-out infinite;
+  }
+
+  /* Smaller, lighter percentage pill */
+  #scroll-percentage {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%, -50%) translateX(-8px); /* was -12px */
+    background: linear-gradient(135deg, #0099ff, #00d4ff);
+    color: white;
+    padding: 2px 6px;  /* was 4px 10px */
+    border-radius: 16px; /* scale down from 20px */
+    font-size: 10px;    /* was 11px */
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    white-space: nowrap;
+    box-shadow: 
+      0 1px 5px rgba(0, 153, 255, 0.35), /* was 0 2px 8px */
+      0 0 0 1px rgba(255, 255, 255, 0.9); /* was 2px */
+    pointer-events: none;
+    letter-spacing: 0.4px;
+  }
+
+  @keyframes light-sweep {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-200%); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { transform: translateY(-50%) scale(1); opacity: 1; }
+    50% { transform: translateY(-50%) scale(1.15); opacity: 0.85; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #scroll-progress-fill::before,
+    #scroll-progress-fill::after {
+      animation: none !important;
+    }
+  }
+
+  /* Mobile: even slimmer */
+  @media (max-width: 768px) {
+    #scroll-progress-track {
+      height: 2px; /* was 6px */
+    }
+    #scroll-progress-fill {
+      border-top-left-radius: 2px; /* was 6px */
+      border-bottom-left-radius: 2px;
+    }
+    #scroll-progress-fill::after {
+      width: 8px;
+      height: 8px;
+      left: -2px;
+      box-shadow:
+        0 0 6px rgba(0, 153, 255, 1),
+        0 0 14px rgba(0, 153, 255, 0.4);
+    }
+    #scroll-percentage {
+      font-size: 9px;      /* was 10px */
+      padding: 2px 5px;    /* was 3px 8px */
+      transform: translate(-100%, -50%) translateX(-6px); /* was -8px */
+      box-shadow:
+        0 1px 4px rgba(0, 153, 255, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+  }
+</style>
+
+<div id="scroll-progress-wrapper">
+  <div id="scroll-progress-track">
+    <div id="scroll-progress-fill">
+      <div id="scroll-percentage">0%</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    function ready(fn) {
+      if (document.readyState !== 'loading') fn();
+      else document.addEventListener('DOMContentLoaded', fn);
+    }
+
+    ready(function () {
+      var wrapper = document.getElementById('scroll-progress-wrapper');
+      var fill = document.getElementById('scroll-progress-fill');
+      var percentageLabel = document.getElementById('scroll-percentage');
+      
+      if (!wrapper || !fill || !percentageLabel) return;
+
+      // Be aggressive about finding Turbo/OTS headers:
+      var header = document.querySelector(
+        [
+          'header',
+          '[role="banner"]',
+          '.site-header',
+          '.Header', '#Header',
+          '#HeaderWrapper',
+          '.header', '.theme-header', '.header-wrapper'
+        ].join(',')
+      );
+
+      // Start hidden - only show when header is offscreen
+      var headerIsOffscreen = false;
+
+      function setVisibility() {
+        if (headerIsOffscreen) {
+          wrapper.classList.add('visible');
+        } else {
+          wrapper.classList.remove('visible');
+        }
+      }
+
+      // Progress update
+      function updateProgress() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+        var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        var progress = Math.min(1, Math.max(0, scrollTop / max));
+        
+        fill.style.transform = 'scaleX(' + progress + ')';
+        percentageLabel.textContent = Math.round(progress * 100) + '%';
+      }
+
+      // Observe header exit if present
+      if (header && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          headerIsOffscreen = entries[0] ? entries[0].intersectionRatio === 0 : false;
+          setVisibility();
+        }, { threshold: [0, 0.0001] });
+        io.observe(header);
+      } else if (header) {
+        // Fallback: compute from geometry
+        function checkHeader() {
+          var rect = header.getBoundingClientRect();
+          headerIsOffscreen = rect.bottom <= 0;
+          setVisibility();
+        }
+        window.addEventListener('scroll', checkHeader, { passive: true });
+        window.addEventListener('resize', checkHeader);
+        checkHeader();
+      } else {
+        // No header found - show immediately
+        headerIsOffscreen = true;
+        setVisibility();
+      }
+
+      // Wire events
+      window.addEventListener('scroll', function(){
+        updateProgress();
+      }, { passive: true });
+
+      window.addEventListener('resize', updateProgress);
+
+      // Initial paint
+      setVisibility();
+      updateProgress();
+    });
+  })();
+</script>

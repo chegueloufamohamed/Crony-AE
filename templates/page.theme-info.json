@@ -1,0 +1,227 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-no-title-template",
+      "settings": {}
+    },
+    "16321624607215a89e": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "wide_display": false,
+        "image": "shopify://shop_images/tennessee__info--iwt-01.jpg",
+        "pretext": "",
+        "title": "Turbo Shopify Theme",
+        "subtitle": "<p>Overhaul your shop and give it a bold, new look.</p>",
+        "button1": "Get Started",
+        "button1_link": "https://outofthesandbox.com/collections/turbo-theme/products/turbo-theme-tennessee",
+        "button1_style": "global-button--banner-highlighted",
+        "button2": "",
+        "button2_link": "",
+        "button2_style": "global-button--banner",
+        "text_position": "center",
+        "text_align": "center",
+        "caption_content_background": "darken_bg",
+        "mobile_text_below_image": true,
+        "mobile_text_color": "",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162625aa7a82ed": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 10,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "163216259480b3a508": {
+      "type": "featured-text",
+      "settings": {
+        "title": "Built for speed. Styled with love.",
+        "content": "<p>Turbo is a highly configurable, blazing fast theme that has been optimized for both speed and mobile experience. Turbo fully supports sections and is packed with features like product row sliders, mega menus, testimonials, homepage image gallery, FAQ template, interactive mini cart, team page template, and infinite scrolling. It also boasts features like instantaneous page transitions for ultra-fast navigation and two separate speed modes.</p>",
+        "button_label": "",
+        "button_link": "",
+        "text_size": "featured_text",
+        "text_alignment": "center",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "163216263704b6c561": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 10,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "163216264023fe43b6": {
+      "type": "image-text",
+      "blocks": {
+        "163216264023fe43b6-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/splash2.jpg",
+            "title": "Velocity, refined.",
+            "text": "<p>Turbo is a fully-loaded theme that can easily accommodate high volume, large catalog shops and especially <strong>Shopify Plus</strong> merchants.</p><p>But it's also an excellent choice for any size shop that's looking for an edge - one that won't sacrifice style and flexibility for enhanced performance.</p>",
+            "button_label": "Purchase Theme",
+            "link": "https://outofthesandbox.com/collections/turbo-theme/products/turbo-theme-tennessee",
+            "bg_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "163216264023fe43b6-0"
+      ],
+      "settings": {
+        "wide_display": false,
+        "featured_links_per_row": "1",
+        "frontpage_text_align": "left",
+        "frontpage_image_position": "row",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162751da4eeb93": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 10,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162757f69dbbb7": {
+      "type": "featured-text",
+      "settings": {
+        "title": "",
+        "content": "<p><strong>40% of online shoppers abandon a site that takes more than 3 seconds to load</strong></p>",
+        "button_label": "",
+        "button_link": "",
+        "text_size": "featured_text",
+        "text_alignment": "center",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162842dff2566b": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 10,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162858f224d290": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "wide_display": false,
+        "image": "shopify://shop_images/turbo-tennessee-social-share-image.jpg",
+        "pretext": "",
+        "title": "Dynamic & Packed with Incredible Features",
+        "subtitle": "",
+        "button1": "View Shops using Turbo",
+        "button1_link": "https://help.outofthesandbox.com/hc/en-us/articles/115006912387-Featured-Shops-using-Turbo",
+        "button1_style": "global-button--banner-highlighted",
+        "button2": "",
+        "button2_link": "",
+        "button2_style": "global-button--banner",
+        "text_position": "left",
+        "text_align": "left",
+        "caption_content_background": "darken_bg",
+        "mobile_text_below_image": false,
+        "mobile_text_color": "",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162979d9fbd0f2": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 10,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162985f952a466": {
+      "type": "content-page",
+      "settings": {
+        "content_page": "turbo-styles",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632163009b974fdf0": {
+      "type": "content-page",
+      "settings": {
+        "content_page": "turbo-features-list",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632163027d65a817a": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "163216305452f40540": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "wide_display": false,
+        "image": "shopify://shop_images/tennessee__info--video-01.jpg",
+        "pretext": "",
+        "title": "Turbo Theme Support",
+        "subtitle": "<p>Our comprehensive <a href=\"https://help.outofthesandbox.com/hc/en-us\">Theme Help Center</a> is where you'll find extensive documentation and video guides for all our themes, including <a href=\"https://help.outofthesandbox.com/hc/en-us/categories/115001109307-Turbo-Shopify-Theme\">Turbo Support Articles.</a> <br/><br/>Updating your theme is also quick and easy, using our unique <a href=\"https://outofthesandbox.com/pages/theme-updater-app\">Shopify Theme Updater App</a>!</p>",
+        "button1": "Get Support",
+        "button1_link": "https://help.outofthesandbox.com/hc/en-us",
+        "button1_style": "global-button--primary",
+        "button2": "",
+        "button2_link": "",
+        "button2_style": "global-button--banner",
+        "text_position": "right",
+        "text_align": "right",
+        "caption_content_background": "text_box",
+        "mobile_text_below_image": true,
+        "mobile_text_color": "",
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "16321624607215a89e",
+    "1632162625aa7a82ed",
+    "163216259480b3a508",
+    "163216263704b6c561",
+    "163216264023fe43b6",
+    "1632162751da4eeb93",
+    "1632162757f69dbbb7",
+    "1632162842dff2566b",
+    "1632162858f224d290",
+    "1632162979d9fbd0f2",
+    "1632162985f952a466",
+    "1632163009b974fdf0",
+    "1632163027d65a817a",
+    "163216305452f40540"
+  ]
+}

@@ -1,0 +1,209 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-no-title-template",
+      "settings": {}
+    },
+    "1632161533d8099c46": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "wide_display": false,
+        "image": "shopify://shop_images/banner-splash.jpg",
+        "pretext": "",
+        "title": "",
+        "subtitle": "",
+        "button1": "",
+        "button1_link": "",
+        "button1_style": "global-button--banner",
+        "button2": "",
+        "button2_link": "",
+        "button2_style": "global-button--banner",
+        "text_position": "center",
+        "text_align": "center",
+        "caption_content_background": "original",
+        "mobile_text_below_image": true,
+        "mobile_text_color": "",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "163216156804f96ac9": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 15,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632161590d340ff4a": {
+      "type": "featured-text",
+      "settings": {
+        "title": "We're a one-stop shop for all things whiskey",
+        "content": "<p>Our goal is to ensure that all you whiskey, whisky, rye, scotch, and bourbon lovers are set for success with the finest glassware and tools that will compliment your premium spirits. There are so many ways to explore and enjoy whiskey, and we are happy to share our passion and expertise to help with that! </p>",
+        "button_label": "",
+        "button_link": "",
+        "text_size": "regular_text",
+        "text_alignment": "center",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632161612b3b735fd": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16321616153425d515": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "",
+        "collection_description": false,
+        "collection": "barware",
+        "collection_style": "slider",
+        "products_per": 4,
+        "products_limit": 10,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632161975071e5e69": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 30,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632161757a709c569": {
+      "type": "video",
+      "settings": {
+        "wide_display": false,
+        "aspect_ratio": "16:9",
+        "autoplay": false,
+        "autoloop": true,
+        "mute_video": false,
+        "show_controls": true,
+        "video_dark_overlay": true,
+        "iframe_video": "https://www.youtube.com/watch?v=YJvo6_11-uo",
+        "html5_video": "",
+        "image": "shopify://shop_images/blog-JD2.jpg",
+        "display_text_over_video": false,
+        "preheading": "",
+        "heading": "Behind the Scenes",
+        "subheading": "<p>Get an inside look at how we curate our selection of liquors.</p>",
+        "button1_label": "Play Video",
+        "button1_link": "",
+        "button1_style": "global-button--banner-highlighted",
+        "button2_label": "",
+        "button2_link": "",
+        "button2_style": "global-button--banner",
+        "text_position": "left",
+        "text_align": "left",
+        "caption_content_background": "original",
+        "mobile_text_below_image": true,
+        "mobile_text_color": "",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16321619775ca16df5": {
+      "type": "image-text",
+      "blocks": {
+        "16321619775ca16df5-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/bartending-set.jpg",
+            "title": "Spotlight on: Barware",
+            "text": "<p>Our latest release of barware that will set you up for success to craft & create all your exquisite cocktails. </p>",
+            "button_label": "View all",
+            "link": "shopify://collections/barware",
+            "bg_color": "",
+            "text_color": ""
+          }
+        },
+        "16321619775ca16df5-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/glassware.jpg",
+            "title": "Our Signature Collection",
+            "text": "<p>Our Signature Collection</p>",
+            "button_label": "Shop Now",
+            "link": "shopify://collections/glassware",
+            "bg_color": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "16321619775ca16df5-0",
+        "16321619775ca16df5-1"
+      ],
+      "settings": {
+        "wide_display": false,
+        "featured_links_per_row": "1",
+        "frontpage_text_align": "left",
+        "frontpage_image_position": "row",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16321620127c745227": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Cocktails, Recipes and More",
+        "blog_widget_select": "the-whiskey-exchange",
+        "home_page_articles": 2,
+        "blog_tags": false,
+        "blog_author": false,
+        "read_time": true,
+        "blog_date": true,
+        "blog_comment_count": true,
+        "read_more_link": true,
+        "excerpt_display": "full_excerpt",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1632162202173c16fb": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": false,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Join Our Newsletter",
+        "newsletter_text": "<p>Sign up today and receive 15% off of your first order!</p>",
+        "newsletter_section_text_align": "center",
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1632161533d8099c46",
+    "163216156804f96ac9",
+    "1632161590d340ff4a",
+    "1632161612b3b735fd",
+    "16321616153425d515",
+    "1632161975071e5e69",
+    "1632161757a709c569",
+    "16321619775ca16df5",
+    "16321620127c745227",
+    "1632162202173c16fb"
+  ]
+}

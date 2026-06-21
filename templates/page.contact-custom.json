@@ -1,0 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "contact-custom-template",
+      "blocks": {
+        "block-1": {
+          "type": "richtext",
+          "settings": {
+            "placeholder": "Name",
+            "required": true,
+            "field_type": "text"
+          }
+        },
+        "block-2": {
+          "type": "richtext",
+          "settings": {
+            "placeholder": "Email",
+            "required": true,
+            "field_type": "email"
+          }
+        },
+        "block-3": {
+          "type": "richtext",
+          "settings": {
+            "placeholder": "Message",
+            "required": true,
+            "field_type": "textarea"
+          }
+        }
+      },
+      "block_order": [
+        "block-1",
+        "block-2",
+        "block-3"
+      ],
+      "settings": {
+        "contact_subheading": "Contact Us Today!",
+        "contact_content": "<p>Customize your contact form to suit your business! Add custom fields like a dropdown menu, checkbox, text fields and more, so that you can gather pertinent info from shoppers right from the get-go, to help answer their inquiries more effectively.</p>"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "newsletter"
+  ]
+}

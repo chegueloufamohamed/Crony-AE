@@ -1,0 +1,135 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "16479858128697be9d": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 5,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16479845746c88d328": {
+      "type": "gallery",
+      "blocks": {
+        "1647984574d359a5b6-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/tenn.jpg"
+          }
+        },
+        "1647984574d359a5b6-4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ten-2.jpg"
+          }
+        },
+        "1647984574d359a5b6-5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/sq-glass.jpg"
+          }
+        },
+        "1647984574d359a5b6-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/tenn-NL2.jpg"
+          }
+        },
+        "1647984574d359a5b6-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/mountain.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "1647984574d359a5b6-1",
+        "1647984574d359a5b6-4",
+        "1647984574d359a5b6-5",
+        "1647984574d359a5b6-2",
+        "1647984574d359a5b6-3"
+      ],
+      "settings": {
+        "wide_display": false,
+        "title": "",
+        "gallery_type": "masonry",
+        "grid-size": 3,
+        "enable_lightbox": true,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "164798454809256d68": {
+      "type": "contact-form",
+      "blocks": {
+        "1647984548c949ea1c-0": {
+          "type": "richtext",
+          "settings": {
+            "label": "",
+            "placeholder": "Name",
+            "required": true,
+            "field_type": "text"
+          }
+        },
+        "1647984548c949ea1c-1": {
+          "type": "richtext",
+          "settings": {
+            "label": "",
+            "placeholder": "Email",
+            "required": true,
+            "field_type": "email"
+          }
+        },
+        "1647984548c949ea1c-2": {
+          "type": "richtext",
+          "settings": {
+            "label": "",
+            "placeholder": "Message",
+            "required": true,
+            "field_type": "textarea"
+          }
+        }
+      },
+      "block_order": [
+        "1647984548c949ea1c-0",
+        "1647984548c949ea1c-1",
+        "1647984548c949ea1c-2"
+      ],
+      "settings": {
+        "contact_heading": "",
+        "contact_subheading": "Don't be afraid to reach out!",
+        "contact_content": "<p>We love hearing from our customer base with any suggestions, ideas or concerns you have. We promise to listen carefully and try to help wherever we can. And if we develop a new product based on your suggestions, we may even name a drink after you!</p>",
+        "contact_text_position": "center",
+        "contact_text_alignment": "center",
+        "contact_social_buttons": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "16479860381678b76d": {
+      "type": "divider",
+      "settings": {
+        "divider_spacing": 20,
+        "divider_border": false,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "16479858128697be9d",
+    "16479845746c88d328",
+    "164798454809256d68",
+    "16479860381678b76d"
+  ]
+}

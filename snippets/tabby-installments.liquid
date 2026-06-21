@@ -1,0 +1,189 @@
+{%- liquid
+  assign lang = localization.language.iso_code
+-%}
+<div id="TabbyPromo" style="display:none"></div>
+
+<script>
+(function(){
+  const MOUNT_SEL = '#TabbyPromo';
+  const LANG = '{{ lang }}';
+  const PUBLIC_KEY = 'pk_ad68da59-a108-4bbf-bdd1-7181c550e365'; // TODO: replace with LIVE key in production
+  const SUPPORTED = { AED:'AED', KWD:'KWD', SAR:'SAR' };
+  const DIGITS = { AED:2, SAR:2, KWD:3 };
+
+  // --- Currency detection (robust) ---
+  function detectCurrency(){
+    // 1) Shopify Markets
+    if (window.Shopify && Shopify.currency && Shopify.currency.active) {
+      return Shopify.currency.active;
+    }
+    // 2) meta tags frequently used by themes/apps
+    const m1 = document.querySelector('meta[itemprop="priceCurrency"]');
+    if (m1 && m1.content) return m1.content.toUpperCase();
+    const m2 = document.querySelector('meta[property="og:price:currency"]');
+    if (m2 && m2.content) return m2.content.toUpperCase();
+    // 3) common money element attribute
+    const money = document.querySelector('[data-money-currency],[data-currency]');
+    if (money){
+      const cur = (money.getAttribute('data-money-currency') || money.getAttribute('data-currency') || '').toUpperCase();
+      if (cur) return cur;
+    }
+    // 4) last resort: shop default (may be wrong for visitor)
+    return '{{ shop.currency }}'.toUpperCase();
+  }
+
+  // --- Price element detection (multiple fallbacks) ---
+  const PRICE_SELECTORS = [
+    '[data-product-price][data-price]',       // price in cents as attribute
+    'meta[itemprop="price"]',                 // structured data
+    'meta[property="og:price:amount"]',       // og meta
+    '.price .price__regular .price-item--regular',
+    '.price [data-product-price]',
+    '[data-price]',
+    '[data-product-price]'
+  ];
+
+  function getPriceEl(){
+    for (const sel of PRICE_SELECTORS){
+      const el = document.querySelector(sel);
+      if (el) return el;
+    }
+    // sometimes themes keep the price inside the product form total
+    const guess = document.querySelector('form[action*="/cart/add"] [data-price], form[action*="/cart/add"] [data-product-price]');
+    return guess || null;
+  }
+
+  function readPriceMajor(el, currency){
+    if (!el) return null;
+
+    // 1) attribute in minor units
+    const centsAttr = el.getAttribute && el.getAttribute('data-price');
+    if (centsAttr && /^\d+$/.test(centsAttr)){
+      const digits = DIGITS[currency] || 2;
+      return parseInt(centsAttr, 10) / Math.pow(10, digits);
+    }
+    // 2) meta content (already major units)
+    if (el.tagName === 'META' && el.content){
+      const v = parseFloat(String(el.content).replace(/[^\d.,]/g,'').replace(/,/g,''));
+      return isNaN(v) ? null : v;
+    }
+    // 3) visible text parsing
+    const txt = (el.textContent || '').trim();
+    if (txt){
+      // strip currency symbols + non-numeric except , . then normalize comma
+      const normalized = txt.replace(/[^\d.,]/g,'').replace(/,/g,'');
+      const val = parseFloat(normalized);
+      if (!isNaN(val)) return val;
+    }
+    // 4) try meta fallbacks
+    const meta = document.querySelector('meta[itemprop="price"], meta[property="og:price:amount"]');
+    if (meta && meta.content){
+      const v = parseFloat(meta.content.replace(/,/g,''));
+      return isNaN(v) ? null : v;
+    }
+    return null;
+  }
+
+  function loadTabby(cb){
+    if (window.__TABBY_PROMO_LOADED__) return cb && cb();
+    const s = document.createElement('script');
+    s.src = 'https://checkout.tabby.ai/tabby-promo.js?v=2';
+    s.async = true;
+    s.onload = function(){ window.__TABBY_PROMO_LOADED__ = true; cb && cb(); };
+    document.head.appendChild(s);
+  }
+
+  let instance = null;
+  let lastKey = '';
+  let priceObserver = null;
+  let retries = 0;
+  const MAX_RETRIES = 40;           // ~10s if interval 250ms
+
+  function mount(){
+    const currency = detectCurrency();
+    const priceEl  = getPriceEl();
+    const price    = readPriceMajor(priceEl, currency);
+
+    // wait for late-rendered price
+    if ((!priceEl || !price) && retries < MAX_RETRIES){
+      retries++;
+      return setTimeout(mount, 250);
+    }
+
+    const mountEl = document.querySelector(MOUNT_SEL);
+    if (!mountEl) return;
+
+    // hide if unsupported / missing
+    if (!SUPPORTED[currency] || !price){
+      mountEl.style.display = 'none';
+      return;
+    }
+
+    retries = 0;
+    const key = currency + '|' + price.toFixed(3);
+
+    if (key === lastKey && instance) return;
+    lastKey = key;
+
+    // Merchant code by market
+    const MERCHANT_CODE = (currency === 'SAR' ? 'ksa' : currency === 'KWD' ? 'KW' : 'default');
+
+    // (re)mount
+    mountEl.style.display = 'block';
+    mountEl.innerHTML = '';
+    try { instance?.destroy?.(); } catch(e){}
+
+    instance = new TabbyPromo({
+      selector: MOUNT_SEL,
+      currency: currency,
+      price: price,
+      lang: LANG,
+      installmentsCount: 4,
+      publicKey: PUBLIC_KEY,
+      merchantCode: MERCHANT_CODE
+    });
+
+    // watch price element for re-renders
+    if (priceEl && 'MutationObserver' in window){
+      priceObserver?.disconnect?.();
+      priceObserver = new MutationObserver(() => {
+        // slight delay to allow DOM paint
+        setTimeout(mount, 50);
+      });
+      priceObserver.observe(priceEl, { attributes:true, childList:true, characterData:true, subtree:true });
+    }
+  }
+
+  function init(){
+    loadTabby(mount);
+
+    // Variant/theme lifecycle events
+    document.addEventListener('variant:changed', mount);
+    document.addEventListener('product:variant-change', mount);
+    document.addEventListener('shopify:section:load', mount);
+    document.addEventListener('shopify:section:select', mount);
+    document.addEventListener('shopify:section:deselect', mount);
+    document.addEventListener('shopify:section:reorder', mount);
+    document.addEventListener('shopify:block:select', mount);
+    document.addEventListener('shopify:block:deselect', mount);
+    document.addEventListener('page:load', mount);
+    document.addEventListener('turbo:load', mount);
+    document.addEventListener('pjax:end', mount);
+
+    const idSelect = document.querySelector('form[action*="/cart/add"] [name="id"]');
+    if (idSelect){ idSelect.addEventListener('change', () => setTimeout(mount, 60)); }
+
+    // Also remount after any price switchers update (common in Markets)
+    document.addEventListener('currency:changed', mount);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+<style>
+/* keep Tabby container from collapsing in some themes */
+#TabbyPromo div:empty,
+#TabbyDialogContainer div:empty { display:block; }
+</style>

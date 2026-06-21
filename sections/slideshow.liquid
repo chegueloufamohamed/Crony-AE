@@ -1,0 +1,186 @@
+<script type="application/json" data-section-type="slideshow" data-section-id="{{ section.id }}"></script>
+
+{% liquid
+  assign id = section.id
+  assign first_block = section.blocks | first
+%}
+
+{%- comment -%} Preload only LCP image(s) {%- endcomment -%}
+{% if first_block.settings.image %}
+<link rel="preload" as="image" href="{{ first_block.settings.image | img_url: '2000x' }}" fetchpriority="high">
+{% endif %}
+{% if first_block.settings.mobile_image %}
+<link rel="preload" as="image" href="{{ first_block.settings.mobile_image | img_url: '900x' }}" fetchpriority="high">
+{% endif %}
+
+<style>
+#static-hero-{{ id }} picture img,
+#static-hero-{{ id }} img {
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+}
+
+#slideshow-{{ id }} {
+  display:none;
+  width:100%;
+}
+
+#slideshow-{{ id }} .gallery-cell img {
+  width:100% !important;
+  height:auto !important;
+  display:block;
+  object-fit:cover;
+}
+
+/* CLS safety */
+.gallery-cell {
+  content-visibility:auto;
+  contain-intrinsic-size:800px 450px;
+}
+</style>
+
+
+<section class="section {% if section.settings.wide_display %}is-width-wide has-no-side-gutter{% endif %}">
+  <div class="container">
+    <div class="one-whole column">
+
+      {%- comment -%} STATIC HERO (first image only) {%- endcomment -%}
+      <div id="static-hero-{{ id }}">
+        <picture>
+          {% if first_block.settings.mobile_image %}
+          <source media="(max-width: 768px)" srcset="{{ first_block.settings.mobile_image | img_url: '900x' }}">
+          {% endif %}
+          <img src="{{ first_block.settings.image | img_url: '2000x' }}" alt="Hero" loading="eager" fetchpriority="high">
+        </picture>
+      </div>
+
+      {%- comment -%} LAZY SLIDESHOW (hidden until user engagement) {%- endcomment -%}
+      <div id="slideshow-{{ id }}" class="homepage-slideshow js-homepage-slideshow"
+        data-speed="{{ section.settings.slideshow_speed | times: 1000 }}">
+        
+        {% for block in section.blocks %}
+        <div class="gallery-cell">
+
+          <picture>
+            {% if block.settings.mobile_image %}
+            <source media="(max-width: 768px)" srcset="{{ block.settings.mobile_image | img_url: '900x' }}">
+            {% endif %}
+            <img 
+              src="{{ block.settings.image | img_url: '2000x' }}"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              alt="Slide {{ forloop.index }}">
+          </picture>
+
+        </div>
+        {% endfor %}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<script>
+(function(){
+  const slider = document.getElementById('slideshow-{{ id }}');
+  const staticHero = document.getElementById('static-hero-{{ id }}');
+
+  if (!slider) return;
+  let activated = false;
+
+  function activateSlider(){
+    if (activated) return;
+    activated = true;
+
+    // swap static for slideshow
+    staticHero.style.display = "none";
+    slider.style.display = "block";
+
+    const options = {
+      wrapAround: true,
+      imagesLoaded: true,
+      cellAlign: "center",
+      lazyLoad: true,
+      pauseAutoPlayOnHover: true,
+      adaptiveHeight: true,
+      autoPlay: slider.dataset.speed ? parseInt(slider.dataset.speed) : 4000
+    };
+
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      options.autoPlay = false;
+    }
+
+    function startFlickity(){
+      let flk;
+
+      if (window.jQuery && typeof jQuery.fn.flickity === "function") {
+        flk = jQuery(slider).flickity(options).data("flickity");
+      } else if (window.Flickity) {
+        flk = new Flickity(slider, options);
+      } else {
+        return setTimeout(startFlickity, 150);
+      }
+
+      // Critical: Fix width + positioning after showing
+      requestAnimationFrame(()=>{
+        flk.resize();
+        flk.reposition();
+        setTimeout(()=> flk.resize(), 200);
+      });
+    }
+
+    // Ensure browser has rendered slideshow before initializing
+    setTimeout(startFlickity, 50);
+  }
+
+  // No auto-start timer. Only user intent triggers.
+  const triggers = ["click","touchstart","mousemove","scroll","keydown","wheel"];
+  triggers.forEach(evt => {
+    window.addEventListener(evt, activateSlider, { once:true, passive:true });
+  });
+
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Smart LCP Slideshow",
+  "settings": [
+    {
+      "type": "range",
+      "id": "slideshow_speed",
+      "label": "Slide change speed",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 5,
+      "unit": "sec"
+    },
+    {
+      "type": "checkbox",
+      "id": "wide_display",
+      "label": "Full width",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Slide",
+      "settings": [
+        { "type":"image_picker","id":"image","label":"Desktop image" },
+        { "type":"image_picker","id":"mobile_image","label":"Mobile image (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Smart LCP Slideshow" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,210 @@
+<style>
+  #eid-announcement-bar,
+  #eid-announcement-bar * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Georgia', serif !important;
+  }
+
+  #eid-announcement-bar {
+    background-color: #1b4332 !important;
+    color: #f5d97e !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 2147483647 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: translateZ(0) !important;
+    will-change: transform !important;
+    backface-visibility: hidden !important;
+    overflow: hidden !important;
+  }
+
+  #eid-announcement-bar::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 220, 80, 0.12) 50%,
+      transparent 60%
+    ) !important;
+    transform: translateX(-100%) translateZ(0) !important;
+    will-change: transform !important;
+    animation: eid-shimmer 3s ease-in-out infinite !important;
+    pointer-events: none !important;
+  }
+
+  #eid-announcement-bar .eid-inner {
+    display: block !important;
+    text-align: center !important;
+    padding: 8px 16px !important;
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+  }
+
+  #eid-announcement-bar .eid-line1 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  #eid-announcement-bar .eid-line2 {
+    display: block !important;
+    color: #e2f0cb !important;
+    font-size: 12.5px !important;
+    font-style: italic !important;
+    padding-top: 3px !important;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+    animation: eid-fadein 0.8s ease both !important;
+    animation-delay: 0.5s !important;
+  }
+
+  #eid-announcement-bar .eid-stars {
+    font-size: 10px !important;
+    color: #f5d97e !important;
+    letter-spacing: 4px !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    animation: eid-twinkle 2s ease-in-out infinite alternate !important;
+  }
+
+  #eid-announcement-bar .eid-moon {
+    display: inline-block !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+    will-change: transform !important;
+    transform-origin: center bottom !important;
+    /* scaleX(-1) flips moon to face right toward "Eid Mubarak!" */
+    animation: eid-moon-swing 3s ease-in-out infinite !important;
+  }
+
+  #eid-announcement-bar .eid-greeting {
+    font-weight: bold !important;
+    font-size: 14px !important;
+    color: #fde68a !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    animation: eid-glow 2.5s ease-in-out infinite !important;
+  }
+
+  @keyframes eid-shimmer {
+    0%   { transform: translateX(-100%) translateZ(0); }
+    100% { transform: translateX(200%) translateZ(0); }
+  }
+
+  /* scaleX(-1) baked into every keyframe so moon stays flipped while swinging */
+  @keyframes eid-moon-swing {
+    0%   { transform: scaleX(-1) rotate(-8deg); }
+    50%  { transform: scaleX(-1) rotate(8deg); }
+    100% { transform: scaleX(-1) rotate(-8deg); }
+  }
+
+  @keyframes eid-glow {
+    0%, 100% { text-shadow: 0 0 6px rgba(253,230,138,0.4); }
+    50%       { text-shadow: 0 0 14px rgba(253,230,138,0.9); }
+  }
+  @keyframes eid-twinkle {
+    0%   { opacity: 0.3; }
+    100% { opacity: 0.7; }
+  }
+  @keyframes eid-fadein {
+    from { opacity: 0; transform: translateY(3px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    #eid-announcement-bar .eid-inner    { padding: 7px 12px !important; }
+    #eid-announcement-bar .eid-stars    { display: none !important; }
+    #eid-announcement-bar .eid-greeting { font-size: 13px !important; }
+    #eid-announcement-bar .eid-line2    { font-size: 11.5px !important; }
+  }
+</style>
+
+<div id="eid-announcement-bar" role="region" aria-label="Eid Holiday Notice">
+  <div class="eid-inner">
+    <div class="eid-line1">
+      <span class="eid-stars">✦ ✦ ✦</span>
+      <span class="eid-moon">🌙</span>
+      <span class="eid-greeting">Eid Mubarak!</span>
+      <span class="eid-stars">✦ ✦ ✦</span>
+    </div>
+    <div class="eid-line2">Orders placed during Eid may be delayed by up to 2 additional days.</div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var applied = false;
+
+    function applyOffsets() {
+      var banner = document.getElementById('eid-announcement-bar');
+      if (!banner) return;
+
+      var bannerH = banner.getBoundingClientRect().height;
+      if (bannerH === 0) return;
+
+      var headerSelectors = [
+        '#shopify-section-header',
+        '.site-header',
+        'header[role="banner"]',
+        '#navbar',
+        '.header-wrapper',
+        'header.header'
+      ];
+
+      var headerEl = null;
+      headerSelectors.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (el) {
+          el.style.setProperty('top', bannerH + 'px', 'important');
+          if (!headerEl) headerEl = el;
+        }
+      });
+
+      var headerH = headerEl ? headerEl.getBoundingClientRect().height : 0;
+      var totalOffset = bannerH + headerH;
+
+      document.body.style.setProperty('padding-top', totalOffset + 'px', 'important');
+
+      var progressBar = document.getElementById('scroll-progress-wrapper');
+      if (progressBar) {
+        progressBar.style.setProperty('top', bannerH + 'px', 'important');
+        progressBar.style.setProperty('z-index', '2147483646', 'important');
+      }
+
+      applied = true;
+    }
+
+    applyOffsets();
+
+    if (!applied) {
+      requestAnimationFrame(function () {
+        applyOffsets();
+        if (!applied) {
+          requestAnimationFrame(applyOffsets);
+        }
+      });
+    }
+
+    window.addEventListener('load', applyOffsets);
+    window.addEventListener('resize', applyOffsets);
+  })();
+</script>

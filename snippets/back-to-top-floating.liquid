@@ -1,0 +1,165 @@
+<!-- Crony • Back to Top Floating Button -->
+<div class="crony-backtotop" id="crony-backtotop" role="button" aria-label="Back to top">
+  <svg id="crony-progress-ring" viewBox="0 0 56 56">
+    <circle
+      id="crony-progress-circle"
+      cx="28"
+      cy="28"
+      r="21"
+    ></circle>
+  </svg>
+  <img
+  src="https://cdn.shopify.com/s/files/1/0662/3621/9628/files/arrow_1.png?v=1760512439&width=100"
+  alt="Back to Top"
+  width="45"
+  height="45">
+</div>
+
+<style>
+  .crony-backtotop {
+    position: fixed;
+    bottom: 32px;      /* 🟡 Adjust SPACE from bottom (desktop) */
+    right: 15px;       /* 🟡 Adjust distance from right */
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease, bottom 0.3s ease;
+    display: none;
+    width: 56px;
+    height: 56px;
+  }
+
+  .crony-backtotop img {
+    width: 45px;       /* 🟢 Adjust ICON SIZE (desktop width) */
+    height: 45px;      /* 🟢 Adjust ICON SIZE (desktop height) */
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  /* SVG Progress Circle */
+  #crony-progress-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #crony-progress-circle {
+    fill: none;
+    stroke: #0099ff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s ease;
+    filter: drop-shadow(0 0 3px rgba(0, 153, 255, 0.4));
+  }
+
+  .crony-backtotop:hover {
+    transform: translateY(-6px) scale(1.08);
+  }
+
+  .crony-backtotop:hover img {
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  }
+
+  /* --- Mobile adjustments --- */
+  @media (max-width:600px){
+    .crony-backtotop {
+      bottom: 26px;     /* 🟡 Adjust SPACE from bottom (mobile) */
+      right: 10px;     /* 🟡 Adjust distance from right (mobile) */
+      width: 53px;
+      height: 53px;
+    }
+    .crony-backtotop img {
+      width: 42px;     /* 🟢 Adjust ICON SIZE (mobile width) */
+      height: 42px;    /* 🟢 Adjust ICON SIZE (mobile height) */
+    }
+    
+    /* Move up when sticky cart is visible */
+    .crony-backtotop.with-sticky-cart {
+      bottom: 73px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.getElementById("crony-backtotop");
+    const stickyCart = document.getElementById("stickyCartContainer");
+    const circle = document.getElementById("crony-progress-circle");
+
+    // Set up the progress circle with updated radius
+    const radius = 21;
+    const circumference = 2 * Math.PI * radius;
+    circle.style.strokeDasharray = circumference + ' ' + circumference;
+    circle.style.strokeDashoffset = circumference;
+
+    // Update progress based on scroll
+    function updateProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(1, Math.max(0, scrollTop / scrollHeight));
+      
+      const offset = circumference - (progress * circumference);
+      circle.style.strokeDashoffset = offset;
+    }
+
+    // Show button only after scrolling down
+    window.addEventListener("scroll", () => {
+      btn.style.display = window.scrollY > 300 ? "block" : "none";
+      updateProgress();
+    }, { passive: true });
+
+    // Smooth scroll to top on click
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Sync with sticky cart visibility (only if sticky cart exists)
+    if (stickyCart) {
+      // Check if we're on mobile
+      function isMobile() {
+        return window.innerWidth <= 600;
+      }
+      
+      // Observer to watch for sticky cart visibility changes
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'class') {
+            updateBackToTopPosition();
+          }
+        });
+      });
+      
+      function updateBackToTopPosition() {
+        if (isMobile() && stickyCart.classList.contains('show')) {
+          btn.classList.add('with-sticky-cart');
+        } else {
+          btn.classList.remove('with-sticky-cart');
+        }
+      }
+      
+      // Start observing the sticky cart for class changes
+      observer.observe(stickyCart, { attributes: true });
+      
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateBackToTopPosition, 150);
+      }, { passive: true });
+      
+      // Initial check
+      updateBackToTopPosition();
+    }
+
+    // Initial progress update
+    updateProgress();
+  });
+</script>

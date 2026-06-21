@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "collection-template",
+      "blocks": {
+        "faceted_filtering_CtPY96": {
+          "type": "faceted_filtering",
+          "settings": {
+            "show_filter_product_count": true
+          }
+        }
+      },
+      "block_order": [
+        "faceted_filtering_CtPY96"
+      ],
+      "disabled": true,
+      "settings": {
+        "featured_collection_image": true,
+        "wide_display": true,
+        "caption_content_background": "original",
+        "display_collection_title": true,
+        "collection_breadcrumb": false,
+        "collection_tags": false,
+        "collection_sort": false,
+        "products_per_row": 3,
+        "pagination_limit": 48,
+        "toggle": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "17608644285a5ae1c4": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_edf009b_N6LPLf": {
+          "type": "ai_gen_block_edf009b",
+          "settings": {
+            "products_per_row_desktop": 4,
+            "products_per_row_mobile": 2,
+            "filter_title_color": "#333333",
+            "filter_text_color": "#6b6b6b",
+            "border_color": "#e0e0e0",
+            "card_bg_color": "#ffffff",
+            "card_title_color": "#333333",
+            "card_content_alignment": "center",
+            "card_padding_top": 12,
+            "card_padding_bottom": 12,
+            "card_radius": 8,
+            "title_color": "#333333",
+            "title_font_size": 13,
+            "title_font_weight": "600",
+            "title_padding_top": 0,
+            "title_padding_bottom": 0,
+            "price_font_size": 14,
+            "price_font_weight": "600",
+            "price_padding_top": 0,
+            "price_padding_bottom": 0,
+            "compare_price_color": "#ff0000",
+            "compare_price_font_weight": "400",
+            "stars_font_size": 19,
+            "stars_padding_top": 0,
+            "stars_padding_bottom": 0,
+            "button_text": "Buy Now",
+            "button_bg_color": "#333333",
+            "button_hover_bg_color": "#5ec6ff",
+            "button_font_color": "#ffffff",
+            "button_font_size": 12,
+            "button_font_weight": "600",
+            "button_padding_vertical": 5,
+            "button_padding_horizontal": 20,
+            "button_radius": 26,
+            "button_text_transform": "uppercase"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_edf009b_N6LPLf"
+      ],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Subscribe",
+        "newsletter_text": "<p>Sign up to get the latest on sales, new releases and more …</p>",
+        "newsletter_section_text_align": "center",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17608644285a5ae1c4",
+    "newsletter"
+  ]
+}

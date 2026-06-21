@@ -1,0 +1,82 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1647897355c142f2a6": {
+      "type": "featured-text",
+      "settings": {
+        "title": "Our Team",
+        "content": "<p>We are Nicole and Kati, and we design for our fellow modern woman - mothers, sisters, friends, confidants, rulebreakers, entrepreneurs, badasses - all gorgeously complex individuals and an endless source of inspiration.  We also believe that we vote for the future with our purchases, so we are constantly working to create our pieces as sustainably and responsibly as we can, creating an opportunity for you to choose with purpose and intention.  We use recycled gold and conflict free stones, and as firm believers in quality-over-quantity, each piece is made by hand in our studio.</p>",
+        "button_label": "",
+        "button_link": "",
+        "text_size": "featured_text",
+        "text_alignment": "center",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "1647897247212d98ad": {
+      "type": "featured-promotions",
+      "blocks": {
+        "164789724771b1f3a7-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/flo1.jpg",
+            "link": "",
+            "title": "NICOLE CHOWDHURY",
+            "text": "<p>Founder and CEO</p>",
+            "button_label": ""
+          }
+        },
+        "164789724771b1f3a7-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/flo2.jpg",
+            "link": "",
+            "title": "katy reese",
+            "text": "<p>Master jeweller</p>",
+            "button_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "164789724771b1f3a7-0",
+        "164789724771b1f3a7-1"
+      ],
+      "settings": {
+        "wide_display": true,
+        "promo_text_on_image_enabled": true,
+        "featured_promos_per_row": 2,
+        "featured_links_animation": "fadeInDown",
+        "feature_style": "square",
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "164789753032eb9107": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Subscribe",
+        "newsletter_text": "<p>Sign up to get the latest on sales, new releases and more …</p>",
+        "newsletter_section_text_align": "center",
+        "css_class": "",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "1647897355c142f2a6",
+    "1647897247212d98ad",
+    "164789753032eb9107"
+  ]
+}

@@ -1,0 +1,232 @@
+<!-- Premium WhatsApp Floating (Arabic + English) -->
+<style>
+  .nael-wa-wrap{
+    position:fixed;
+    left:15px;
+    bottom:32px;
+    z-index:99999;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    transition: bottom 0.3s ease;
+  }
+
+  .nael-wa-btn{
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    user-select:none;
+    transition:transform .25s ease;
+  }
+
+  .nael-wa-btn img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+    display:block;
+    transition:transform .25s ease;
+  }
+
+  .nael-wa-btn:hover{
+    transform:translateY(-4px);
+  }
+
+  .nael-wa-btn:hover img{
+    transform:scale(1.06);
+  }
+
+  .nael-wa-pop{
+    position:absolute;
+    left:0;
+    bottom:72px;
+    width:280px;
+    max-width:85vw;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 18px 45px rgba(0,0,0,.18);
+    overflow:hidden;
+    opacity:0;
+    transform:translateY(10px) scale(.98);
+    pointer-events:none;
+    transition:all .18s ease;
+  }
+
+  .nael-wa-pop.open{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto
+  }
+
+  .nael-wa-head{
+    padding:12px 14px;
+    background:linear-gradient(135deg,#1fa855,#25D366);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .nael-wa-head .t1{font-weight:700;font-size:14px;line-height:1.2}
+  .nael-wa-head .t2{font-size:12px;opacity:.92;margin-top:2px}
+
+  .nael-wa-x{
+    width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.18);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .nael-wa-x:after{content:"✕";font-size:14px;line-height:1}
+
+  .nael-wa-body{padding:12px 12px 14px;background:#fff}
+
+  .nael-wa-card{
+    border:1px solid rgba(0,0,0,.08);
+    border-radius:14px;
+    padding:10px 10px;
+    margin:8px 0;
+    display:flex;
+    gap:10px;
+    align-items:center;
+    transition:transform .12s ease, box-shadow .12s ease;
+    text-decoration:none;
+    color:#111;
+  }
+
+  .nael-wa-card:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 22px rgba(0,0,0,.08)
+  }
+
+  .nael-wa-flag{font-size:18px;width:26px;text-align:center}
+  .nael-wa-meta{flex:1}
+  .nael-wa-meta .h{font-weight:700;font-size:13px}
+  .nael-wa-meta .s{font-size:12px;opacity:.7;margin-top:1px}
+
+  .nael-wa-go{
+    width:34px;height:34px;border-radius:12px;
+    background:rgba(37,211,102,.12);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:#1fa855
+  }
+
+  .nael-wa-note{font-size:11px;opacity:.7;margin-top:8px}
+
+  /* Mobile */
+  @media (max-width:600px){
+    .nael-wa-wrap{
+      left:10px;
+      bottom:26px;
+    }
+    .nael-wa-btn{
+      width:53px;
+      height:53px;
+    }
+    .nael-wa-btn img{
+      width:42px;
+      height:42px;
+    }
+    .nael-wa-pop{
+      bottom:70px;
+    }
+
+    /* Move up when sticky cart is visible — matches back-to-top */
+    .nael-wa-wrap.with-sticky-cart {
+      bottom: 73px;
+    }
+  }
+</style>
+
+<div class="nael-wa-wrap" id="naelWaWrap">
+  <div class="nael-wa-pop" id="naelWaPop" aria-hidden="true">
+    <div class="nael-wa-head">
+      <div>
+        <div class="t1">WhatsApp Support</div>
+        <div class="t2">Choose your language</div>
+      </div>
+      <div class="nael-wa-x" id="naelWaClose" title="Close"></div>
+    </div>
+
+    <div class="nael-wa-body">
+      <a class="nael-wa-card" target="_blank" rel="noopener"
+         href="https://wa.me/971522461293?text=Hello%20-%20I%20need%20Arabic%20support">
+        <div class="nael-wa-flag">🇦🇪</div>
+        <div class="nael-wa-meta">
+          <div class="h">Arabic Support</div>
+          <div class="s">Zahel • 0522461293</div>
+        </div>
+        <div class="nael-wa-go">➜</div>
+      </a>
+
+      <a class="nael-wa-card" target="_blank" rel="noopener"
+         href="https://wa.me/971521726356?text=Hello%20-%20I%20need%20English%20support">
+        <div class="nael-wa-flag">🇬🇧</div>
+        <div class="nael-wa-meta">
+          <div class="h">English Support</div>
+          <div class="s">Mariane • 0521726356</div>
+        </div>
+        <div class="nael-wa-go">➜</div>
+      </a>
+
+      <div class="nael-wa-note">Tip: Tap anywhere outside to close.</div>
+    </div>
+  </div>
+
+  <div class="nael-wa-btn" id="naelWaBtn" title="WhatsApp">
+    <img
+      src="https://cdn.shopify.com/s/files/1/0662/3621/9628/files/whatsapp_copy.png?v=1764351954"
+      alt="WhatsApp"
+      width="45"
+      height="45"
+    >
+  </div>
+</div>
+
+<script>
+  (function(){
+    var btn = document.getElementById('naelWaBtn');
+    var pop = document.getElementById('naelWaPop');
+    var close = document.getElementById('naelWaClose');
+    var wrap = document.getElementById('naelWaWrap');
+
+    function openPop(){ pop.classList.add('open'); pop.setAttribute('aria-hidden','false'); }
+    function closePop(){ pop.classList.remove('open'); pop.setAttribute('aria-hidden','true'); }
+    function togglePop(){ pop.classList.contains('open') ? closePop() : openPop(); }
+
+    btn.addEventListener('click', function(e){ e.stopPropagation(); togglePop(); });
+    close.addEventListener('click', function(e){ e.stopPropagation(); closePop(); });
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target)) closePop();
+    });
+
+    // Sync position with sticky cart — same logic as back-to-top
+    function isMobile(){ return window.innerWidth <= 600; }
+
+    function updateWaPosition(){
+      var stickyCart = document.getElementById('stickyCartContainer');
+      if(!stickyCart) return;
+      if(isMobile() && stickyCart.classList.contains('show')){
+        wrap.classList.add('with-sticky-cart');
+      } else {
+        wrap.classList.remove('with-sticky-cart');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var stickyCart = document.getElementById('stickyCartContainer');
+      if(!stickyCart) return;
+
+      var observer = new MutationObserver(function(mutations){
+        mutations.forEach(function(mutation){
+          if(mutation.attributeName === 'class') updateWaPosition();
+        });
+      });
+      observer.observe(stickyCart, { attributes: true });
+
+      window.addEventListener('resize', function(){
+        updateWaPosition();
+      }, { passive: true });
+
+      updateWaPosition();
+    });
+  })();
+</script>

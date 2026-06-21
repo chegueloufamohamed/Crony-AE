@@ -1,0 +1,717 @@
+{% comment %}
+===========================================
+FACETED FILTERING CODE - FIXED FOR AED CURRENCY
+===========================================
+This version displays prices in AED instead of $
+Changes made:
+1. Line 272-277: Changed | money to | money_without_currency and added AED
+2. Line 380-390: Updated formatMoney function to always return AED
+{% endcomment %}
+
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+/* ================= Scoped + Anti-theme bleed ================= */
+.ai-faceted-filter-{{ ai_gen_id }} :where(h1,h2,h3,h4,h5,h6,p,span,small,strong,em,button,label,input,select){
+  all: revert;
+  font-family: inherit;
+  color: inherit;
+}
+
+/* DO NOT apply 'all: revert' to links - it breaks them */
+.ai-faceted-filter-{{ ai_gen_id }} a { 
+  text-decoration: none !important; 
+  cursor: pointer !important;
+}
+
+.ai-faceted-filter-{{ ai_gen_id }} a:hover {
+  opacity: 0.8;
+}
+
+.ai-faceted-filter-{{ ai_gen_id }}{
+  --ai-btn-font-color: {{ block.settings.button_font_color }};
+}
+
+/* ================= Layout ================= */
+.ai-faceted-filter-container-{{ ai_gen_id }}{
+  display:flex; gap:30px; padding:40px 20px; max-width:1400px; margin:0 auto; box-sizing:border-box;
+}
+.ai-faceted-filter-container-{{ ai_gen_id }} *,
+.ai-faceted-filter-container-{{ ai_gen_id }} *::before,
+.ai-faceted-filter-container-{{ ai_gen_id }} *::after { box-sizing:border-box; margin:0; padding:0; }
+
+.ai-faceted-filter-sidebar-{{ ai_gen_id }}{ width:260px; flex-shrink:0; }
+.ai-faceted-filter-products-{{ ai_gen_id }}{ flex:1; }
+
+.ai-faceted-filter-products-grid-{{ ai_gen_id }}{
+  display:grid;
+  grid-template-columns: repeat({{ block.settings.products_per_row_desktop }}, 1fr);
+  gap:20px;
+}
+
+/* ================= MOBILE: HIDE SIDEBAR ================= */
+@media (max-width: 768px) {
+  .ai-faceted-filter-sidebar-{{ ai_gen_id }} {
+    display: none !important;
+  }
+  
+  .ai-faceted-filter-container-{{ ai_gen_id }} {
+    padding: 20px 15px;
+  }
+  
+  .ai-faceted-filter-products-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .ai-faceted-filter-products-grid-{{ ai_gen_id }} {
+    grid-template-columns: repeat({{ block.settings.products_per_row_mobile }}, 1fr);
+    gap: 15px;
+  }
+}
+
+/* ================= Sidebar ================= */
+.ai-faceted-filter-group-{{ ai_gen_id }}{
+  margin-bottom:25px; padding-bottom:20px; border-bottom:1px solid {{ block.settings.border_color }};
+}
+.ai-faceted-filter-group-{{ ai_gen_id }}:last-child{ border-bottom:none; }
+
+.ai-faceted-filter-title-{{ ai_gen_id }}{
+  font-size:14px; font-weight:700; margin-bottom:12px;
+  color: {{ block.settings.filter_title_color }};
+  text-transform:uppercase; letter-spacing:.5px;
+}
+.ai-faceted-filter-checkbox-wrapper-{{ ai_gen_id }}{ display:flex; align-items:center; margin-bottom:8px; }
+.ai-faceted-filter-checkbox-{{ ai_gen_id }}{ margin-right:8px; cursor:pointer; width:16px; height:16px; }
+.ai-faceted-filter-label-{{ ai_gen_id }}{ cursor:pointer; color: {{ block.settings.filter_text_color }}; font-size:13px; line-height:1.4; }
+.ai-faceted-filter-count-{{ ai_gen_id }}{ color:#999; font-size:12px; }
+
+.ai-faceted-filter-price-inputs-{{ ai_gen_id }}{ display:flex; gap:8px; margin-bottom:10px; }
+.ai-faceted-filter-price-input-{{ ai_gen_id }}{
+  flex:1; padding:8px; border:1px solid {{ block.settings.border_color }}; border-radius:4px; font-size:13px;
+}
+
+/* ================= Buttons ================= */
+.ai-faceted-filter-apply-btn-{{ ai_gen_id }},
+.ai-faceted-filter-buy-btn-{{ ai_gen_id }}{
+  width:100%;
+  padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+  background-color: {{ block.settings.button_bg_color }};
+  color: {{ block.settings.button_font_color }} !important;
+  border:none; border-radius: {{ block.settings.button_radius }}px;
+  cursor: pointer !important; 
+  font-size: {{ block.settings.button_font_size }}px;
+  font-weight: {{ block.settings.button_font_weight }};
+  text-transform: {{ block.settings.button_text_transform }};
+  text-decoration: none !important; 
+  display: block !important; 
+  text-align:center;
+  transition: background-color .3s ease;
+  margin-top: auto;
+}
+
+.ai-faceted-filter-apply-btn-{{ ai_gen_id }}:hover,
+.ai-faceted-filter-buy-btn-{{ ai_gen_id }}:hover{
+  background-color: {{ block.settings.button_hover_bg_color }};
+  color: {{ block.settings.button_font_color }} !important;
+  opacity: 1;
+}
+
+/* ================= Product Card ================= */
+.ai-faceted-filter-product-card-{{ ai_gen_id }}{
+  background: {{ block.settings.card_bg_color }};
+  border:1px solid {{ block.settings.border_color }};
+  border-radius: {{ block.settings.card_radius }}px;
+  overflow:hidden; transition: box-shadow .3s ease;
+  display:flex; flex-direction:column;
+  position: relative;
+}
+.ai-faceted-filter-product-card-{{ ai_gen_id }}:hover{ box-shadow:0 4px 12px rgba(0,0,0,.08); }
+
+/* Ensure all links are clickable */
+.ai-faceted-filter-product-card-{{ ai_gen_id }} a {
+  position: relative;
+  z-index: 10;
+}
+
+.ai-faceted-filter-product-image-link-{{ ai_gen_id }}{ 
+  display: block !important;
+}
+
+.ai-faceted-filter-product-image-wrapper-{{ ai_gen_id }}{
+  width:100%; aspect-ratio:1; background:#ffffff; display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.ai-faceted-filter-product-image-{{ ai_gen_id }}{ width:100%; height:100%; object-fit:cover; }
+
+.ai-faceted-filter-product-image-placeholder-{{ ai_gen_id }}{ width:100%; height:100%; background:#f9f9f9; display:flex; align-items:center; justify-content:center; }
+.ai-faceted-filter-product-image-placeholder-{{ ai_gen_id }} svg{ width:60%; height:60%; opacity:.3; }
+
+.ai-faceted-filter-product-info-{{ ai_gen_id }}{
+  padding: {{ block.settings.card_padding_top }}px 12px {{ block.settings.card_padding_bottom }}px;
+  text-align: {{ block.settings.card_content_alignment }};
+  display:flex; flex-direction:column; gap:8px; flex:1;
+}
+
+.ai-faceted-filter-product-title-{{ ai_gen_id }}{
+  font-size: {{ block.settings.title_font_size }}px;
+  font-weight: {{ block.settings.title_font_weight }};
+  color: {{ block.settings.title_color }};
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden; text-overflow:ellipsis; line-height:1.4;
+  min-height: calc({{ block.settings.title_font_size }}px * 1.4 * 2);
+  padding-top: {{ block.settings.title_padding_top }}px;
+  padding-bottom: {{ block.settings.title_padding_bottom }}px;
+}
+
+.ai-faceted-filter-product-price-wrapper-{{ ai_gen_id }}{
+  display:flex; align-items:center; gap:8px;
+  padding-top: {{ block.settings.price_padding_top }}px;
+  padding-bottom: {{ block.settings.price_padding_bottom }}px;
+  {% if block.settings.card_content_alignment == 'center' %}
+    justify-content:center;
+  {% elsif block.settings.card_content_alignment == 'right' %}
+    justify-content:flex-end;
+  {% else %}
+    justify-content:flex-start;
+  {% endif %}
+}
+.ai-faceted-filter-product-price-{{ ai_gen_id }}{
+  font-size: {{ block.settings.price_font_size }}px;
+  font-weight: {{ block.settings.price_font_weight }};
+  color: {{ block.settings.card_title_color }};
+}
+.ai-faceted-filter-product-compare-price-{{ ai_gen_id }}{
+  font-size: {{ block.settings.price_font_size }}px;
+  font-weight: {{ block.settings.compare_price_font_weight }};
+  color: {{ block.settings.compare_price_color }};
+  text-decoration: line-through;
+}
+
+.ai-faceted-filter-product-rating-{{ ai_gen_id }}{
+  display:flex; gap:2px;
+  padding-top: {{ block.settings.stars_padding_top }}px;
+  padding-bottom: {{ block.settings.stars_padding_bottom }}px;
+  {% if block.settings.card_content_alignment == 'center' %}
+    justify-content:center;
+  {% elsif block.settings.card_content_alignment == 'right' %}
+    justify-content:flex-end;
+  {% else %}
+    justify-content:flex-start;
+  {% endif %}
+}
+.ai-faceted-filter-star-{{ ai_gen_id }}{ color:#ffc107; font-size: {{ block.settings.stars_font_size }}px; }
+.ai-faceted-filter-star-{{ ai_gen_id }}.empty{ color:#e0e0e0; }
+
+.ai-faceted-filter-no-results-{{ ai_gen_id }}{ text-align:center; padding:60px 20px; color:#666; font-size:16px; }
+
+/* ================= Responsive ================= */
+@media screen and (max-width: 768px){
+  .ai-faceted-filter-container-{{ ai_gen_id }}{ flex-direction:column; padding:20px 15px; gap:20px; }
+  .ai-faceted-filter-sidebar-{{ ai_gen_id }}{ width:100%; }
+  .ai-faceted-filter-products-grid-{{ ai_gen_id }}{
+    grid-template-columns: repeat({{ block.settings.products_per_row_mobile }}, 1fr);
+    gap:12px;
+  }
+  .ai-faceted-filter-product-info-{{ ai_gen_id }}{ padding: {{ block.settings.card_padding_top }}px 10px {{ block.settings.card_padding_bottom }}px; gap:6px; }
+  .ai-faceted-filter-product-title-{{ ai_gen_id }}{
+    font-size: calc({{ block.settings.title_font_size }}px * .9);
+    min-height: calc({{ block.settings.title_font_size }}px * .9 * 1.4 * 2);
+  }
+  .ai-faceted-filter-product-price-{{ ai_gen_id }},
+  .ai-faceted-filter-product-compare-price-{{ ai_gen_id }}{ font-size: calc({{ block.settings.price_font_size }}px * .9); }
+  .ai-faceted-filter-star-{{ ai_gen_id }}{ font-size: calc({{ block.settings.stars_font_size }}px * .9); }
+  .ai-faceted-filter-buy-btn-{{ ai_gen_id }}{ font-size: calc({{ block.settings.button_font_size }}px * .9); padding:8px 12px; }
+}
+{% endstyle %}
+
+<faceted-filter-{{ ai_gen_id }} class="ai-faceted-filter-{{ ai_gen_id }} ai-faceted-filter-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <!-- ================= Sidebar ================= -->
+  <div class="ai-faceted-filter-sidebar-{{ ai_gen_id }}">
+    <!-- Availability -->
+    <div class="ai-faceted-filter-group-{{ ai_gen_id }}">
+      <h3 class="ai-faceted-filter-title-{{ ai_gen_id }}">Availability</h3>
+      {% assign in_stock_count = 0 %}
+      {% assign out_of_stock_count = 0 %}
+      {% for p in collections.all.products %}
+        {% if p.available %}
+          {% assign in_stock_count = in_stock_count | plus: 1 %}
+        {% else %}
+          {% assign out_of_stock_count = out_of_stock_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      <div class="ai-faceted-filter-checkbox-wrapper-{{ ai_gen_id }}">
+        <input type="checkbox" id="in-stock-{{ ai_gen_id }}" class="ai-faceted-filter-checkbox-{{ ai_gen_id }}" data-filter="availability" value="in-stock">
+        <label for="in-stock-{{ ai_gen_id }}" class="ai-faceted-filter-label-{{ ai_gen_id }}">
+          In Stock <span class="ai-faceted-filter-count-{{ ai_gen_id }}">({{ in_stock_count }})</span>
+        </label>
+      </div>
+      <div class="ai-faceted-filter-checkbox-wrapper-{{ ai_gen_id }}">
+        <input type="checkbox" id="out-of-stock-{{ ai_gen_id }}" class="ai-faceted-filter-checkbox-{{ ai_gen_id }}" data-filter="availability" value="out-of-stock">
+        <label for="out-of-stock-{{ ai_gen_id }}" class="ai-faceted-filter-label-{{ ai_gen_id }}">
+          Out of Stock <span class="ai-faceted-filter-count-{{ ai_gen_id }}">({{ out_of_stock_count }})</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="ai-faceted-filter-group-{{ ai_gen_id }}">
+      <h3 class="ai-faceted-filter-title-{{ ai_gen_id }}">Price</h3>
+      <div class="ai-faceted-filter-price-inputs-{{ ai_gen_id }}">
+        <input type="number" placeholder="From" class="ai-faceted-filter-price-input-{{ ai_gen_id }}" id="price-from-{{ ai_gen_id }}" min="0">
+        <input type="number" placeholder="To" class="ai-faceted-filter-price-input-{{ ai_gen_id }}" id="price-to-{{ ai_gen_id }}" min="0">
+      </div>
+      <button class="ai-faceted-filter-apply-btn-{{ ai_gen_id }}" data-action="apply-price">Apply</button>
+    </div>
+
+    <!-- Collections with counts -->
+    <div class="ai-faceted-filter-group-{{ ai_gen_id }}">
+      <h3 class="ai-faceted-filter-title-{{ ai_gen_id }}">Collections</h3>
+      {% for collection in collections %}
+        {% if collection.all_products_count > 0 %}
+          <div class="ai-faceted-filter-checkbox-wrapper-{{ ai_gen_id }}">
+            <input
+              type="checkbox"
+              id="collection-{{ collection.handle }}-{{ ai_gen_id }}"
+              class="ai-faceted-filter-checkbox-{{ ai_gen_id }}"
+              data-filter="collection"
+              value="{{ collection.handle }}"
+              data-count="{{ collection.all_products_count }}"
+            >
+            <label for="collection-{{ collection.handle }}-{{ ai_gen_id }}" class="ai-faceted-filter-label-{{ ai_gen_id }}">
+              {{ collection.title }} <span class="ai-faceted-filter-count-{{ ai_gen_id }}">({{ collection.all_products_count }})</span>
+            </label>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Color -->
+    <div class="ai-faceted-filter-group-{{ ai_gen_id }}">
+      <h3 class="ai-faceted-filter-title-{{ ai_gen_id }}">Color</h3>
+      {% assign predefined_colors = 'Black,White,Gray,Red,Blue,Green,Yellow,Brown' | split: ',' %}
+      {% for color in predefined_colors %}
+        <div class="ai-faceted-filter-checkbox-wrapper-{{ ai_gen_id }}">
+          <input
+            type="checkbox"
+            id="color-{{ color | handleize }}-{{ ai_gen_id }}"
+            class="ai-faceted-filter-checkbox-{{ ai_gen_id }}"
+            data-filter="color"
+            value="{{ color }}"
+          >
+          <label for="color-{{ color | handleize }}-{{ ai_gen_id }}" class="ai-faceted-filter-label-{{ ai_gen_id }}">{{ color }}</label>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ================= Products ================= -->
+  <div class="ai-faceted-filter-products-{{ ai_gen_id }}">
+    <div class="ai-faceted-filter-products-grid-{{ ai_gen_id }}">
+      {%- assign rendered_ids = '|' -%}
+      {%- assign rendered_counter = 0 -%}
+      {%- assign max_cards = 400 -%}
+      {%- assign stop_loop = '' -%}
+
+      {%- for c in collections -%}
+        {%- if c.all_products_count > 0 -%}
+          {%- for product in c.products -%}
+            {%- if rendered_counter >= max_cards -%}
+              {%- assign stop_loop = 'stop' -%}
+              {%- break -%}
+            {%- endif -%}
+
+            {%- assign needle = '|' | append: product.id | append: '|' -%}
+            {%- unless rendered_ids contains needle -%}
+              {%- assign rendered_ids = rendered_ids | append: product.id | append: '|' -%}
+              {%- assign rendered_counter = rendered_counter | plus: 1 -%}
+
+              {%- assign color_options = '' -%}
+              {%- for option in product.options_with_values -%}
+                {%- assign option_name_lower = option.name | downcase -%}
+                {%- if option_name_lower == 'color' or option_name_lower == 'colour' -%}
+                  {%- for value in option.values -%}
+                    {%- if color_options != '' -%}{%- assign color_options = color_options | append: '|' -%}{%- endif -%}
+                    {%- assign color_options = color_options | append: value -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- assign product_collections = '' -%}
+              {%- for pcoll in product.collections -%}
+                {%- if product_collections != '' -%}{%- assign product_collections = product_collections | append: '|' -%}{%- endif -%}
+                {%- assign product_collections = product_collections | append: pcoll.handle -%}
+              {%- endfor -%}
+
+              <div
+                class="ai-faceted-filter-product-card-{{ ai_gen_id }}"
+                data-product-id="{{ product.id }}"
+                data-price="{{ product.price | money_without_currency | remove: ',' }}"
+                data-available="{{ product.available }}"
+                data-collections="{{ product_collections }}"
+                data-colors="{{ color_options }}"
+              >
+                <a href="{{ product.url }}" class="ai-faceted-filter-product-image-link-{{ ai_gen_id }}">
+                  <div class="ai-faceted-filter-product-image-wrapper-{{ ai_gen_id }}">
+                  {%- if product.featured_image -%}
+                    <img
+                      src="{{ product.featured_image | image_url: width: 400 }}"
+                      alt="{{ product.featured_image.alt | escape }}"
+                      class="ai-faceted-filter-product-image-{{ ai_gen_id }}"
+                      loading="lazy" width="400" height="400"
+                    >
+                  {%- else -%}
+                    <div class="ai-faceted-filter-product-image-placeholder-{{ ai_gen_id }}">
+                      {{ 'product-1' | placeholder_svg_tag }}
+                    </div>
+                  {%- endif -%}
+                </div>
+                </a>
+
+                <div class="ai-faceted-filter-product-info-{{ ai_gen_id }}">
+                  <h3 class="ai-faceted-filter-product-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+
+                  <div class="ai-faceted-filter-product-price-wrapper-{{ ai_gen_id }}">
+                    <div class="ai-faceted-filter-product-price-{{ ai_gen_id }}">{{ product.price | money_without_currency }} AED</div>
+                    {%- if product.compare_at_price > product.price -%}
+                      <div class="ai-faceted-filter-product-compare-price-{{ ai_gen_id }}">{{ product.compare_at_price | money_without_currency }} AED</div>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="ai-faceted-filter-product-rating-{{ ai_gen_id }}">
+                    {%- assign random_rating = rendered_counter | modulo: 2 | plus: 4 -%}
+                    {%- for star in (1..5) -%}
+                      {%- if star <= random_rating -%}
+                        <span class="ai-faceted-filter-star-{{ ai_gen_id }}">★</span>
+                      {%- else -%}
+                        <span class="ai-faceted-filter-star-{{ ai_gen_id }} empty">★</span>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+
+                  <a href="{{ product.url }}" class="ai-faceted-filter-buy-btn-{{ ai_gen_id }}">
+                    {{ block.settings.button_text }}
+                  </a>
+                </div>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+          {%- if stop_loop == 'stop' -%}{%- break -%}{%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="ai-faceted-filter-no-results-{{ ai_gen_id }}" style="display:none;">
+      No products match your filters.
+    </div>
+  </div>
+</faceted-filter-{{ ai_gen_id }}>
+
+<script>
+(function(){
+  class FacetedFilter{{ ai_gen_id }} extends HTMLElement {
+    constructor(){ 
+      super(); 
+      this.filters = { availability:[], collection:[], color:[], priceFrom:null, priceTo:null }; 
+    }
+    
+    connectedCallback(){
+      this.grid = this.querySelector('.ai-faceted-filter-products-grid-{{ ai_gen_id }}');
+      this.productCards = this.querySelectorAll('.ai-faceted-filter-product-card-{{ ai_gen_id }}');
+      this.noResultsMessage = this.querySelector('.ai-faceted-filter-no-results-{{ ai_gen_id }}');
+      this.setupEventListeners();
+      this.checkURLParams();
+    }
+    
+    async loadFullCollectionIfNeeded(handle){
+      try{
+        const checkbox = this.querySelector(`.ai-faceted-filter-checkbox-{{ ai_gen_id }}[data-filter="collection"][value="${handle}"]`);
+        if(!checkbox) return;
+        const expected = parseInt(checkbox.getAttribute('data-count') || '0', 10);
+        const current = Array.from(this.querySelectorAll('.ai-faceted-filter-product-card-{{ ai_gen_id }}'))
+          .filter(el => (el.dataset.collections||'').split('|').includes(handle)).length;
+
+        if(current >= expected || expected === 0) return;
+
+        let page = 1, fetchedTotal = 0, seenIds = new Set(
+          Array.from(this.querySelectorAll('.ai-faceted-filter-product-card-{{ ai_gen_id }}')).map(el => el.dataset.productId)
+        );
+
+        while(fetchedTotal < expected){
+          const resp = await fetch(`/collections/${handle}/products.json?limit=250&page=${page}`);
+          if(!resp.ok) break;
+          const data = await resp.json();
+          const products = Array.isArray(data.products) ? data.products : [];
+          if(products.length === 0) break;
+
+          const frag = document.createDocumentFragment();
+
+          products.forEach((p, idx) => {
+            if(seenIds.has(String(p.id))) return;
+
+            const firstVar = p.variants && p.variants[0] ? p.variants[0] : null;
+            const priceNum = firstVar ? parseFloat(firstVar.price) : 0;
+            const compareNum = firstVar && firstVar.compare_at_price ? parseFloat(firstVar.compare_at_price) : null;
+
+            // FIXED: Force AED currency
+            const formatMoney = (num) => {
+              try{
+                return `${parseFloat(num).toFixed(2)} AED`;
+              }catch(e){
+                return `${num} AED`;
+              }
+            };
+
+            const priceHTML = formatMoney(priceNum);
+            const compareHTML = compareNum && compareNum > priceNum ? formatMoney(compareNum) : null;
+
+            const imgSrc = (p.images && p.images[0] && p.images[0].src) ? p.images[0].src.replace('.jpg', '_400x.jpg').replace('.png','_400x.png') : null;
+            const url = `/products/${p.handle}`;
+            const title = p.title || '';
+
+            const card = document.createElement('div');
+            card.className = 'ai-faceted-filter-product-card-{{ ai_gen_id }}';
+            card.setAttribute('data-product-id', p.id);
+            card.setAttribute('data-price', String(priceNum));
+            card.setAttribute('data-available', String(p.available !== false));
+            card.setAttribute('data-collections', handle);
+            card.setAttribute('data-colors', '');
+
+            card.innerHTML = `
+              <a href="${url}" class="ai-faceted-filter-product-image-link-{{ ai_gen_id }}">
+                <div class="ai-faceted-filter-product-image-wrapper-{{ ai_gen_id }}">
+                  ${imgSrc ? `<img src="${imgSrc}" alt="${title.replace(/"/g,'&quot;')}" class="ai-faceted-filter-product-image-{{ ai_gen_id }}" loading="lazy" width="400" height="400">`
+                            : `<div class="ai-faceted-filter-product-image-placeholder-{{ ai_gen_id }}">{{ 'product-1' | placeholder_svg_tag }}</div>`}
+                </div>
+              </a>
+              <div class="ai-faceted-filter-product-info-{{ ai_gen_id }}">
+                <h3 class="ai-faceted-filter-product-title-{{ ai_gen_id }}">${title}</h3>
+                <div class="ai-faceted-filter-product-price-wrapper-{{ ai_gen_id }}">
+                  <div class="ai-faceted-filter-product-price-{{ ai_gen_id }}">${priceHTML}</div>
+                  ${compareHTML ? `<div class="ai-faceted-filter-product-compare-price-{{ ai_gen_id }}">${compareHTML}</div>` : ``}
+                </div>
+                <div class="ai-faceted-filter-product-rating-{{ ai_gen_id }}">
+                  <span class="ai-faceted-filter-star-{{ ai_gen_id }}">★</span>
+                  <span class="ai-faceted-filter-star-{{ ai_gen_id }}">★</span>
+                  <span class="ai-faceted-filter-star-{{ ai_gen_id }}">★</span>
+                  <span class="ai-faceted-filter-star-{{ ai_gen_id }}">★</span>
+                  <span class="ai-faceted-filter-star-{{ ai_gen_id }} empty">★</span>
+                </div>
+                <a href="${url}" class="ai-faceted-filter-buy-btn-{{ ai_gen_id }}">{{ block.settings.button_text }}</a>
+              </div>
+            `.trim();
+
+            frag.appendChild(card);
+            seenIds.add(String(p.id));
+            fetchedTotal++;
+          });
+
+          this.grid.appendChild(frag);
+          this.productCards = this.querySelectorAll('.ai-faceted-filter-product-card-{{ ai_gen_id }}');
+
+          page++;
+          if(products.length < 250) break;
+        }
+
+        this.applyFilters();
+
+      }catch(err){
+        console.warn('Faceted loader error:', err);
+      }
+    }
+    
+    checkURLParams(){
+      const urlParams = new URLSearchParams(window.location.search);
+      const collectionParam = urlParams.get('collection');
+      
+      if(collectionParam){
+        const checkbox = this.querySelector(`.ai-faceted-filter-checkbox-{{ ai_gen_id }}[data-filter="collection"][value="${collectionParam}"]`);
+        if(checkbox){
+          checkbox.checked = true;
+          this.filters.collection = [collectionParam];
+          this.loadFullCollectionIfNeeded(collectionParam).then(() => {
+            this.applyFilters();
+          });
+          return;
+        }
+      }
+      this.applyFilters();
+    }
+    
+    setupEventListeners(){
+      const checkboxes = this.querySelectorAll('.ai-faceted-filter-checkbox-{{ ai_gen_id }}');
+      checkboxes.forEach(cb => cb.addEventListener('change', () => this.handleFilterChange()));
+      const applyPriceBtn = this.querySelector('[data-action="apply-price"]');
+      if(applyPriceBtn){ applyPriceBtn.addEventListener('click', () => this.handlePriceFilter()); }
+    }
+    
+    handleFilterChange(){
+      this.filters.availability = Array.from(this.querySelectorAll('.ai-faceted-filter-checkbox-{{ ai_gen_id }}[data-filter="availability"]:checked')).map(cb => cb.value);
+      this.filters.collection   = Array.from(this.querySelectorAll('.ai-faceted-filter-checkbox-{{ ai_gen_id }}[data-filter="collection"]:checked')).map(cb => cb.value);
+      this.filters.color        = Array.from(this.querySelectorAll('.ai-faceted-filter-checkbox-{{ ai_gen_id }}[data-filter="color"]:checked')).map(cb => cb.value.toLowerCase());
+
+      if(this.filters.collection.length === 1){
+        this.loadFullCollectionIfNeeded(this.filters.collection[0]).then(() => this.applyFilters());
+      } else {
+        this.applyFilters();
+      }
+    }
+    
+    handlePriceFilter(){
+      const from = this.querySelector('#price-from-{{ ai_gen_id }}').value;
+      const to   = this.querySelector('#price-to-{{ ai_gen_id }}').value;
+      this.filters.priceFrom = from ? parseFloat(from) : null;
+      this.filters.priceTo   = to   ? parseFloat(to)   : null;
+      this.applyFilters();
+    }
+    
+    applyFilters(){
+      let visible = 0;
+      this.productCards.forEach(card => {
+        const price = parseFloat(card.dataset.price);
+        const available = card.dataset.available === 'true';
+        const productCollections = (card.dataset.collections || '').toLowerCase().split('|').filter(Boolean);
+        const productColors = (card.dataset.colors || '').toLowerCase().split('|').filter(Boolean);
+
+        let show = true;
+
+        if(this.filters.availability.length){
+          const inSel  = this.filters.availability.includes('in-stock');
+          const outSel = this.filters.availability.includes('out-of-stock');
+          if(inSel && !outSel) show = show && available;
+          else if(outSel && !inSel) show = show && !available;
+        }
+
+        if(this.filters.collection.length){
+          const hasCollection = this.filters.collection.some(col => productCollections.includes(col));
+          show = show && hasCollection;
+        }
+
+        if(this.filters.color.length){
+          const hasColor = this.filters.color.some(color => productColors.includes(color));
+          show = show && hasColor;
+        }
+
+        if(this.filters.priceFrom !== null) show = show && price >= this.filters.priceFrom;
+        if(this.filters.priceTo   !== null) show = show && price <= this.filters.priceTo;
+
+        card.style.display = show ? 'flex' : 'none';
+        if(show) visible++;
+      });
+
+      this.noResultsMessage.style.display = visible ? 'none' : 'block';
+    }
+  }
+  customElements.define('faceted-filter-{{ ai_gen_id }}', FacetedFilter{{ ai_gen_id }});
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Faceted filtering",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "products_per_row_desktop", "min": 2, "max": 6, "step": 1, "label": "Products per row on desktop", "default": 4 },
+    { "type": "range", "id": "products_per_row_mobile",  "min": 1, "max": 3, "step": 1, "label": "Products per row on mobile",  "default": 2 },
+
+    { "type": "header", "content": "Filter style" },
+    { "type": "color", "id": "filter_title_color", "label": "Title color", "default": "#333333" },
+    { "type": "color", "id": "filter_text_color",  "label": "Text color",  "default": "#666666" },
+    { "type": "color", "id": "border_color",       "label": "Border color","default": "#e0e0e0" },
+
+    { "type": "header", "content": "Product card" },
+    { "type": "color", "id": "card_bg_color",       "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "card_title_color",    "label": "Price color","default": "#333333" },
+    { "type": "select", "id": "card_content_alignment", "label": "Content alignment",
+      "options": [
+        { "value":"left",   "label":"Left" },
+        { "value":"center", "label":"Center" },
+        { "value":"right",  "label":"Right" }
+      ],
+      "default": "center"
+    },
+    { "type": "range", "id": "card_padding_top",    "min": 0, "max": 30, "step": 2, "unit": "px", "label": "Padding top",    "default": 12 },
+    { "type": "range", "id": "card_padding_bottom", "min": 0, "max": 30, "step": 2, "unit": "px", "label": "Padding bottom", "default": 12 },
+    { "type": "range", "id": "card_radius",         "min": 0, "max": 20, "step": 2, "unit": "px", "label": "Border radius",  "default": 8 },
+
+    { "type": "header", "content": "Title" },
+    { "type": "color",  "id": "title_color", "label": "Color", "default": "#333333" },
+    { "type": "range",  "id": "title_font_size", "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Font size", "default": 13 },
+    { "type": "select", "id": "title_font_weight", "label": "Font weight",
+      "options": [
+        { "value":"300","label":"Light" },
+        { "value":"400","label":"Normal" },
+        { "value":"500","label":"Medium" },
+        { "value":"600","label":"Semi-bold" },
+        { "value":"700","label":"Bold" }
+      ],
+      "default": "500"
+    },
+    { "type": "range", "id": "title_padding_top",    "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Padding top",    "default": 0 },
+    { "type": "range", "id": "title_padding_bottom", "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Padding bottom", "default": 0 },
+
+    { "type": "header", "content": "Price" },
+    { "type": "range", "id": "price_font_size", "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Font size", "default": 14 },
+    { "type": "select","id": "price_font_weight","label":"Font weight",
+      "options": [
+        { "value":"300","label":"Light" },
+        { "value":"400","label":"Normal" },
+        { "value":"500","label":"Medium" },
+        { "value":"600","label":"Semi-bold" },
+        { "value":"700","label":"Bold" }
+      ],
+      "default": "600"
+    },
+    { "type": "range", "id": "price_padding_top",    "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Padding top",    "default": 0 },
+    { "type": "range", "id": "price_padding_bottom", "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Padding bottom", "default": 0 },
+    { "type": "color", "id": "compare_price_color", "label": "Compare at price color", "default": "#999999" },
+    { "type": "select","id":"compare_price_font_weight","label":"Compare at price font weight",
+      "options": [
+        { "value":"300","label":"Light" },
+        { "value":"400","label":"Normal" },
+        { "value":"500","label":"Medium" },
+        { "value":"600","label":"Semi-bold" },
+        { "value":"700","label":"Bold" }
+      ],
+      "default": "400"
+    },
+
+    { "type": "header", "content": "Stars" },
+    { "type": "range", "id": "stars_font_size", "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Font size", "default": 13 },
+    { "type": "range", "id": "stars_padding_top", "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Padding top", "default": 0 },
+    { "type": "range", "id": "stars_padding_bottom", "min": 0, "max": 20, "step": 1, "unit": "px", "label": "Padding bottom", "default": 0 },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text",  "id": "button_text", "label": "Button text", "default": "Buy Now" },
+    { "type": "color", "id": "button_bg_color",        "label": "Background",       "default": "#1b1f23" },
+    { "type": "color", "id": "button_hover_bg_color",  "label": "Hover background", "default": "#5ec6ff" },
+    { "type": "color", "id": "button_font_color",      "label": "Font color",       "default": "#ffffff" },
+    { "type": "range", "id": "button_font_size",       "min": 10, "max": 20, "step": 1, "unit": "px", "label": "Font size", "default": 12 },
+    { "type": "select","id": "button_font_weight", "label": "Font weight",
+      "options": [
+        { "value":"300","label":"Light" },
+        { "value":"400","label":"Normal" },
+        { "value":"500","label":"Medium" },
+        { "value":"600","label":"Semi-bold" },
+        { "value":"700","label":"Bold" }
+      ],
+      "default": "600"
+    },
+    { "type": "range", "id": "button_padding_vertical",   "min": 5, "max": 20, "step": 1, "unit": "px", "label": "Vertical padding",   "default": 10 },
+    { "type": "range", "id": "button_padding_horizontal", "min": 10,"max": 40, "step": 2, "unit": "px", "label": "Horizontal padding", "default": 20 },
+    { "type": "range", "id": "button_radius", "min": 0, "max": 26, "step": 2, "unit": "px", "label": "Border radius", "default": 4 },
+    { "type": "select","id": "button_text_transform","label":"Text transform",
+      "options":[
+        { "value":"none","label":"None" },
+        { "value":"uppercase","label":"Uppercase" },
+        { "value":"lowercase","label":"Lowercase" },
+        { "value":"capitalize","label":"Capitalize" }
+      ],
+      "default": "uppercase"
+    }
+  ],
+  "presets": [
+    { "name": "Faceted filtering" }
+  ]
+}
+{% endschema %}

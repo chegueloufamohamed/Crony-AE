@@ -1,0 +1,278 @@
+{% doc %}
+  @prompt
+    Create a responsive full-screen hero section for Shopify (compatible with the Turbo theme).
+    The section must have two image inputs:
+    
+    One for desktop (recommended 1920×1080).
+    
+    One for mobile (recommended 1080×1920 or 1080×1350).
+    
+    The hero should automatically detect screen size and switch between desktop and mobile images.
+    It must take up 100% of the browser width and height (100vw, 100vh) with no white borders.
+    
+    Add customizable settings for:
+    
+    Desktop image picker
+    
+    Mobile image picker
+    
+    Background color (default: #0e0e10)
+    
+    Desktop height in vh (default: 100)
+    
+    Mobile height in vh (default: 95)
+    
+    Image fit mode (Contain or Cover)
+    
+    Alt text for SEO
+    
+    Toggle for loading priority (loading="eager" for better LCP)
+    
+    On desktop, the image should use object-fit: contain to show the entire 1920×1080 image without cropping.
+    On mobile, the image should use object-fit: cover to fill the screen naturally.
+    
+    Ensure clean and minimal styling, with centered alignment, no padding, and full responsiveness across devices.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-fullscreen-hero-{{ ai_gen_id }} {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-fullscreen-hero-{{ ai_gen_id }}--desktop {
+    height: {{ block.settings.desktop_height }}vh;
+  }
+
+  .ai-fullscreen-hero-{{ ai_gen_id }}--mobile {
+    height: {{ block.settings.mobile_height }}vh;
+  }
+
+  .ai-fullscreen-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .ai-fullscreen-hero-image-{{ ai_gen_id }}--desktop {
+    object-fit: {{ block.settings.desktop_image_fit }};
+  }
+
+  .ai-fullscreen-hero-image-{{ ai_gen_id }}--mobile {
+    object-fit: {{ block.settings.mobile_image_fit }};
+  }
+
+  .ai-fullscreen-hero-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.background_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-fullscreen-hero-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 400px;
+    opacity: 0.3;
+  }
+
+  .ai-fullscreen-hero-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-fullscreen-hero-{{ ai_gen_id }}--mobile {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-fullscreen-hero-{{ ai_gen_id }}--desktop {
+      display: none;
+    }
+  }
+{% endstyle %}
+
+{% if block.settings.desktop_image != blank %}
+  <div
+    class="ai-fullscreen-hero-{{ ai_gen_id }} ai-fullscreen-hero-{{ ai_gen_id }}--desktop"
+    {{ block.shopify_attributes }}
+  >
+    <img
+      src="{{ block.settings.desktop_image | image_url: width: 1920 }}"
+      srcset="{{ block.settings.desktop_image | image_url: width: 1920 }} 1920w,
+              {{ block.settings.desktop_image | image_url: width: 1440 }} 1440w,
+              {{ block.settings.desktop_image | image_url: width: 1024 }} 1024w"
+      sizes="100vw"
+      alt="{{ block.settings.alt_text | escape }}"
+      class="ai-fullscreen-hero-image-{{ ai_gen_id }} ai-fullscreen-hero-image-{{ ai_gen_id }}--desktop"
+      width="{{ block.settings.desktop_image.width }}"
+      height="{{ block.settings.desktop_image.height }}"
+      {% if block.settings.loading_priority %}loading="eager"{% else %}loading="lazy"{% endif %}
+    >
+  </div>
+{% else %}
+  <div
+    class="ai-fullscreen-hero-{{ ai_gen_id }} ai-fullscreen-hero-{{ ai_gen_id }}--desktop"
+    {{ block.shopify_attributes }}
+  >
+    <div class="ai-fullscreen-hero-placeholder-{{ ai_gen_id }}">
+      {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      <div class="ai-fullscreen-hero-empty-state-{{ ai_gen_id }}">
+        Add a desktop image (1920×1080 recommended)
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% if block.settings.mobile_image != blank %}
+  <div class="ai-fullscreen-hero-{{ ai_gen_id }} ai-fullscreen-hero-{{ ai_gen_id }}--mobile">
+    <img
+      src="{{ block.settings.mobile_image | image_url: width: 1080 }}"
+      srcset="{{ block.settings.mobile_image | image_url: width: 1080 }} 1080w,
+              {{ block.settings.mobile_image | image_url: width: 750 }} 750w,
+              {{ block.settings.mobile_image | image_url: width: 480 }} 480w"
+      sizes="100vw"
+      alt="{{ block.settings.alt_text | escape }}"
+      class="ai-fullscreen-hero-image-{{ ai_gen_id }} ai-fullscreen-hero-image-{{ ai_gen_id }}--mobile"
+      width="{{ block.settings.mobile_image.width }}"
+      height="{{ block.settings.mobile_image.height }}"
+      {% if block.settings.loading_priority %}loading="eager"{% else %}loading="lazy"{% endif %}
+    >
+  </div>
+{% else %}
+  <div class="ai-fullscreen-hero-{{ ai_gen_id }} ai-fullscreen-hero-{{ ai_gen_id }}--mobile">
+    <div class="ai-fullscreen-hero-placeholder-{{ ai_gen_id }}">
+      {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      <div class="ai-fullscreen-hero-empty-state-{{ ai_gen_id }}">
+        Add a mobile image (1080×1920 or 1080×1350 recommended)
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Fullscreen hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image",
+      "info": "1920×1080 recommended"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Desktop height",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_fit",
+      "label": "Desktop image fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "header",
+      "content": "Mobile image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "1080×1920 or 1080×1350 recommended"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Mobile height",
+      "default": 95
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_fit",
+      "label": "Mobile image fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "cover",
+          "label": "Cover"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#0e0e10"
+    },
+    {
+      "type": "text",
+      "id": "alt_text",
+      "label": "Alt text",
+      "info": "Describe the image for SEO and accessibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "loading_priority",
+      "label": "Enable priority loading",
+      "info": "Use loading='eager' for better LCP performance",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fullscreen hero"
+    }
+  ]
+}
+{% endschema %}

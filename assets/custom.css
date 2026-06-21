@@ -1,0 +1,62 @@
+.container .global-button {
+  background-color: #000000 !important;
+  border-color: black !important;
+  color: white !important;
+}
+.container .global-button:hover {
+    background-color: #5ec6ff !important;
+    border-color: #5ec6ff !important;
+}
+.whatsapp-btn {
+  position: fixed;
+  bottom: 10%;
+  right: 1%;
+
+  z-index: 999
+}
+.whatsapp-btn a {
+  display: flex;
+  width: 50px;
+}
+.backtotop-btn {
+  position: fixed;
+  bottom: 5%;
+  left: 1%;
+  z-index: 999
+
+}
+#backtop {
+  display: flex;
+  cursor: pointer;
+}
+#backtop svg {
+  width: 50px;
+  background-color: white;
+  height: 50px;
+  border: 1px solid;
+}
+.up-widget-timer {
+margin: auto;
+}
+.product-label.best-seller {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  color: white;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+}
+.product-label.ends-soon {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  background-color: #03A196;
+  color: white;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+}

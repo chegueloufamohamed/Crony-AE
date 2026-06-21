@@ -1,0 +1,67 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer_0": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Crony_Logo_1.png",
+            "text_align": "left",
+            "social_icons_footer": false
+          }
+        },
+        "footer_1": {
+          "type": "link_list",
+          "settings": {
+            "menu": "useful-links",
+            "social_icons_footer": false
+          }
+        },
+        "footer_2": {
+          "type": "link_list",
+          "settings": {
+            "menu": "collections",
+            "social_icons_footer": false
+          }
+        },
+        "footer_3": {
+          "type": "text",
+          "settings": {
+            "title": "Locations",
+            "content": "<ul><li>📍 <a href=\"https://www.google.com/maps/place/Crony+Service+Centre,+Dragon+Mart-2/@25.1718455,55.4437923,15z/data=!4m6!3m5!1s0x3e5f61ed77e269a5:0xa264a56361183121!8m2!3d25.1718455!4d55.4247379!16s%2Fg%2F11l5vwbwll\">Crony Service Centre – Dragon Mart 2, Dubai</a></li><li>📍 <a href=\"https://www.google.com/maps/place/CRONY+E-SCOOTER+REPAIR+SHOP/@25.1655913,55.422608,15z/data=!4m6!3m5!1s0x3e5f6100088267e7:0xc4e120730c5a840c!8m2!3d25.1746625!4d55.4122656!16s%2Fg%2F11wyb9n14b\">Crony E-Scooter Repair Shop – Sharjah</a></li><li>📍 <a href=\"https://www.google.com/maps/place/Crony+Trading+FZE+Shop+Number+BB+038+Ajman/@25.2927825,55.6265634,11z/data=!4m6!3m5!1s0x3ef5f82789052dbf:0x85914de5f8f2d60f!8m2!3d25.4286453!4d55.5236311!16s%2Fg%2F11bbwxbk22\">Crony Trading FZE – Ajman</a></li></ul>",
+            "social_icons_footer": true
+          }
+        }
+      },
+      "block_order": [
+        "footer_0",
+        "footer_1",
+        "footer_2",
+        "footer_3"
+      ],
+      "settings": {
+        "copyright_text": "",
+        "display_designed_by": true,
+        "display_payment_methods": true,
+        "enable_follow_on_shop": true,
+        "show_locale_selector": false,
+        "show_currency_selector": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

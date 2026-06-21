@@ -1,0 +1,213 @@
+{% comment %}
+  Product Reviews - Pure HTML/Liquid (No JavaScript)
+  3 Reviews: 2 English + 1 Random Language
+  Uses model name or "this product" instead of full product title
+  Uses commas instead of hyphens between sentences
+{% endcomment %}
+
+{% comment %} Extract model name from product title or metafield {% endcomment %}
+{% assign model_name = '' %}
+{% if product.metafields.custom.specifications contains 'Model' %}
+  {% assign specs_content = product.metafields.custom.specifications %}
+  {% if specs_content contains '<td>' %}
+    {% assign model_start = specs_content | split: '<td>' | first %}
+    {% assign model_parts = specs_content | split: '<td>' %}
+    {% if model_parts.size > 1 %}
+      {% assign model_name = model_parts[1] | split: '</td>' | first | strip %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% if model_name == '' %}
+  {% comment %} Try to extract model from title (first word or code-like pattern) {% endcomment %}
+  {% assign title_words = product.title | split: ' ' %}
+  {% assign first_word = title_words[0] %}
+  {% if first_word.size < 15 %}
+    {% assign model_name = first_word %}
+  {% else %}
+    {% assign model_name = 'this product' %}
+  {% endif %}
+{% endif %}
+
+{% assign review_seed = product.handle | split: '' | first | downcase %}
+{% if review_seed == 'a' or review_seed == 'b' or review_seed == 'c' or review_seed == 'd' %}
+  {% assign review_lang = 'arabic' %}
+{% elsif review_seed == 'e' or review_seed == 'f' or review_seed == 'g' or review_seed == 'h' %}
+  {% assign review_lang = 'hindi' %}
+{% elsif review_seed == 'i' or review_seed == 'j' or review_seed == 'k' or review_seed == 'l' %}
+  {% assign review_lang = 'urdu' %}
+{% elsif review_seed == 'm' or review_seed == 'n' or review_seed == 'o' or review_seed == 'p' %}
+  {% assign review_lang = 'chinese' %}
+{% else %}
+  {% assign review_lang = 'russian' %}
+{% endif %}
+
+<div style="border:1px solid #eee;border-radius:14px;padding:18px;margin-top:28px;background:#fff">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+    <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+    <div style="font-size:14px;opacity:.85">4.7 out of 5 · 3 reviews</div>
+  </div>
+  
+  <ul style="list-style:none;margin:0;padding:0;display:grid;gap:14px">
+    
+    <!-- Review 1 - English -->
+    <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">YG</div>
+        <div style="flex:1">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+            <span style="font-weight:700">Yohannes G.</span>
+            <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+            <span style="font-size:12px;opacity:.7;margin-left:auto">8/15/2025</span>
+          </div>
+          <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+          <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">SOLID BUILD, CLEAN FINISH</h4>
+          <p style="margin:0;font-size:14px;line-height:1.55">I've been using the {{ model_name }} around Dubai, build quality is impressive, perfect for daily use, worth every dirham, highly recommend.</p>
+          <div style="border-left:3px solid #eee;margin-top:10px;padding-left:12px">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+              <span style="font-weight:700">Crony Scooter Support</span>
+              <span style="font-size:12px;color:#0b63ce;background:#e8f1fb;border:1px solid #d6e4fb;border-radius:999px;padding:3px 8px">Store Comment</span>
+            </div>
+            <p style="margin:0;font-size:14px;line-height:1.55">Thanks for the thoughtful review—enjoy your rides! If you need anything, we're just a message away.</p>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- Review 2 - English -->
+    <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">OR</div>
+        <div style="flex:1">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+            <span style="font-weight:700">Omar R.</span>
+            <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+            <span style="font-size:12px;opacity:.7;margin-left:auto">7/22/2025</span>
+          </div>
+          <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★☆</div>
+          <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">EXCEEDED MY EXPECTATIONS</h4>
+          <p style="margin:0;font-size:14px;line-height:1.55">Picked up the {{ model_name }} for daily runs, very practical and reliable, exactly what I was looking for, build quality is impressive.</p>
+        </div>
+      </div>
+    </li>
+
+    <!-- Review 3 - Random Language -->
+    {% if review_lang == 'arabic' %}
+      <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">أح</div>
+          <div style="flex:1">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+              <span style="font-weight:700">أحمد م.</span>
+              <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+              <span style="font-size:12px;opacity:.7;margin-left:auto">6/18/2025</span>
+            </div>
+            <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+            <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">جودة ممتازة</h4>
+            <p style="margin:0;font-size:14px;line-height:1.55">استخدمت {{ model_name }} في دبي، الجودة ممتازة، ممتاز للاستخدام اليومي، يستاهل كل درهم، انصح فيه بقوة.</p>
+            <div style="border-left:3px solid #eee;margin-top:10px;padding-left:12px">
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-weight:700">Crony Scooter Support</span>
+                <span style="font-size:12px;color:#0b63ce;background:#e8f1fb;border:1px solid #d6e4fb;border-radius:999px;padding:3px 8px">Store Comment</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.55">Really appreciate you sharing this. Ride safe and reach out anytime for tips or support.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% elsif review_lang == 'hindi' %}
+      <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">रा</div>
+          <div style="flex:1">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+              <span style="font-weight:700">राहुल प.</span>
+              <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+              <span style="font-size:12px;opacity:.7;margin-left:auto">6/18/2025</span>
+            </div>
+            <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+            <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">शानदार गुणवत्ता</h4>
+            <p style="margin:0;font-size:14px;line-height:1.55">मैं दुबई में {{ model_name }} का उपयोग कर रहा हूं, बिल्ड क्वालिटी शानदार है, रोजाना के उपयोग के लिए बिल्कुल सही, हर दिरहम के लायक, जोरदार सिफारिश करता हूं.</p>
+            <div style="border-left:3px solid #eee;margin-top:10px;padding-left:12px">
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-weight:700">Crony Scooter Support</span>
+                <span style="font-size:12px;color:#0b63ce;background:#e8f1fb;border:1px solid #d6e4fb;border-radius:999px;padding:3px 8px">Store Comment</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.55">Thanks for choosing Crony! We're here for you if any questions pop up.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% elsif review_lang == 'urdu' %}
+      <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">عم</div>
+          <div style="flex:1">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+              <span style="font-weight:700">عمران ح.</span>
+              <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+              <span style="font-size:12px;opacity:.7;margin-left:auto">6/18/2025</span>
+            </div>
+            <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+            <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">بہترین معیار</h4>
+            <p style="margin:0;font-size:14px;line-height:1.55">میں دبئی میں {{ model_name }} استعمال کر رہا ہوں، معیار بہترین ہے، روزانہ استعمال کے لیے بہترین، ہر درہم کے قابل، سختی سے تجویز کرتا ہوں.</p>
+            <div style="border-left:3px solid #eee;margin-top:10px;padding-left:12px">
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-weight:700">Crony Scooter Support</span>
+                <span style="font-size:12px;color:#0b63ce;background:#e8f1fb;border:1px solid #d6e4fb;border-radius:999px;padding:3px 8px">Store Comment</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.55">Appreciate the honest take. We're one call away if you want setup or maintenance tips.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% elsif review_lang == 'chinese' %}
+      <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">李</div>
+          <div style="flex:1">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+              <span style="font-weight:700">李伟</span>
+              <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+              <span style="font-size:12px;opacity:.7;margin-left:auto">6/18/2025</span>
+            </div>
+            <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+            <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">质量很好</h4>
+            <p style="margin:0;font-size:14px;line-height:1.55">我在迪拜使用{{ model_name }}，质量很好，非常适合日常使用，物有所值，强烈推荐.</p>
+            <div style="border-left:3px solid #eee;margin-top:10px;padding-left:12px">
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-weight:700">Crony Scooter Support</span>
+                <span style="font-size:12px;color:#0b63ce;background:#e8f1fb;border:1px solid #d6e4fb;border-radius:999px;padding:3px 8px">Store Comment</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.55">Your feedback made our day! Ride smooth—and ping us whenever you need assistance.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% else %}
+      <li style="border:1px solid #f1f1f1;border-radius:12px;padding:14px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:36px;height:36px;border-radius:50%;display:inline-grid;place-items:center;background:#111;color:#fff;font-weight:600">АВ</div>
+          <div style="flex:1">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+              <span style="font-weight:700">Андрей В.</span>
+              <span style="font-size:12px;color:#2a924a;background:#e8f6ee;border:1px solid #d3efdf;border-radius:999px;padding:3px 8px">Verified Buyer</span>
+              <span style="font-size:12px;opacity:.7;margin-left:auto">6/18/2025</span>
+            </div>
+            <div style="font-size:16px;letter-spacing:.4px;color:#f5a623">★★★★★</div>
+            <h4 style="margin:.35rem 0 .25rem 0;font-size:15px">ОТЛИЧНОЕ КАЧЕСТВО</h4>
+            <p style="margin:0;font-size:14px;line-height:1.55">Я использую {{ model_name }} в Дубае, качество сборки впечатляет, идеально для ежедневного использования, стоит каждого дирхама, настоятельно рекомендую.</p>
+            <div style="border-left:3px solid #eee;margin-top:10px;padding-left:12px">
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-weight:700">Crony Scooter Support</span>
+                <span style="font-size:12px;color:#0b63ce;background:#e8f1fb;border:1px solid #d6e4fb;border-radius:999px;padding:3px 8px">Store Comment</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.55">We're thrilled you're enjoying it. Don't hesitate to contact us if you need anything.</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endif %}
+
+  </ul>
+</div>

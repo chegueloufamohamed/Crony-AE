@@ -1,0 +1,733 @@
+{% comment %} Crony • Stacked Hero Carousel (Full-bleed + Custom Arrows + Hide Behind Edges) {% endcomment %}
+<section
+  class="crony-stacked-carousel"
+  id="crony-stacked-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="crony-stacked-carousel__inner">
+    {%- capture flickity_json -%}
+      {
+        "cellAlign": "center",
+        "contain": true,
+        "wrapAround": true,
+        "prevNextButtons": true,
+        "pageDots": false,
+        "draggable": true,
+        "selectedAttraction": 0.02,
+        "friction": 0.4,
+        "imagesLoaded": true,
+        "lazyLoad": 2,
+        "autoPlay": {{ section.settings.autoplay | default: false | json }},
+        "pauseAutoPlayOnHover": true,
+        "setGallerySize": true
+      }
+    {%- endcapture -%}
+
+    <div
+      class="crony-stacked-carousel__track"
+      data-flickity='{{ flickity_json | strip_newlines }}'
+    >
+      {% for block in section.blocks %}
+        {% assign link_url = block.settings.link_override | default: block.settings.collection.url %}
+        {% assign base = section.settings.start_index | default: 1 %}
+        {% assign idx = base | minus: 1 | plus: forloop.index %}
+        {% assign idx_str = idx | prepend: '0' %}
+
+        <article class="crony-slide" {{ block.shopify_attributes }}>
+          <div class="crony-slide__inner">
+            <div class="crony-slide__media">
+              {% if block.settings.image != blank %}
+  <img
+    class="crony-slide__img lazyload"
+    {%- comment -%}
+      Small placeholder for fast first paint
+    {%- endcomment -%}
+    src="{{ block.settings.image | img_url: '260x' }}"
+    {%- comment -%}
+      Actual slide image: ~480px wide → sharp at ~287px display, not overkill
+    {%- endcomment -%}
+    data-flickity-lazyload="{{ block.settings.image | img_url: '480x' }}"
+    alt="{{ block.settings.heading | escape }}"
+  >
+{% endif %}
+
+              <div class="crony-slide__scrim"></div>
+            </div>
+
+            {% if section.settings.index_style != 'hidden' %}
+              <span class="crony-slide__index crony-slide__index--{{ section.settings.index_style }}">
+                {{ section.settings.index_prefix }}{{ idx_str }}
+              </span>
+            {% endif %}
+
+            <div class="crony-slide__content ha-{{ section.settings.h_align }}">
+              {% if block.settings.kicker != blank %}
+                <p class="crony-slide__kicker">{{ block.settings.kicker }}</p>
+              {% endif %}
+
+              {% if block.settings.heading != blank %}
+                <h3 class="crony-slide__title">{{ block.settings.heading }}</h3>
+              {% endif %}
+
+              {% if block.settings.subheading != blank %}
+                <p class="crony-slide__sub">{{ block.settings.subheading }}</p>
+              {% endif %}
+
+              {% if block.settings.btn_label != blank %}
+  {% assign link_url = block.settings.link_override %}
+  
+  {%- comment -%} If no custom URL, build link to filtering page with collection parameter {%- endcomment -%}
+  {% if link_url == blank and block.settings.collection != blank %}
+{% assign link_url = '/collections/all-products?collection=' | append: block.settings.collection.handle %}  {% endif %}
+  
+  {% if link_url != blank %}
+    <a class="crony-slide__btn" href="{{ link_url }}">{{ block.settings.btn_label }}</a>
+  {% endif %}
+{% endif %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  {%- comment -%} Overlay liquid tokens {%- endcomment -%}
+  {% assign ov_color = section.settings.overlay_color | default: '#000000' %}
+  {% assign ov_alpha = section.settings.overlay_opacity | default: 30 | times: 0.01 %}
+  {% assign ov_rgba = ov_color | color_modify: 'alpha', ov_alpha %}
+
+  <style>
+    /* ================ PERFORMANCE OPTIMIZATIONS ================ */
+    /* PERFORMANCE: CSS Containment for better rendering isolation */
+    #crony-stacked-{{ section.id }} {
+      contain: layout style !important;
+    }
+    
+    #crony-stacked-{{ section.id }} .crony-slide {
+      contain: layout style paint !important;
+    }
+    
+    /* PERFORMANCE: GPU Acceleration with will-change hints */
+    #crony-stacked-{{ section.id }} .crony-slide__inner {
+      will-change: transform, opacity, filter !important;
+      backface-visibility: hidden !important;
+    }
+    
+    #crony-stacked-{{ section.id }} .crony-slide__img {
+      will-change: transform !important;
+      backface-visibility: hidden !important;
+      /* PERFORMANCE: Optimize image rendering */
+      image-rendering: -webkit-optimize-contrast !important;
+    }
+    
+    #crony-stacked-{{ section.id }} .crony-slide__btn {
+      will-change: transform !important;
+      backface-visibility: hidden !important;
+    }
+    
+    /* PERFORMANCE: Force GPU layers for Flickity viewport */
+    #crony-stacked-{{ section.id }} .flickity-viewport {
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+    }
+    
+    /* ---------- FULL-BLEED WRAP (kill white bars) ---------- */
+    /* ---------- FULL-BLEED WRAP (kill white bars) ---------- */
+    #crony-stacked-{{ section.id }} {
+      --h: {{ section.settings.desktop_height }}vh;
+      --h-m: {{ section.settings.mobile_height }}vh;
+      --tilt: {{ section.settings.tilt_deg }}deg;
+      --scale-side: {{ section.settings.scale_side | times: 0.01 }};
+      --depth: -{{ section.settings.depth_px }}px;
+      --overlap: -{{ section.settings.overlap_px }}px;
+      --shadow: 0 18px 44px rgba(0, 0, 0, .25);
+
+      /* page/canvas color used to hide neighbors around selected card */
+      --canvas: #ffffff;
+
+      /* overlay token (controlled by settings) */
+      --overlay-color: {% if section.settings.overlay_enable %}{{ ov_rgba }}{% else %}transparent{% endif %};
+
+      /* button tokens */
+      --btn-bg: {{ section.settings.btn_bg }};
+      --btn-color: {{ section.settings.btn_color }};
+      --btn-bg-hover: {{ section.settings.btn_bg_hover }};
+      --btn-color-hover: {{ section.settings.btn_color_hover }};
+      --btn-bw: {{ section.settings.btn_border_width }}px;
+      --btn-bc: {{ section.settings.btn_border_color }};
+      --btn-radius: {{ section.settings.btn_radius }}px;
+      --btn-px: {{ section.settings.btn_pad_x }}px;
+      --btn-py: {{ section.settings.btn_pad_y }}px;
+
+      position: relative;
+      padding: 0;
+    }
+
+    /* Full-bleed trick even if the theme wraps us in a container */
+    #crony-stacked-{{ section.id }} .crony-stacked-carousel__inner {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+
+      /* keep perspective adjustable */
+      perspective: {{ section.settings.perspective_px }}px;
+      padding: 0;
+    }
+
+    #crony-stacked-{{ section.id }} .flickity-viewport {
+      overflow: hidden !important;
+    }
+
+    /* ---------- CELLS ---------- */
+    #crony-stacked-{{ section.id }} .crony-slide {
+      width: {{ section.settings.card_width }}%;
+      margin: 0 var(--overlap);
+      height: var(--h);
+      position: relative;
+      border-radius: 18px;
+    }
+
+    @media (max-width: 767px) {
+      #crony-stacked-{{ section.id }} .crony-slide {
+        width: 82%;
+        height: var(--h-m);
+      }
+    }
+
+    #crony-stacked-{{ section.id }} .crony-slide__inner {
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      transform-origin: center center;
+      transition: transform .6s ease, filter .6s ease, opacity .6s ease;
+      z-index: 0; /* base, we’ll raise selected via its parent */
+    }
+
+    .crony-slide__media {
+      position: absolute;
+      inset: 0;
+    }
+
+    .crony-slide__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: {{ section.settings.object_position }};
+    }
+
+    /* OVERLAY + existing bottom gradient */
+    .crony-slide__scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(0deg, var(--overlay-color), var(--overlay-color)),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, .5) 100%);
+    }
+
+    /* ---------- BOTTOM CONTENT + ALIGNMENT ---------- */
+    .crony-slide__content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px;
+      color: #fff;
+    }
+
+    .ha-left { align-items: flex-start; text-align: left; }
+    .ha-center { align-items: center; text-align: center; }
+    .ha-right { align-items: flex-end; text-align: right; }
+
+    .crony-slide__kicker {
+      text-transform: uppercase;
+      font-size: 12px;
+      opacity: .9;
+    }
+
+    .crony-slide__title {
+      font-size: clamp(20px, 2.4vw, 34px);
+      margin: 0;
+      color: #ffffff !important;
+    }
+
+    .crony-slide__sub {
+      font-size: clamp(14px, 1.2vw, 16px);
+      opacity: .9;
+      margin: 0;
+    }
+
+    /* ---------- BUTTON (configurable) ---------- */
+    .crony-slide__btn {
+      display: inline-block;
+      padding: var(--btn-py) var(--btn-px);
+      border-radius: var(--btn-radius);
+      background: var(--btn-bg);
+      color: var(--btn-color);
+      border: var(--btn-bw) solid var(--btn-bc);
+      font-weight: 600;
+      text-decoration: none;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+      margin-top: 6px;
+    }
+
+    .crony-slide__btn:hover {
+      transform: translateY(-2px);
+      background: var(--btn-bg-hover);
+      color: var(--btn-color-hover);
+    }
+
+    /* ---------- 3D STACK ---------- */
+    .crony-slide__inner {
+      transform: translateZ(0) scale(var(--scale-side));
+      opacity: .9;
+    }
+
+    .crony-slide.is-left .crony-slide__inner {
+      transform:
+        perspective(1200px)
+        rotateY(14deg)
+        rotateX(1.5deg)
+        translateX(-6%)
+        translateZ(var(--depth))
+        scale(var(--scale-side));
+      filter: brightness(.8) blur(1px);
+    }
+
+    .crony-slide.is-right .crony-slide__inner {
+      transform:
+        perspective(1200px)
+        rotateY(-14deg)
+        rotateX(1.5deg)
+        translateX(6%)
+        translateZ(var(--depth))
+        scale(var(--scale-side));
+      filter: brightness(.8) blur(1px);
+    }
+
+    /* Selected: bring above and add an OUTER “mat” that hides neighbors */
+    .crony-slide.is-selected { z-index: 5; }
+
+    .crony-slide.is-selected .crony-slide__inner {
+      transform: rotateY(0) rotateX(0) translateZ(0) scale(1.02);
+      opacity: 1;
+      filter: none;
+    }
+
+    .crony-slide.is-selected .crony-slide__inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+
+      /* Giant outward box-shadow uses the page color to cover any peeking neighbors */
+      box-shadow: 0 0 0 2000px var(--canvas);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ---------- CUSTOM ARROWS (use uploaded WEBP icons) ---------- */
+    #crony-stacked-{{ section.id }} {
+      /* arrow tokens */
+      --arrow-w: 46px;
+      --arrow-h: 46px;
+      --arrow-left: url('https://cdn.shopify.com/s/files/1/0706/5508/2679/files/Arrow_Left.webp?v=1760082396');
+      --arrow-right: url('https://cdn.shopify.com/s/files/1/0706/5508/2679/files/Arrow_Right.webp?v=1760082396');
+    }
+
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button {
+      width: var(--arrow-w);
+      height: var(--arrow-h);
+      background: transparent; /* no white pill */
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.95;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+
+    /* hide Flickity's default inline SVG */
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button .flickity-button-icon {
+      display: none;
+    }
+
+    /* paint your WEBP as the button "face" */
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    /* left / right images */
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button.previous { left: 16px; }
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button.previous::after { background-image: var(--arrow-left); }
+
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button.next { right: 16px; }
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button.next::after { background-image: var(--arrow-right); }
+
+    /* hover / focus states */
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button:hover,
+    #crony-stacked-{{ section.id }} .flickity-prev-next-button:focus {
+      outline: none;
+      opacity: 1;
+      transform: translateY(-50%) scale(1.04);
+    }
+
+    /* slightly smaller on mobile */
+    @media (max-width: 767px) {
+      #crony-stacked-{{ section.id }} {
+        --arrow-w: 36px;
+        --arrow-h: 36px;
+      }
+
+      #crony-stacked-{{ section.id }} .flickity-prev-next-button.previous { left: 10px; }
+      #crony-stacked-{{ section.id }} .flickity-prev-next-button.next { right: 10px; }
+    }
+
+    /* Editor visibility tweak */
+    .shopify-design-mode #crony-stacked-{{ section.id }} .crony-stacked-carousel__inner,
+    .shopify-design-mode #crony-stacked-{{ section.id }} .flickity-viewport {
+      overflow: hidden !important;
+    }
+  </style>
+
+  <script>
+    (function () {
+      'use strict';
+      
+      // PERFORMANCE: RAF throttle helper
+      function rafThrottle(callback) {
+        var rafId = null;
+        return function() {
+          if (rafId) return;
+          rafId = requestAnimationFrame(function() {
+            callback();
+            rafId = null;
+          });
+        };
+      }
+      
+      function init(id) {
+        var root = document.getElementById(id);
+        if (!root) return;
+
+        var track = root.querySelector('.crony-stacked-carousel__track');
+        if (!track || typeof Flickity === 'undefined') return;
+
+        var flkty = Flickity.data(track);
+
+        if (!flkty) {
+          try {
+            var opts = JSON.parse(track.getAttribute('data-flickity') || '{}');
+            if (opts.autoPlay === true) {
+              opts.autoPlay = {{ section.settings.autoplay_speed | times: 1000 }};
+            }
+            flkty = new Flickity(track, opts);
+          } catch (e) {
+            return;
+          }
+        }
+
+        // PERFORMANCE: Cache cells query
+        var cells = [...root.querySelectorAll('.crony-slide')];
+
+        // PERFORMANCE: RAF-wrapped mark function for smooth 60fps updates
+        function mark() {
+          if (!cells.length) return;
+
+          var i = flkty.selectedIndex,
+              len = cells.length;
+
+          // PERFORMANCE: Batch DOM operations in RAF
+          requestAnimationFrame(function() {
+            cells.forEach(function (c) {
+              c.classList.remove('is-left', 'is-right');
+            });
+
+            var l = (i - 1 + len) % len,
+                r = (i + 1) % len;
+
+            if (cells[l]) cells[l].classList.add('is-left');
+            if (cells[r]) cells[r].classList.add('is-right');
+
+            cells.forEach(function (c, idx) {
+              c.style.zIndex = (idx === i) ? 5 : ((idx === l || idx === r) ? 2 : 0);
+            });
+          });
+        }
+
+        // PERFORMANCE: Throttle select events with RAF
+        var throttledMark = rafThrottle(mark);
+        flkty.on('select', throttledMark);
+
+        // PERFORMANCE: Use RAF for initial setup
+        requestAnimationFrame(function() {
+          setTimeout(function () {
+            flkty.resize();
+            mark();
+          }, 80);
+        });
+
+        mark();
+      }
+
+      var id = 'crony-stacked-{{ section.id }}';
+
+      // PERFORMANCE: Event listeners
+      document.addEventListener('DOMContentLoaded', function () { init(id); });
+      document.addEventListener('shopify:section:load', function (e) {
+        if (e.target.querySelector('#' + id)) init(id);
+      });
+      document.addEventListener('shopify:section:select', function (e) {
+        if (e.target.querySelector('#' + id)) init(id);
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Stacked Hero Carousel",
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 40,
+      "max": 90,
+      "step": 1,
+      "unit": "%",
+      "label": "Desktop height (vh)",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 38,
+      "max": 80,
+      "step": 1,
+      "unit": "%",
+      "label": "Mobile height (vh)",
+      "default": 62
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 0,
+      "max": 95,
+      "step": 1,
+      "unit": "%",
+      "label": "Card width (% of track)",
+      "default": 66
+    },
+    {
+      "type": "range",
+      "id": "perspective_px",
+      "min": 600,
+      "max": 3000,
+      "step": 50,
+      "unit": "px",
+      "label": "3D perspective depth",
+      "default": 1800
+    },
+    {
+      "type": "select",
+      "id": "h_align",
+      "label": "Content alignment (bottom)",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "tilt_deg",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "°",
+      "label": "Tilt intensity",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "scale_side",
+      "min": 75,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Side scale (%)",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "depth_px",
+      "min": 0,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Depth (Z-offset)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "overlap_px",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Overlap margin",
+      "default": 22
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay speed",
+      "default": 5
+    },
+
+    /* Button design controls */
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Button background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_hover",
+      "label": "Button background (hover)",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "btn_color_hover",
+      "label": "Button text (hover)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button border color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "btn_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Button border width",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "btn_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Button corner radius",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "btn_pad_x",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Button horizontal padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "btn_pad_y",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button vertical padding",
+      "default": 10
+    },
+
+    /* Overlay controls */
+    {
+      "type": "checkbox",
+      "id": "overlay_enable",
+      "label": "Enable color overlay",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Background image" },
+        { "type": "text", "id": "kicker", "label": "Kicker (optional)" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Electric Trikes" },
+        { "type": "text", "id": "subheading", "label": "Subheading", "default": "Explore our latest collection" },
+        { "type": "text", "id": "btn_label", "label": "Button label", "default": "Explore More" },
+        { "type": "collection", "id": "collection", "label": "Link to collection" },
+        { "type": "url", "id": "link_override", "label": "Custom URL (overrides collection link)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    { "name": "Stacked Hero Carousel", "category": "Crony" }
+  ]
+}
+{% endschema %}
